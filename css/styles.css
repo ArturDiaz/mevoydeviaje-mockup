@@ -1237,3 +1237,10 @@ body.modal-open {
 .header-section-sentinel {
     height: 1px;
 }
+
+/* Contador de pasajeros (.pax-counter, ver script.js): botones +/- deshabilitados
+   al llegar al limite min/max de cada campo */
+.pax-counter button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}

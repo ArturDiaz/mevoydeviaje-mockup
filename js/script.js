@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const expanded = list.classList.toggle('is-expanded');
             btn.classList.toggle('is-expanded', expanded);
-            if (label) label.textContent = expanded ? 'Mostrar menos horarios' : 'Mostrar más horarios';
+            if (label) label.textContent = expanded ? 'Menos horarios' : 'Más horarios';
         });
     });
 });
@@ -556,4 +556,63 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+});
+
+// Contador de pasajeros (.content-pasajeros): los botones +/- de cada fila (Adultos/
+// Menores/Infantes, identificados por data-passenger-field) suman/restan su .pax-count
+// respetando limites min/max, se deshabilitan al llegar a esos limites, y el total se
+// refleja en el boton "Pasajeros" (.btn-float) como "N Persona"/"N Personas"
+document.addEventListener('DOMContentLoaded', () => {
+    const LIMITS = {
+        'PassengerInfo.NumberOfAdults': { min: 1, max: 9 },
+        'PassengerInfo.NumberOfChildren': { min: 0, max: 8 },
+        'PassengerInfo.NumberOfInfants': { min: 0, max: 8 },
+    };
+
+    document.querySelectorAll('.content-pasajeros').forEach((container) => {
+        const label = container.querySelector('.btn-float');
+
+        const updateLabel = () => {
+            let total = 0;
+            container.querySelectorAll('.pax-count').forEach((el) => {
+                total += parseInt(el.textContent, 10) || 0;
+            });
+            if (label) label.textContent = `${total} ${total === 1 ? 'Persona' : 'Personas'}`;
+        };
+
+        container.querySelectorAll('.pax-counter').forEach((counter) => {
+            const countEl = counter.querySelector('.pax-count');
+            const removeBtn = counter.querySelector('[data-bind*="removePassenger"]');
+            const addBtn = counter.querySelector('[data-bind*="addPassenger"]');
+            if (!countEl || !removeBtn || !addBtn) return;
+
+            const limits = LIMITS[removeBtn.dataset.passengerField] || { min: 0, max: 9 };
+
+            const render = () => {
+                const count = parseInt(countEl.textContent, 10) || 0;
+                removeBtn.disabled = count <= limits.min;
+                addBtn.disabled = count >= limits.max;
+            };
+
+            removeBtn.addEventListener('click', () => {
+                const count = parseInt(countEl.textContent, 10) || 0;
+                if (count <= limits.min) return;
+                countEl.textContent = count - 1;
+                render();
+                updateLabel();
+            });
+
+            addBtn.addEventListener('click', () => {
+                const count = parseInt(countEl.textContent, 10) || 0;
+                if (count >= limits.max) return;
+                countEl.textContent = count + 1;
+                render();
+                updateLabel();
+            });
+
+            render();
+        });
+
+        updateLabel();
+    });
 });
