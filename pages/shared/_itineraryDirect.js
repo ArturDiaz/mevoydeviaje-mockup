@@ -31,7 +31,7 @@
                                     <div class="flex-r gap-2 ai-c jc-r">
                                         <span class="flex-r ai-r text-5.5 c-scale-300">
                                             <svg class="bs-icon bg-i-default m-0 c-blue"><use xlink:href="#i-mochila"></use></svg>
-                                            <svg class="bs-icon bg-i-default m-0 c-blue"><use xlink:href="#i-maleta-mano"></use></svg>
+                                            <svg class="bs-icon bg-i-default m-0"><use xlink:href="#i-maleta-mano"></use></svg>
                                             <svg class="bs-icon bg-i-default m-0"><use xlink:href="#i-bodega"></use></svg>
                                         </span>
                                         <a class="btn-detail-itinerary-a" data-toggle="modal" data-target="#modalItinerarioIda"><svg class="bs-icon"><use xlink:href="#i-arrow-bottom"></use></svg></a>
@@ -61,7 +61,7 @@
                                     <div class="flex-r gap-2 ai-c jc-r">
                                         <span class="flex-r ai-r text-5.5 c-scale-300">
                                             <svg class="bs-icon bg-i-default m-0 c-blue"><use xlink:href="#i-mochila"></use></svg>
-                                            <svg class="bs-icon bg-i-default m-0 c-blue"><use xlink:href="#i-maleta-mano"></use></svg>
+                                            <svg class="bs-icon bg-i-default m-0"><use xlink:href="#i-maleta-mano"></use></svg>
                                             <svg class="bs-icon bg-i-default m-0"><use xlink:href="#i-bodega"></use></svg>
                                         </span>
                                         <a class="btn-detail-itinerary-b" data-toggle="modal" data-target="#modalItinerarioVuelta"><svg class="bs-icon"><use xlink:href="#i-arrow-bottom"></use></svg></a>
@@ -86,7 +86,7 @@
             </div>
 
             <div class="flex-r gap-2 mt-2">
-                <button class="btn btn-default-outline flex-r ai-c jc-c gap-1"><svg class="bs-icon"><use xlink:href="#i-carrito"></use></svg></button>
+                <!--<button class="btn btn-default-outline flex-r ai-c jc-c gap-1"><svg class="bs-icon"><use xlink:href="#i-carrito"></use></svg></button>-->
                 <button class="btn btn-primary w-full">Reservar</button>
             </div>
         </div>

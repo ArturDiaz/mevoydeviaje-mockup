@@ -425,6 +425,9 @@ input[type="text"], input[type="email"], input[type="tel"], input[type="password
     max-height: 320px;
     overflow-y: auto;
     padding: 0.5rem 0;
+    @media (min-width:1024px){
+        min-width: 300px;
+    }
 }
 .airport-dropdown.active {
     display: block;
@@ -856,6 +859,23 @@ input[type="text"], input[type="email"], input[type="tel"], input[type="password
     }
 }
 
+/* Botones mobile (Filtros/Tabla precios/Curvas precios): si entre todos superan el
+   ancho de pantalla, se vuelven un carousel de scroll horizontal (touch) en vez de
+   partirse en varias lineas; overflow-x:auto no hace nada si ya entran en una linea */
+.content-actions-mobile {
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+}
+.content-actions-mobile::-webkit-scrollbar {
+    display: none;
+}
+.content-actions-mobile > * {
+    flex-shrink: 0;
+    scroll-snap-align: start;
+}
+
 /* Tabs simples (ej. "Añadir maletas" separado por tramo Ida/Vuelta, ver [data-tab-target]
    en script.js): resalta el boton .btn-outline del tramo activo */
 .tabs-luggage a.active {
@@ -1055,7 +1075,7 @@ body.modal-open {
    patron .c-blue / .c-scale-300 de los iconos de maleta en las tarjetas de
    vuelo) y una lista de beneficios/penalidades */
 .fare-card {
-    border: 1px solid var(--scale-300);
+    border: 2px solid var(--scale-300);
     border-radius: 12px;
     overflow: hidden;
     display: flex;
@@ -1063,7 +1083,6 @@ body.modal-open {
 }
 .fare-card.is-selected {
     border-color: var(--primary);
-    box-shadow: 0 0 0 1px var(--primary);
 }
 .fare-card-header {
     background: var(--scale-100);
@@ -1140,4 +1159,81 @@ body.modal-open {
    (el resto de footer-modal en el sitio los alinea a la derecha por defecto) */
 #modalAddLuggage .footer-modal {
     justify-content: flex-start;
+}
+
+/* Carrusel de tarifas (5 tarjetas: Basic/Light/Standard/Plus/Flex). En mobile
+   (<1024px) se apilan en columna y hacen scroll normal dentro del modal (sin
+   flechas). En desktop (>=1024px) se ven 3 a la vez, con .fare-cards scrolleando
+   por scroll-snap y las flechas .fare-carousel-prev/next (ver script.js) */
+.fare-carousel {
+    position: relative;
+}
+.fare-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+.fare-carousel-btn {
+    display: none;
+}
+@media (min-width: 1024px) {
+    .fare-carousel {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+    .fare-cards {
+        flex: 1;
+        flex-direction: row;
+        min-width: 0;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+    }
+    .fare-cards::-webkit-scrollbar {
+        display: none;
+    }
+    .fare-cards .fare-card {
+        flex: 0 0 calc((100% - 2rem) / 3);
+        min-width: 0;
+        scroll-snap-align: start;
+    }
+    .fare-carousel-btn {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid var(--scale-300);
+        background: #fff;
+        color: var(--c-text);
+        cursor: pointer;
+    }
+    .fare-carousel-btn:hover {
+        background: var(--scale-100);
+    }
+}
+
+.section-products{
+    .header-section{
+        position: sticky;
+        top: 0;
+        z-index: 5;
+        transition: background-color .2s ease, padding .2s ease, border-color .2s ease;
+    }
+    .header-section.is-stuck{
+        background: var(--bg-body);
+        padding: 0.7rem 1rem;
+        border-bottom: 1px solid var(--scale-200);
+        border-radius: 0 0 20px 20px;
+    }
+}
+/* Marcador de 1px justo antes de .header-section: cuando sale del viewport (scroll
+   hacia abajo) significa que el sticky ya esta "pegado" arriba, y ahi recien se le
+   agrega fondo/padding a .header-section (ver IntersectionObserver en script.js) */
+.header-section-sentinel {
+    height: 1px;
 }

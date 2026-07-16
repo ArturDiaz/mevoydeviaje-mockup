@@ -85,7 +85,7 @@
                             </span>
                         </div>
                         <div class="btn-action-itinerary flex-r jc-b gap-2">
-                            <a class="btn btn-default-outline text-3 flex-r ai-c gap-1 btn-toggle-more"><svg class="bs-icon bg-i-default m-0 toggle-icon"><use xlink:href="#i-plus"></use></svg><span class="btn-toggle-more-label">Mostrar más horarios</span></a>
+                            <a class="btn btn-default-outline text-3 flex-r ai-c gap-1 btn-toggle-more"><svg class="bs-icon bg-i-default m-0 toggle-icon"><use xlink:href="#i-plus"></use></svg><span class="btn-toggle-more-label">más horarios</span></a>
                             <a id="btn-add-luggage-${uid}" class="btn btn-default-outline text-3 flex-r ai-c gap-1" data-toggle="modal" data-target="#modalAddLuggage"><svg class="bs-icon bg-i-default m-0"><use xlink:href="#i-plus"></use></svg>Añadir Maletas</a>
                         </div>
                     </div>
@@ -104,7 +104,7 @@
                 <span class="badge badge-blue flex-r ai-c gap-1"><svg class="bs-icon"><use xlink:href="#i-check"></use></svg>Recomendado</span>
             </div>
             <div class="flex-r gap-2 mt-2">
-                <button class="btn btn-default-outline flex-r ai-c jc-c gap-1"><svg class="bs-icon"><use xlink:href="#i-carrito"></use></svg></button>
+                <!--<button class="btn btn-default-outline flex-r ai-c jc-c gap-1"><svg class="bs-icon"><use xlink:href="#i-carrito"></use></svg></button>-->
                 <button class="btn btn-primary w-full">Reservar</button>
             </div>
         </div>

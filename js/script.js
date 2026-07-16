@@ -203,6 +203,44 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Carrusel de tarifas (desktop, #modalAddLuggage): las flechas .fare-carousel-prev/next
+// desplazan el track .fare-cards el ancho de una tarjeta + gap; scroll-snap (CSS) hace
+// que quede alineada. En mobile las flechas estan ocultas (ver styles.css)
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.fare-carousel').forEach((carousel) => {
+        const track = carousel.querySelector('.fare-cards');
+        const prevBtn = carousel.querySelector('.fare-carousel-prev');
+        const nextBtn = carousel.querySelector('.fare-carousel-next');
+        if (!track || !prevBtn || !nextBtn) return;
+
+        const scrollByCard = (dir) => {
+            const card = track.querySelector('.fare-card');
+            if (!card) return;
+            const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+            track.scrollBy({ left: dir * (card.offsetWidth + gap), behavior: 'smooth' });
+        };
+
+        prevBtn.addEventListener('click', () => scrollByCard(-1));
+        nextBtn.addEventListener('click', () => scrollByCard(1));
+    });
+});
+
+// .header-section (sticky, top:0): arranca sin fondo/padding, mezclado con la pagina.
+// Un sentinel de 1px justo antes de el (.header-section-sentinel) se observa con
+// IntersectionObserver; cuando ese sentinel sale del viewport (scroll hacia abajo)
+// es porque el sticky ya quedo "pegado" arriba, y ahi se le agrega .is-stuck
+// (fondo + padding, ver styles.css). Vuelve a quitarse al scrollear hacia arriba.
+document.addEventListener('DOMContentLoaded', () => {
+    const sentinel = document.querySelector('.header-section-sentinel');
+    const header = document.querySelector('.header-section');
+    if (!sentinel || !header) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+        header.classList.toggle('is-stuck', !entry.isIntersecting);
+    });
+    observer.observe(sentinel);
+});
+
 // Floats tipo modal: cualquier .btn-float abre/cierra el .content-float hermano dentro de su mismo contenedor
 document.addEventListener('DOMContentLoaded', () => {
     // Boton "Buscar": lleva a AirSearch.html. Esta misma pagina incluye el mismo formulario,

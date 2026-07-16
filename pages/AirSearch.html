@@ -64,7 +64,7 @@
             </div>
         </div>
 
-        <div id="main-content" class="skeleton-hidden flex-c gap-5 lg:grid lg:cl-8">
+        <div id="main-content" class="skeleton-hidden flex-c lg:gap-5 lg:grid lg:cl-8">
         <div class="span-2 flex-c gap-8">
             <div class="modal modal-sidebar" id="modalBusqueda">
                 <div class="modal-dialog">
@@ -376,6 +376,7 @@
         </div>
 
         <section class="section-products span-6 flex-c gap-5">
+            <div class="header-section-sentinel"></div>
             <div class="header-section flex-c lg:flex-r jc-b ai-c gap-3">
                 <div class="flex-r jc-b max-md:w-full">
                     <div class="flex-c">
@@ -502,6 +503,15 @@
                         <span class="text-3.5 c-scale-500">Vie. 13 Sep · LATAM Airlines</span>
                         <span class="badge badge-blue">1 escala · 5h 20m</span>
                     </div>
+                    <div class="flex-r jc-b ai-c mb-4">
+                        <span class="text-3.5 c-scale-500">Equipaje incluido</span>
+                        <span class="flex-r ai-r text-5.5 c-scale-300">
+                            <svg class="bs-icon bg-i-default m-0 c-blue"><use xlink:href="#i-mochila"></use></svg>
+                            <svg class="bs-icon bg-i-default m-0 c-blue"><use xlink:href="#i-maleta-mano"></use></svg>
+                            <svg class="bs-icon bg-i-default m-0"><use xlink:href="#i-bodega"></use></svg>
+                        </span>
+                    </div>
+                    <div class="line-horizontal mb-4"></div>
                     <div class="flex-c">
                         <div class="itinerary-stop">
                             <div class="itinerary-marker"><span class="itinerary-dot"></span></div>
@@ -585,6 +595,15 @@
                         <span class="text-3.5 c-scale-500">Vie. 13 Sep · LATAM Airlines</span>
                         <span class="badge badge-blue">1 escala · 5h 20m</span>
                     </div>
+                    <div class="flex-r jc-b ai-c mb-4">
+                        <span class="text-3.5 c-scale-500">Equipaje incluido</span>
+                        <span class="flex-r ai-r text-5.5 c-scale-300">
+                            <svg class="bs-icon bg-i-default m-0 c-blue"><use xlink:href="#i-mochila"></use></svg>
+                            <svg class="bs-icon bg-i-default m-0 c-blue"><use xlink:href="#i-maleta-mano"></use></svg>
+                            <svg class="bs-icon bg-i-default m-0"><use xlink:href="#i-bodega"></use></svg>
+                        </span>
+                    </div>
+                    <div class="line-horizontal mb-4"></div>
                     <div class="flex-c">
                         <div class="itinerary-stop">
                             <div class="itinerary-marker"><span class="itinerary-dot"></span></div>
@@ -668,7 +687,11 @@
                     </button>
                 </div>
                 <div class="body-modal">
-                        <div class="fare-cards grid cl-3 max-sm:cl-1 gap-4">
+                        <div class="fare-carousel">
+                            <button type="button" class="fare-carousel-btn fare-carousel-prev" aria-label="Tarifa anterior">
+                                <svg class="bs-icon"><use xlink:href="#i-chevron-left"></use></svg>
+                            </button>
+                            <div class="fare-cards">
                             <div class="fare-card is-selected">
                                 <div class="fare-card-header">
                                     <span class="font-bold">Basic</span>
@@ -679,19 +702,19 @@
                                         <span class="text-6 font-bold">+ US$ 0</span>
                                         <span class="text-3 c-scale-500">Por persona</span>
                                     </div>
-                                    <button type="button" class="fare-select-btn" data-fare-select>Seleccionar</button>
-                                    <div class="fare-selected-indicator">
-                                        <span class="fare-check-circle"><svg class="bs-icon"><use xlink:href="#i-checkmark"></use></svg></span>
-                                        Seleccionado
-                                    </div>
                                     <div class="line-horizontal"></div>
                                     <div class="flex-r jc-b ai-c">
-                                        <span class="flex-r gap-2 ai-c c-scale-300">
+                                        <span class="flex-r gap-1 ai-c c-scale-300">
                                             <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-mochila"></use></svg>
                                             <svg class="bs-icon m-0"><use xlink:href="#i-maleta-mano"></use></svg>
                                             <svg class="bs-icon m-0"><use xlink:href="#i-bodega"></use></svg>
                                         </span>
                                         <a class="fare-more-link text-3">Ver más</a>
+                                    </div>
+                                    <button type="button" class="fare-select-btn" data-fare-select>Seleccionar</button>
+                                    <div class="fare-selected-indicator">
+                                        <span class="fare-check-circle"><svg class="bs-icon"><use xlink:href="#i-checkmark"></use></svg></span>
+                                        Seleccionado
                                     </div>
                                     <div class="line-horizontal"></div>
                                     <div class="flex-c gap-2">
@@ -716,19 +739,19 @@
                                         <span class="text-6 font-bold">+ US$ 83</span>
                                         <span class="text-3 c-scale-500">Por persona</span>
                                     </div>
-                                    <button type="button" class="fare-select-btn" data-fare-select>Seleccionar</button>
-                                    <div class="fare-selected-indicator">
-                                        <span class="fare-check-circle"><svg class="bs-icon"><use xlink:href="#i-checkmark"></use></svg></span>
-                                        Seleccionado
-                                    </div>
                                     <div class="line-horizontal"></div>
                                     <div class="flex-r jc-b ai-c">
-                                        <span class="flex-r gap-2 ai-c c-scale-300">
+                                        <span class="flex-r gap-1 ai-c c-scale-300">
                                             <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-mochila"></use></svg>
                                             <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-maleta-mano"></use></svg>
                                             <svg class="bs-icon m-0"><use xlink:href="#i-bodega"></use></svg>
                                         </span>
                                         <a class="fare-more-link text-3">Ver más</a>
+                                    </div>
+                                    <button type="button" class="fare-select-btn" data-fare-select>Seleccionar</button>
+                                    <div class="fare-selected-indicator">
+                                        <span class="fare-check-circle"><svg class="bs-icon"><use xlink:href="#i-checkmark"></use></svg></span>
+                                        Seleccionado
                                     </div>
                                     <div class="line-horizontal"></div>
                                     <div class="flex-c gap-2">
@@ -753,19 +776,19 @@
                                         <span class="text-6 font-bold">+ US$ 138</span>
                                         <span class="text-3 c-scale-500">Por persona</span>
                                     </div>
-                                    <button type="button" class="fare-select-btn" data-fare-select>Seleccionar</button>
-                                    <div class="fare-selected-indicator">
-                                        <span class="fare-check-circle"><svg class="bs-icon"><use xlink:href="#i-checkmark"></use></svg></span>
-                                        Seleccionado
-                                    </div>
                                     <div class="line-horizontal"></div>
                                     <div class="flex-r jc-b ai-c">
-                                        <span class="flex-r gap-2 ai-c c-scale-300">
+                                        <span class="flex-r gap-1 ai-c c-scale-300">
                                             <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-mochila"></use></svg>
                                             <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-maleta-mano"></use></svg>
                                             <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-bodega"></use></svg>
                                         </span>
                                         <a class="fare-more-link text-3">Ver más</a>
+                                    </div>
+                                    <button type="button" class="fare-select-btn" data-fare-select>Seleccionar</button>
+                                    <div class="fare-selected-indicator">
+                                        <span class="fare-check-circle"><svg class="bs-icon"><use xlink:href="#i-checkmark"></use></svg></span>
+                                        Seleccionado
                                     </div>
                                     <div class="line-horizontal"></div>
                                     <div class="flex-c gap-2">
@@ -780,6 +803,84 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="fare-card">
+                                <div class="fare-card-header">
+                                    <span class="font-bold">Plus</span>
+                                    <span class="text-3 c-scale-500">Cabina Económica</span>
+                                </div>
+                                <div class="fare-card-body">
+                                    <div class="flex-c text-c">
+                                        <span class="text-6 font-bold">+ US$ 189</span>
+                                        <span class="text-3 c-scale-500">Por persona</span>
+                                    </div>
+                                    <div class="line-horizontal"></div>
+                                    <div class="flex-r jc-b ai-c">
+                                        <span class="flex-r gap-1 ai-c c-scale-300">
+                                            <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-mochila"></use></svg>
+                                            <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-maleta-mano"></use></svg>
+                                            <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-bodega"></use></svg>
+                                        </span>
+                                        <a class="fare-more-link text-3">Ver más</a>
+                                    </div>
+                                    <button type="button" class="fare-select-btn" data-fare-select>Seleccionar</button>
+                                    <div class="fare-selected-indicator">
+                                        <span class="fare-check-circle"><svg class="bs-icon"><use xlink:href="#i-checkmark"></use></svg></span>
+                                        Seleccionado
+                                    </div>
+                                    <div class="line-horizontal"></div>
+                                    <div class="flex-c gap-2">
+                                        <span class="fare-feature flex-r gap-2 ai-c text-3 c-blue">
+                                            <svg class="bs-icon"><use xlink:href="#i-checkmark"></use></svg>
+                                            Cambio de fecha sin costo extra
+                                        </span>
+                                        <span class="fare-feature flex-r gap-2 ai-c text-3 c-blue">
+                                            <svg class="bs-icon"><use xlink:href="#i-checkmark"></use></svg>
+                                            Selección de asiento sin costo extra
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="fare-card">
+                                <div class="fare-card-header">
+                                    <span class="font-bold">Flex</span>
+                                    <span class="text-3 c-scale-500">Cabina Económica</span>
+                                </div>
+                                <div class="fare-card-body">
+                                    <div class="flex-c text-c">
+                                        <span class="text-6 font-bold">+ US$ 245</span>
+                                        <span class="text-3 c-scale-500">Por persona</span>
+                                    </div>
+                                    <div class="line-horizontal"></div>
+                                    <div class="flex-r jc-b ai-c">
+                                        <span class="flex-r gap-1 ai-c c-scale-300">
+                                            <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-mochila"></use></svg>
+                                            <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-maleta-mano"></use></svg>
+                                            <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-bodega"></use></svg>
+                                        </span>
+                                        <a class="fare-more-link text-3">Ver más</a>
+                                    </div>
+                                    <button type="button" class="fare-select-btn" data-fare-select>Seleccionar</button>
+                                    <div class="fare-selected-indicator">
+                                        <span class="fare-check-circle"><svg class="bs-icon"><use xlink:href="#i-checkmark"></use></svg></span>
+                                        Seleccionado
+                                    </div>
+                                    <div class="line-horizontal"></div>
+                                    <div class="flex-c gap-2">
+                                        <span class="fare-feature flex-r gap-2 ai-c text-3 c-blue">
+                                            <svg class="bs-icon"><use xlink:href="#i-checkmark"></use></svg>
+                                            Cambio de fecha sin costo extra
+                                        </span>
+                                        <span class="fare-feature flex-r gap-2 ai-c text-3 c-blue">
+                                            <svg class="bs-icon"><use xlink:href="#i-checkmark"></use></svg>
+                                            Cancelación con reembolso completo
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <button type="button" class="fare-carousel-btn fare-carousel-next" aria-label="Siguiente tarifa">
+                                <svg class="bs-icon"><use xlink:href="#i-chevron-right"></use></svg>
+                            </button>
                         </div>
                         <p class="text-3 c-scale-500 mt-4">Los beneficios y penalidades de la tarifa aplican a los cargos de la aerolínea, y no incluyen los cargos por servicio.</p>
                 </div>
