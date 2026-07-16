@@ -1,0 +1,1051 @@
+/*********** CSS RESET **********/
+:root {
+  --bg-header: #f9fbfff5;
+  --bg-body: #F9FBFF;
+  --box-form: 0 25px 40px -18px #0066ff26, 0 0 0 1px #0066ff14, 0 -2px 20px 1px #0066ff10;
+  --border-header: 1px solid #0066ff1f;
+  --bg-default: #eceef5;
+  --box-btn-primary: 0 8px 18px #0066ff33;
+  --box-btn-primary-hover: 0 15px 25px #0066ff40;
+  --primary: #0066ff;
+  --primary-hover: #0052cc;
+  --primary-hover-2: #00204f;
+  --primary-hover-3: #00193f;
+  --primary-hover-4: #00132f;
+
+  --primary-50: #ebf7ff;
+  --primary-100: #d1ebff;
+  --primary-200: #aedeff;
+  --primary-300: #76cbff;
+  --primary-400: #35adff;
+  --primary-500: #078aff;
+  --primary-600: #0075ff;
+  --primary-700: #0068ff;
+  --primary-800: #0052d7;
+  --primary-900: #003f9b;
+  --primary-950: #062a65;
+
+  --primary-50-trans: #003e9b15;
+  --primary-100-trans: #003e9b2f;
+  --primary-200-trans: #003e9b44;
+  --primary-300-trans: #003e9b5f;
+  --primary-400-trans: #003e9b7c;
+  --primary-500-trans: #003e9b93;
+  --primary-600-trans: #003e9baf;
+  --primary-700-trans: #003e9bc8;
+  --primary-800-trans: #003e9be1;
+
+  --white-10\%: #ffffff15;
+  --white-20\%: #ffffff2f;
+  --white-30\%: #ffffff44;
+  --white-40\%: #ffffff5f;
+  --white-50\%: #ffffff7c;
+  --white-60\%: #ffffff93;
+  --white-70\%: #ffffffaf;
+  --white-80\%: #ffffffc8;
+  --white-90\%: #ffffffe1;
+
+  --scale-50: #fafafa;
+  --scale-100: #f3f4f6;
+  --scale-200: #e2e5e9;
+  --scale-300: #d1d5db;
+  --scale-400: #9aa4b1;
+  --scale-500: #6a7481;
+  --scale-600: #4b5562;
+  --scale-700: #3a424b;
+  --scale-800: #25282c;
+  --scale-900: #1a1e23;
+  --scale-950: #070a0d;
+
+  --scale-10\%: #070a0d1c;
+  --scale-20\%: #070a0d2c;
+  --scale-30\%: #070a0d49;
+  --scale-40\%: #070a0d5f;
+  --scale-50\%: #070a0d79;
+  --scale-60\%: #070a0d8e;
+  --scale-70\%: #070a0daa;
+  --scale-80\%: #070a0dc3;
+  --scale-90\%: #070a0ddc;
+
+  --pink-50: #fff0f8;
+  --pink-100: #ffe3f9;
+  --pink-200: #ffc6f3;
+  --pink-300: #ff98f8;
+  --pink: #fd009e;
+  --pink-hover: #97005b;
+  --pink-50\%: #fd009e6e;
+  --pink-60\%: #fd009c8a;
+  --pink-80: #fd009ebd;
+
+  --green-50: #ecfdf5;
+  --green-100: #d1fae4;
+  --green-200: #a8f2ce;
+  --green-300: #6fe6b4;
+  --green: #07a26e;
+
+  --cyan-50: #f1f8fe;
+  --cyan-100: #e1f0fd;
+  --cyan-200: #bde1fa;
+  --cyan-300: #82c9f7;
+  --cyan-400: #4ab2f1;
+  --cyan-500: #1794e0;
+  --cyan: #1794e0;
+  --cyan-hover: #0a75bf;
+
+  --orange-50: #fef7ee;
+	--orange-100: #fcedd8;
+	--orange-200: #f9d7af;
+	--orange-300: #f4ba7d;
+	--orange: #ed8937;
+	--orange-hover: #ea7625;
+
+  --red-50: #fef2f2;
+  --red-100: #fee2e2;
+  --red-200: #ffc9c9;
+  --red-300: #fda4a4;
+  --red: #d92020;
+  --red-hover: #9b1919;
+
+  --violet-50: #f5f3ff;
+  --violet-100: #ede9fe;
+  --violet-200: #ddd6fe;
+  --violet-300: #c4b5fd;
+  --violet: #7c3aed;
+  --violet-hover: #6d28d9;
+
+  /* Texto */
+  --c-text: #3a424b;
+
+	--font-exo: "Exo 2", sans-serif;
+  --font-poppins: 'Poppins', sans-serif;
+
+}
+
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins-MediumItalic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Poppins';
+  src: url('../fonts/Poppins-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+* {
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  line-height: 1.2;
+}
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  margin: 0;
+  -webkit-text-size-adjust: none;
+}
+body {
+  font-family: var(--font-poppins);
+  background: var(--bg-body);
+  color: var(--c-text);
+}
+ul, li, a{
+    text-decoration: none;
+    list-style: none;
+}
+
+/* Utilidades base reforzadas en CSS estatico: scriptCss.js genera estas mismas
+   clases en runtime (leyendo el DOM), pero al correr al final del <body> deja
+   una fraccion de segundo sin layout (flex/grid) antes de inyectar su <style>,
+   causando un parpadeo de contenido descuadrado. Repetir aqui el subset de
+   clases "de valor fijo" (sin variantes numericas) elimina ese parpadeo en el
+   primer pintado. Si cambias alguno de estos valores en scriptCss.js
+   (CONFIG.valoresEspeciales), actualiza tambien aqui para que no diverjan. */
+.flex { display: flex; }
+.flex-r { display: flex; flex-direction: row; }
+.flex-c { display: flex; flex-direction: column; }
+.flex-r-revert { display: flex; flex-direction: row-reverse; }
+.flex-c-revert { display: flex; flex-direction: column-reverse; }
+.grid { display: grid; }
+.block { display: block; }
+.inline { display: inline; }
+.inline-block { display: inline-block; }
+.hidden, .hide { display: none; }
+
+.wrap { flex-wrap: wrap; }
+.nowrap { flex-wrap: nowrap; }
+.wrap-revert { flex-wrap: wrap-reverse; }
+
+.jc-c { justify-content: center; }
+.jc-b { justify-content: space-between; }
+.jc-a { justify-content: space-around; }
+.jc-e { justify-content: space-evenly; }
+.jc-l { justify-content: flex-start; }
+.jc-r { justify-content: flex-end; }
+
+.ai-c { align-items: center; }
+.ai-l { align-items: flex-start; }
+.ai-r { align-items: flex-end; }
+.ai-s { align-items: stretch; }
+
+.as-c { align-self: center; }
+.as-l { align-self: flex-start; }
+.as-r { align-self: flex-end; }
+.as-s { align-self: stretch; }
+
+.relative { position: relative; }
+.absolute { position: absolute; }
+.fixed { position: fixed; }
+.static { position: static; }
+.sticky { position: sticky; }
+
+.w-full { width: 100%; }
+.w-auto { width: auto; }
+.w-screen { width: 100vw; }
+.w-min { width: min-content; }
+.w-max { width: max-content; }
+.w-fit { width: fit-content; }
+
+.h-full { height: 100%; }
+.h-auto { height: auto; }
+.h-screen { height: 100vh; }
+.h-min { height: min-content; }
+.h-max { height: max-content; }
+.h-fit { height: fit-content; }
+
+/* icons SVG */
+.icons-svg {
+  /*font-size: 1.5em;*/
+  stroke-width: 7%;
+  /*max-width: 47rem;*/
+}
+.bs-icon {
+  display: inline-block;
+  fill: none;
+  margin: 0.2em;
+  font-size: 1em;
+  width: 1em;
+  height: 1em;
+  stroke: currentColor;
+  stroke-width: inherit;
+  stroke-linecap: inherit;
+  stroke-linejoin: inherit;
+  overflow: visible;
+  box-sizing: initial;
+}
+
+.bs-logos {
+  display: inline-block;
+  font-size: 1em;
+  width: 1em;
+  height: 1em;
+  stroke: currentColor;
+  stroke-width: inherit;
+  stroke-linecap: inherit;
+  stroke-linejoin: inherit;
+  overflow: visible;
+}
+
+/* Botones */
+.btn, .btn-i {
+    border: 0;
+    padding: 7px 15px;
+    font-size: 15px;
+    border-radius: 30px;
+    transition: all .3s ease;
+    text-decoration: none;
+    cursor: pointer;
+}
+.btn-default {
+    background-color: var(--bg-default);
+    color: var(--c-text);
+    transition: all .3s ease;
+    &:hover {
+        background-color: var(--scale-200);
+    }
+}
+.btn-default-outline, .btn-default-outline-2{
+    color: var(--scale-500);
+    border: var(--border-header);
+    background: var(--scale-100);
+    &:hover {
+        background-color: var(--scale-200);
+    }
+}
+.btn-primary, .btn-blue {
+    background-color: var(--primary);
+    color: #fff;
+    box-shadow: var(--box-btn-primary);
+    transform: translateY(0);
+    transition: all .3s ease;
+    &:hover {
+        background: var(--primary-hover);
+        transform: translateY(-2px);
+        box-shadow: var(--box-btn-primary-hover);
+        transition: all .3s ease;
+    }
+}
+.btn-outline{
+    border: 1px solid var(--scale-300);
+    color: var(--c-text);
+    background: transparent;
+    font-size: 14px;
+}
+.outline-cyber{
+    border-color: var(--red);
+    background: var(--red-50);
+    color: var(--red);
+}
+
+.badge{
+    display: inline-block;
+    padding: 0.25em 0.5em;
+    font-size: 12px;
+    border-radius: 6px;
+}
+.badge-pink {
+    background: var(--pink-100);
+    color: var(--pink);
+}
+.badge-blue {
+    background: var(--primary-100);
+    color: var(--primary);
+}
+
+.c-white{color: #fff;}
+.c-default{color: var(--c-text);}
+.c-scale-300{color: var(--scale-300);}
+.c-scale-400{color: var(--scale-400);}
+.c-scale-500{color: var(--scale-500);}
+.c-primary, .c-blue{color: var(--primary);}
+.a-cyber {
+    border-radius: 20px;
+    background: var(--pink-50\%) !important;
+    border: 1px solid var(--pink-50\%) !important;
+}
+
+.bg-default{background: var(--bg-default);}
+.bg-white{background: #fff;}
+
+.line-horizontal{
+    width: 100%;
+    height: 1px;
+    background: var(--scale-200);
+}
+.line-horizontal-header{
+    width: 100%;
+    height: 1px;
+    background: var(--white-20\%);
+}
+.line-vertical{}
+
+input[type="text"], input[type="email"], input[type="tel"], input[type="password"], input[type="date"], textarea, select {
+    height: 36px;
+    padding: 8px;
+    vertical-align: middle;
+    direction: ltr;
+    border: 1px solid var(--scale-300);
+}
+.input-date, .input-text {
+    width: 100%;
+    height: 36px;
+    padding: 8px;
+    box-sizing: border-box;
+    background: #fff;
+    color: var(--c-text);
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    text-align: left;
+}
+.input-date {
+    position: relative;
+    border: 0;
+    padding: 0;
+    height: auto;
+    background: transparent;
+}
+
+.flight-input-wrapper {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+}
+
+/* Buscador de Origen/Destino */
+.airport-dropdown {
+    display: none;
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    right: 0;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: var(--box-form);
+    z-index: 25;
+    max-height: 320px;
+    overflow-y: auto;
+    padding: 0.5rem 0;
+}
+.airport-dropdown.active {
+    display: block;
+}
+.airport-group-header {
+    padding: 8px 14px 4px;
+    font-size: 12px;
+    color: var(--scale-500);
+    font-weight: 600;
+}
+.airport-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.airport-item:hover {
+    background: var(--primary-50);
+}
+.airport-item .bs-icon {
+    color: var(--scale-400);
+    flex-shrink: 0;
+}
+.airport-item-name {
+    flex: 1;
+    min-width: 0;
+}
+.airport-item-code {
+    color: var(--scale-400);
+    font-size: 12px;
+}
+.airport-dropdown mark {
+    background: none;
+    color: var(--pink);
+    font-weight: 600;
+}
+.page-index .content-nav{
+    padding-bottom: 3.5rem;
+}
+.flight-search-container {
+    background: #fff;
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: var(--box-form);
+}
+@media (min-width: 1024px) {
+    .flight-search-container {
+        position: absolute;
+    }
+}
+.page-air-search .flight-search-container{position: relative;}
+.page-air-search .btn-search{
+    filter: opacity(0.5);
+    &:hover{
+        filter: opacity(1);
+    }
+}
+
+.menu__link.active, .user-account-link {
+    background: var(--primary-300-trans);
+    color: white;
+    border-color: white;
+}
+.k-input {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: 100%;
+    height: 36px;
+    padding: 0 8px;
+    background: #fff;
+    border: 1px solid var(--scale-300);
+    border-radius: 6px;
+}
+.k-input .k-input-inner {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    border: 0;
+    padding: 0;
+    background: transparent;
+    outline: none;
+}
+.k-clear-value,
+.k-input-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 0;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+    color: var(--scale-500);
+}
+.k-hidden {
+    display: none !important;
+}
+.k-svg-icon .bs-icon {
+    fill: currentColor;
+    stroke: none;
+    margin: 0;
+    width: 0.8em;
+    height: 0.8em;
+}
+
+
+/* FLOATS (dropdowns tipo modal, ej. selector de pasajeros) */
+.btn-float {
+    cursor: pointer;
+    text-align: left;
+}
+.content-float {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: var(--box-form);
+    padding: 1rem;
+    z-index: 20;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-8px);
+    transition: opacity .15s ease, transform .15s ease, visibility .15s;
+}
+.content-float.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Calendario (solo visual, sin logica de fechas real) */
+.calendar-float {
+    min-width: 280px;
+}
+.calendar-header {
+    margin-bottom: 0.75rem;
+}
+.calendar-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: none;
+    padding: 4px;
+    color: var(--scale-500);
+    cursor: pointer;
+}
+.calendar-title {
+    font-weight: 600;
+    text-transform: capitalize;
+}
+.calendar-weekdays,
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+}
+.calendar-weekdays span {
+    text-align: center;
+    font-size: 12px;
+    color: var(--scale-400);
+    padding-bottom: 8px;
+}
+.calendar-day {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1;
+    border-radius: 5px;
+    font-size: 14px;
+    color: var(--c-text);
+    line-height: 1;
+}
+.calendar-day:not(.is-empty) {
+    cursor: pointer;
+}
+.calendar-day:not(.is-empty):not(.is-selected):hover {
+    background: var(--primary-50);
+}
+.calendar-day.is-today {
+    font-weight: 700;
+}
+.calendar-day.is-outside {
+    color: var(--scale-300);
+}
+.calendar-day.is-selected {
+    background: var(--primary);
+    color: #fff;
+}
+.calendar-day.is-selected small,
+.calendar-day.is-reference small {
+    font-size: 10px;
+    font-weight: 500;
+}
+.calendar-day.is-reference {
+    background: var(--primary-50);
+    color: var(--primary);
+}
+.calendar-day.is-in-range {
+    background: var(--scale-100);
+    border-radius: 0;
+}
+.calendar-footer {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--scale-100);
+    text-align: center;
+    font-size: 13px;
+    color: var(--orange);
+}
+
+/* HEADER */
+.bg-header {
+    background: var(--primary-hover-2);
+}
+.btn-moneda{
+    background: transparent;
+    color: white;
+    border: none;
+    option{
+        color: var(--c-text);
+    }
+}
+
+.page-index .form-search{
+    margin-top: -4rem;
+}
+.page-air-search .content-form{
+    display: flex !important;
+    flex-direction: column !important;
+    .flight-inputs-container{
+        width: 100% !important;
+        display: flex !important;
+        flex-direction: column !important;
+    }
+}
+.page-air-search .btn-return{display: none;}
+
+/* Resultados de vuelos + preloader tipo skeleton (casillas grises con shimmer) */
+.results-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+.flight-result-card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: var(--box-form);
+    padding: 1rem;
+}
+.airline-logo {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    padding: 4px;
+    background: var(--scale-100);
+    color: var(--scale-500);
+    flex-shrink: 0;
+}
+.skeleton {
+    background: linear-gradient(90deg, var(--scale-100) 25%, var(--scale-200) 37%, var(--scale-100) 63%);
+    background-size: 400% 100%;
+    animation: skeleton-loading 1.4s ease infinite;
+    border-radius: 6px;
+}
+/* Utilidad para el patron "skeleton -> contenido real": oculta el contenedor sin
+   importar que otras clases de layout tenga (flex-c, lg:grid, etc.), ya que esas
+   utilidades se auto-generan sin !important y a veces le ganan a .hidden por orden
+   de aparicion en la hoja de estilos. Aplicala a CUALQUIER contenedor que quieras
+   mostrar/ocultar como parte de una carga; quitarla por JS revela su display normal. */
+.skeleton-hidden {
+    display: none !important;
+}
+@keyframes skeleton-loading {
+    0% { background-position: 100% 50%; }
+    100% { background-position: 0 50%; }
+}
+.skeleton-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.skeleton-line {
+    height: 12px;
+}
+.skeleton-line-lg {
+    width: 60%;
+}
+.skeleton-line-sm {
+    width: 35%;
+}
+.skeleton-line-price {
+    width: 60px;
+    height: 20px;
+    flex-shrink: 0;
+}
+.skeleton-title {
+    width: 220px;
+    height: 24px;
+}
+.skeleton-block {
+    width: 100%;
+    height: 130px;
+}
+
+/* Filtros tipo acordeon (Escalas, Equipaje, Precio, Aerolineas, Horario) */
+.section-header {
+    cursor: pointer;
+}
+.section-header .toggle-icon {
+    transition: transform 0.25s ease;
+}
+.section-header.is-collapsed .toggle-icon {
+    transform: rotate(-90deg);
+}
+[id$="-collapse"] {
+    overflow: hidden;
+    max-height: 600px;
+    transition: opacity 0.2s ease;
+}
+[id$="-collapse"].is-collapsed {
+    max-height: 0;
+    opacity: 0;
+}
+
+/* Listas tipo horarios (ej. .list-itinerario): muestra solo los primeros 2 items,
+   el boton .btn-toggle-more agrega .is-expanded al contenedor para revelar el resto */
+.list-toggle-2 > *:nth-child(n + 3) {
+    display: none;
+}
+.list-toggle-2.is-expanded > *:nth-child(n + 3) {
+    display: flex;
+}
+.btn-toggle-more .toggle-icon {
+    transition: transform 0.25s ease;
+}
+.btn-toggle-more.is-expanded .toggle-icon {
+    transform: rotate(45deg);
+}
+
+/* Revelado incremental de resultados (#results-content, ver script.js): las tarjetas
+   mas alla del primer lote quedan ocultas hasta que el scroll llega al sentinel.
+   !important por la misma razon que .skeleton-hidden: las tarjetas tienen clases de
+   layout (flex-c, flex-r) que scriptCss.js inyecta despues y ganarian el empate de
+   especificidad por orden de aparicion */
+.is-hidden-batch {
+    display: none !important;
+}
+.results-sentinel {
+    height: 1px;
+}
+.i-logos{
+    width: 30px;
+}
+/* Timeline de itinerario (detalle de vuelo con escalas, ver modales de Itinerario Ida/Vuelta):
+   .itinerary-stop = punto (salida/llegada), .itinerary-connector = tramo entre puntos
+   (vuelo o escala), cada uno con su columna .itinerary-marker con el punto/linea vertical */
+.itinerary-stop {
+    display: flex;
+    gap: 0.75rem;
+}
+.itinerary-marker {
+    width: 10px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 6px;
+}
+.itinerary-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--primary);
+    flex-shrink: 0;
+}
+.itinerary-connector {
+    display: flex;
+    gap: 0.75rem;
+}
+.itinerary-connector .itinerary-marker {
+    padding-top: 0;
+}
+.line-vertical-itinerary {
+    width: 2px;
+    min-height: 40px;
+    background: var(--scale-200);
+}
+.itinerary-connector-body {
+    flex: 1;
+    padding: 0.5rem 0;
+}
+
+.card-product {
+    height: 100%;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: var(--box-form);
+    transform: translateY(0);
+    transition: all .3s ease;
+    position: relative;
+}
+
+.content-actions{
+    a{
+        filter: opacity(0.7);
+        &:hover{
+            filter: opacity(1);
+            cursor: pointer;
+        }
+    }
+    a.active{
+        filter: opacity(1);
+        background: var(--primary-50);
+        color: var(--primary);
+        border: 1px solid var(--primary);
+    }
+}
+
+/* Tabs simples (ej. "Añadir maletas" separado por tramo Ida/Vuelta, ver [data-tab-target]
+   en script.js): resalta el boton .btn-outline del tramo activo */
+.tabs-luggage a.active {
+    background: var(--primary-50);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+}
+
+/* MODAL (tipo Bootstrap: overlay + dialog centrado, con header-modal/body-modal/footer-modal).
+   Se abre con data-toggle="modal" data-target="#id" y se cierra con data-dismiss="modal",
+   click en el backdrop o tecla Escape. Ver window.openModal/closeModal en script.js */
+body.modal-open {
+    overflow: hidden;
+}
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: var(--scale-90\%);
+    z-index: 1040;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .15s ease, visibility .15s;
+}
+.modal-backdrop.show {
+    opacity: 1;
+    visibility: visible;
+}
+.modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1050;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .15s ease, visibility .15s;
+}
+.modal.show {
+    opacity: 1;
+    visibility: visible;
+}
+.modal-dialog {
+    width: 100%;
+    max-width: 500px;
+    margin: auto;
+    transform: translateY(-30px);
+    transition: transform .2s ease;
+}
+.modal.show .modal-dialog {
+    transform: translateY(0);
+}
+.modal-dialog.modal-sm {
+    max-width: 320px;
+}
+.modal-dialog.modal-lg {
+    max-width: 700px;
+}
+.modal-dialog.modal-xl {
+    max-width: 1000px;
+}
+.modal-content {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: var(--box-form);
+    overflow: hidden;
+}
+.header-modal {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1.25rem 1.5rem;
+    border-bottom: var(--border-header);
+}
+.header-modal h1,
+.header-modal h2,
+.header-modal h3,
+.header-modal h4 {
+    margin: 0;
+}
+.body-modal {
+    padding: 1.5rem;
+    max-height: 65vh;
+    overflow-y: auto;
+}
+.footer-modal {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+    border-top: var(--border-header);
+}
+.modal-close {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    background: none;
+    padding: 4px;
+    color: var(--scale-500);
+    cursor: pointer;
+    line-height: 0;
+}
+.modal-close:hover {
+    color: var(--scale-800);
+}
+.modal-close .bs-icon {
+    width: 1.2em;
+    height: 1.2em;
+}
+
+/* Modales tipo sidebar (.modal-sidebar, ej. #modalFiltros y #modalBusqueda):
+   en escritorio (>=1024px) son la misma sidebar de siempre (sin comportamiento
+   de modal), en movil (<=1023px) se vuelven un bottom sheet que se activa
+   desde los botones de .content-actions-mobile */
+.modal-drag-handle {
+    display: none;
+}
+@media (min-width: 1024px) {
+    .modal-sidebar {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        display: block;
+        padding: 0;
+        z-index: auto;
+        overflow: visible;
+    }
+    .modal-sidebar .modal-dialog {
+        max-width: none;
+        margin: 0;
+        transform: none;
+        transition: none;
+    }
+    .modal-sidebar .modal-content {
+        background: none;
+        border-radius: 0;
+        box-shadow: none;
+        overflow: visible;
+    }
+    .modal-sidebar .header-modal,
+    .modal-sidebar .footer-modal {
+        display: none;
+    }
+    .modal-sidebar .body-modal {
+        padding: 0;
+        max-height: none;
+        overflow: visible;
+    }
+}
+@media (max-width: 1023px) {
+    .modal-sidebar {
+        align-items: flex-end;
+        padding: 0;
+    }
+    .modal-sidebar .modal-dialog {
+        max-width: none;
+        margin: 0;
+        transform: translateY(100%);
+    }
+    /* Especificidad ID+2 clases: gana sobre la regla de arriba (ID+1 clase)
+       para que el slide-up hacia translateY(0) si funcione al abrir */
+    .modal-sidebar.show .modal-dialog {
+        transform: translateY(0);
+    }
+    .modal-sidebar .modal-content {
+        width: 100%;
+        max-height: 85vh;
+        border-radius: 20px 20px 0 0;
+        display: flex;
+        flex-direction: column;
+    }
+    .modal-sidebar .modal-drag-handle {
+        display: block;
+        width: 40px;
+        height: 4px;
+        flex-shrink: 0;
+        margin: 10px auto 0;
+        border-radius: 999px;
+        background: var(--scale-300);
+    }
+    .modal-sidebar .body-modal {
+        flex: 1;
+        max-height: none;
+    }
+    .modal-sidebar .footer-modal {
+        justify-content: stretch;
+    }
+}

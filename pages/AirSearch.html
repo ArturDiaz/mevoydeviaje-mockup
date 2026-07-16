@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mevoydeviaje.com</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="page-air-search icons-svg text-3.5">
+    <script src="shared/IconSVG.js"></script>
+    <script src="shared/_header.js"></script>
+    <main class="w-responsive py-7">
+        <div id="page-skeleton" class="flex-c gap-5 lg:grid lg:cl-8">
+            <div class="span-2 flex-c gap-4">
+                <div class="skeleton skeleton-block"></div>
+                <div class="skeleton skeleton-line skeleton-line-lg"></div>
+                <div class="skeleton skeleton-line skeleton-line-sm"></div>
+                <div class="skeleton skeleton-line skeleton-line-lg"></div>
+                <div class="skeleton skeleton-line skeleton-line-sm"></div>
+                <div class="skeleton skeleton-line skeleton-line-lg"></div>
+            </div>
+            <div class="span-6 flex-c gap-3">
+                <div class="skeleton skeleton-line skeleton-title"></div>
+                <div class="flight-result-card skeleton-card flex-r ai-c gap-3">
+                    <div class="skeleton skeleton-circle"></div>
+                    <div class="flex-c gap-2 flex-1">
+                        <div class="skeleton skeleton-line skeleton-line-lg"></div>
+                        <div class="skeleton skeleton-line skeleton-line-sm"></div>
+                    </div>
+                    <div class="skeleton skeleton-line skeleton-line-price"></div>
+                </div>
+                <div class="flight-result-card skeleton-card flex-r ai-c gap-3">
+                    <div class="skeleton skeleton-circle"></div>
+                    <div class="flex-c gap-2 flex-1">
+                        <div class="skeleton skeleton-line skeleton-line-lg"></div>
+                        <div class="skeleton skeleton-line skeleton-line-sm"></div>
+                    </div>
+                    <div class="skeleton skeleton-line skeleton-line-price"></div>
+                </div>
+                <div class="flight-result-card skeleton-card flex-r ai-c gap-3">
+                    <div class="skeleton skeleton-circle"></div>
+                    <div class="flex-c gap-2 flex-1">
+                        <div class="skeleton skeleton-line skeleton-line-lg"></div>
+                        <div class="skeleton skeleton-line skeleton-line-sm"></div>
+                    </div>
+                    <div class="skeleton skeleton-line skeleton-line-price"></div>
+                </div>
+                <div class="flight-result-card skeleton-card flex-r ai-c gap-3">
+                    <div class="skeleton skeleton-circle"></div>
+                    <div class="flex-c gap-2 flex-1">
+                        <div class="skeleton skeleton-line skeleton-line-lg"></div>
+                        <div class="skeleton skeleton-line skeleton-line-sm"></div>
+                    </div>
+                    <div class="skeleton skeleton-line skeleton-line-price"></div>
+                </div>
+                <div class="flight-result-card skeleton-card flex-r ai-c gap-3">
+                    <div class="skeleton skeleton-circle"></div>
+                    <div class="flex-c gap-2 flex-1">
+                        <div class="skeleton skeleton-line skeleton-line-lg"></div>
+                        <div class="skeleton skeleton-line skeleton-line-sm"></div>
+                    </div>
+                    <div class="skeleton skeleton-line skeleton-line-price"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="main-content" class="skeleton-hidden flex-c gap-5 lg:grid lg:cl-8">
+        <div class="span-2 flex-c gap-8">
+            <div class="modal modal-sidebar" id="modalBusqueda">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-drag-handle"></div>
+                        <div class="header-modal">
+                            <h3>Editar búsqueda</h3>
+                            <button type="button" class="modal-close" data-dismiss="modal">
+                                <svg class="bs-icon"><use xlink:href="#i-close"></use></svg>
+                            </button>
+                        </div>
+                        <div class="body-modal">
+                            <script src="shared/_formSearch.js"></script>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal modal-sidebar" id="modalFiltros">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-drag-handle"></div>
+                        <div class="header-modal">
+                            <h3>Filtros</h3>
+                            <button type="button" class="modal-close" data-dismiss="modal">
+                                <svg class="bs-icon"><use xlink:href="#i-close"></use></svg>
+                            </button>
+                        </div>
+                        <div class="body-modal">
+            <div class="filter-content">
+                <div class="flex-c gap-8">
+                    <div class="card-filter flex-c gap-5">
+                        <a class="flex-r jc-b ai-c section-header" onclick="toggleSection('escalas-collapse')">
+                            <span class="text-4.5">Escalas</span>
+                            <svg class="bs-icon toggle-icon"><use xlink:href="#i-arrow-botton"></use></svg>
+                        </a>
+                        <div id="escalas-collapse" class="">
+                            <div class="flex-c gap-3">
+                                <div class="item-filter flex-r jc-b gap-3">
+                                    <div class="flex-r gap-2">
+                                        <input type="radio" name="filter-stops" value="-1" id="filter-escala-1" data-bind="checked: Filters.Stops" checked="">
+                                        <label for="filter-escala-1">Todas las escalas</label>
+                                    </div>
+                                    <span id="stops-count-all">0</span>
+                                </div>
+                                <div class="item-filter flex-r jc-b gap-3">
+                                    <div class="flex-r gap-2">
+                                        <input type="radio" name="filter-stops" value="0" id="filter-escala-2" data-bind="checked: Filters.Stops">
+                                        <label for="filter-escala-2">Directo</label>
+                                    </div>
+                                    <span id="stops-count-direct">0</span>
+                                </div>
+                                <div class="item-filter flex-r jc-b gap-3">
+                                    <div class="flex-r gap-2">
+                                        <input type="radio" name="filter-stops" value="1" id="filter-escala-3" data-bind="checked: Filters.Stops">
+                                        <label for="filter-escala-3">1 Escala</label>
+                                    </div>
+                                    <span id="stops-count-one">0</span>
+                                </div>
+                                <div class="item-filter flex-r jc-b gap-3">
+                                    <div class="flex-r gap-2">
+                                        <input type="radio" name="filter-stops" value="5" id="filter-escala-4" data-bind="checked: Filters.Stops">
+                                        <label for="filter-escala-4">+ 2 Escalas</label>
+                                    </div>
+                                    <span id="stops-count-multiple">0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full line-horizontal"></div>
+                    <div class="card-filter flex-c gap-5">
+                        <a class="flex-r jc-b ai-c section-header" onclick="toggleSection('equipaje-collapse')">
+                            <span class="text-4.5">Equipaje</span>
+                            <svg class="bs-icon toggle-icon"><use xlink:href="#i-arrow-botton"></use></svg>
+                        </a>
+                        <div id="equipaje-collapse" class="">
+                            <div class="flex-c gap-3">
+                                <div class="item-filter flex-r jc-b gap-3">
+                                    <div class="flex-r gap-2">
+                                        <input type="checkbox" id="filter-maleta-all" name="filter-baggage-all" checked="">
+                                        <label for="filter-maleta-all">Todas las opciones</label>
+                                    </div>
+                                    <span id="baggage-count-all">0</span>
+                                </div>
+                                <div class="item-filter flex-r jc-b gap-3">
+                                    <div class="flex-r gap-2">
+                                        <input type="checkbox" id="filter-maleta-1" name="filter-baggage-personal" data-bind="checked: Filters.BaggagePersonal">
+                                        <label for="filter-maleta-1">Mochila o cartera personal</label>
+                                    </div>
+                                    <span id="baggage-count-personal">0</span>
+                                </div>
+                                <div class="item-filter flex-r jc-b gap-3">
+                                    <div class="flex-r gap-2">
+                                        <input type="checkbox" id="filter-maleta-2" name="filter-baggage-carryon" data-bind="checked: Filters.BaggageCarryOn">
+                                        <label for="filter-maleta-2">Equipaje de mano</label>
+                                    </div>
+                                    <span id="baggage-count-cabin">0</span>
+                                </div>
+                                <div class="item-filter flex-r jc-b gap-3">
+                                    <div class="flex-r gap-2">
+                                        <input type="checkbox" id="filter-maleta-3" name="filter-baggage-checked" data-bind="checked: Filters.BaggageChecked">
+                                        <label for="filter-maleta-3">Equipaje de bodega 23kg</label>
+                                    </div>
+                                    <span id="baggage-count-checked">0</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full line-horizontal"></div>
+                    <div class="card-filter flex-c gap-5">
+                        <a class="flex-r jc-b ai-c section-header" onclick="toggleSection('price-collapse')">
+                            <span class="text-4.5">Precio</span>
+                            <svg class="bs-icon toggle-icon"><use xlink:href="#i-arrow-botton"></use></svg>
+                        </a>
+                        <div id="price-collapse" class="">
+                            <div class="flex-c gap-5">
+                                <div class="item-filter line-filter relative" id="price-track" data-min="150" data-max="5000">
+                                    <div class="line-dynamic" id="price-range"></div>
+                                    <svg id="dot-star" class="bs-icon c-blue price-dot" data-role="min">
+                                        <circle cx="7" cy="7" r="8" stroke-width="0" fill="currentColor"></circle>
+                                    </svg>
+                                    <svg id="dot-exit" class="bs-icon c-blue price-dot" data-role="max">
+                                        <circle cx="7" cy="7" r="8" stroke-width="0" fill="currentColor"></circle>
+                                    </svg>
+                                </div>
+                                <div class="flex-r jc-b">
+                                    <span class="text-3" id="price-label-min">S/ 150</span>
+                                    <span class="text-3" id="price-label-max">S/ 5,000</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full line-horizontal"></div>
+                    <div class="card-filter flex-c gap-5">
+                        <a class="flex-r jc-b ai-c section-header" onclick="toggleSection('airlines-collapse')">
+                            <span class="text-4.5">Aerolíneas</span>
+                            <svg class="bs-icon toggle-icon"><use xlink:href="#i-arrow-botton"></use></svg>
+                        </a>
+                        <div id="airlines-collapse">
+                            <div id="airlines-list" class="flex-c gap-3">
+
+                                <!-- Template: fila "Todas las aerolíneas" — visible, se actualiza su contador -->
+                                <div id="airline-row-all" class="item-filter flex-r jc-b gap-3">
+                                    <div class="flex-r gap-2">
+                                        <input type="checkbox" id="filter-aerolinea-all" name="filter-airline-all" checked="">
+                                        <label for="filter-aerolinea-all" class="flex-r ai-c">Todas las aerolíneas</label>
+                                    </div>
+                                    <span id="airline-count-all">0</span>
+                                </div>
+
+                                <!-- Placeholders estáticos: se cablearán clonando el template desde el Summary -->
+                                <div class="item-filter flex-r jc-b gap-3">
+                                    <div class="flex-r gap-2">
+                                        <input type="checkbox" class="airline-cb" name="filter-airline" value="LA">
+                                        <label class="flex-r ai-c">
+                                            <img class="i-logos airline-logo" src="../img/LA.png" alt="LATAM Airlines">
+                                            <span class="airline-name">LATAM Airlines</span>
+                                        </label>
+                                    </div>
+                                    <span class="airline-count">0</span>
+                                </div>
+                                <div class="item-filter flex-r jc-b gap-3">
+                                    <div class="flex-r gap-2">
+                                        <input type="checkbox" class="airline-cb" name="filter-airline" value="AV">
+                                        <label class="flex-r ai-c">
+                                            <img class="i-logos airline-logo" src="../img/AA.png" alt="American Airlines">
+                                            <span class="airline-name">American Airlines</span>
+                                        </label>
+                                    </div>
+                                    <span class="airline-count">0</span>
+                                </div>
+                                <div class="item-filter flex-r jc-b gap-3">
+                                    <div class="flex-r gap-2">
+                                        <input type="checkbox" class="airline-cb" name="filter-airline" value="H2">
+                                        <label class="flex-r ai-c">
+                                            <img class="i-logos airline-logo" src="../img/H2.png" alt="Sky Airline">
+                                            <span class="airline-name">Sky Airline</span>
+                                        </label>
+                                    </div>
+                                    <span class="airline-count">0</span>
+                                </div>
+
+                                <!-- Template: fila de aerolínea individual — oculta, se clona por cada aerolínea del Summary -->
+                                <div id="airline-row-template" class="item-filter flex-r jc-b gap-3" style="display:none" aria-hidden="true">
+                                    <div class="flex-r gap-2">
+                                        <input type="checkbox" class="airline-cb" name="filter-airline" value="">
+                                        <label class="flex-r ai-c">
+                                            <img class="i-logos airline-logo" src="" alt="">
+                                            <span class="airline-name"></span>
+                                        </label>
+                                    </div>
+                                    <span class="airline-count"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full line-horizontal"></div>
+                    <div class="card-filter flex-c gap-5">
+                        <a class="flex-r jc-b ai-c section-header" onclick="toggleSection('schedule-collapse')">
+                            <span class="text-4.5">Horario</span>
+                            <svg class="bs-icon toggle-icon"><use xlink:href="#i-arrow-botton"></use></svg>
+                        </a>
+                        <div id="schedule-collapse">
+                            <div class="flex-c gap-5">
+
+                                <!-- Tramo 1 — placeholder estático (rango/dots posicionados por JS al cablear) -->
+                                <div id="schedule-leg-0" class="flex-c gap-2">
+                                    <span id="schedule-label-0" class="text-3"><b>Ida</b> · Vuelo a Cusco</span>
+                                    <div class="item-filter line-filter relative" id="time-track-0" data-min="0" data-max="1439">
+                                        <div class="line-dynamic" id="time-range-0" style="left: 19%; width: 78%;"></div>
+                                        <svg id="time-dot-min-0" class="bs-icon c-blue price-dot" data-role="min" style="left: 19%;">
+                                            <circle cx="7" cy="7" r="8" stroke-width="0" fill="currentColor"></circle>
+                                        </svg>
+                                        <svg id="time-dot-max-0" class="bs-icon c-blue price-dot" data-role="max" style="left: 97%;">
+                                            <circle cx="7" cy="7" r="8" stroke-width="0" fill="currentColor"></circle>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-r jc-b">
+                                        <span class="text-3" id="time-label-min-0">04:40</span>
+                                        <span class="text-3">vie. 24 jul. 2026</span>
+                                        <span class="text-3" id="time-label-max-0">23:40</span>
+                                    </div>
+                                </div>
+
+                                <!-- Tramo 2 -->
+                                <div id="schedule-leg-1" class="flex-c gap-2" style="display:none">
+                                    <span id="schedule-label-1"></span>
+                                    <div class="item-filter line-filter relative" id="time-track-1" data-min="0" data-max="1439">
+                                        <div class="line-dynamic" id="time-range-1"></div>
+                                        <svg id="time-dot-min-1" class="bs-icon c-blue price-dot" data-role="min">
+                                            <circle cx="7" cy="7" r="8" stroke-width="0" fill="currentColor"></circle>
+                                        </svg>
+                                        <svg id="time-dot-max-1" class="bs-icon c-blue price-dot" data-role="max">
+                                            <circle cx="7" cy="7" r="8" stroke-width="0" fill="currentColor"></circle>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-r jc-b">
+                                        <span class="text-3" id="time-label-min-1">0h 00m</span>
+                                        <span class="text-3" id="time-label-max-1">23h 59m</span>
+                                    </div>
+                                </div>
+
+                                <!-- Tramo 3 -->
+                                <div id="schedule-leg-2" class="flex-c gap-2" style="display:none">
+                                    <span id="schedule-label-2"></span>
+                                    <div class="item-filter line-filter relative" id="time-track-2" data-min="0" data-max="1439">
+                                        <div class="line-dynamic" id="time-range-2"></div>
+                                        <svg id="time-dot-min-2" class="bs-icon c-blue price-dot" data-role="min">
+                                            <circle cx="7" cy="7" r="8" stroke-width="0" fill="currentColor"></circle>
+                                        </svg>
+                                        <svg id="time-dot-max-2" class="bs-icon c-blue price-dot" data-role="max">
+                                            <circle cx="7" cy="7" r="8" stroke-width="0" fill="currentColor"></circle>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-r jc-b">
+                                        <span class="text-3" id="time-label-min-2">0h 00m</span>
+                                        <span class="text-3" id="time-label-max-2">23h 59m</span>
+                                    </div>
+                                </div>
+
+                                <!-- Tramo 4 -->
+                                <div id="schedule-leg-3" class="flex-c gap-2" style="display:none">
+                                    <span id="schedule-label-3"></span>
+                                    <div class="item-filter line-filter relative" id="time-track-3" data-min="0" data-max="1439">
+                                        <div class="line-dynamic" id="time-range-3"></div>
+                                        <svg id="time-dot-min-3" class="bs-icon c-blue price-dot" data-role="min">
+                                            <circle cx="7" cy="7" r="8" stroke-width="0" fill="currentColor"></circle>
+                                        </svg>
+                                        <svg id="time-dot-max-3" class="bs-icon c-blue price-dot" data-role="max">
+                                            <circle cx="7" cy="7" r="8" stroke-width="0" fill="currentColor"></circle>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-r jc-b">
+                                        <span class="text-3" id="time-label-min-3">0h 00m</span>
+                                        <span class="text-3" id="time-label-max-3">23h 59m</span>
+                                    </div>
+                                </div>
+
+                                <!-- Tramo 5 -->
+                                <div id="schedule-leg-4" class="flex-c gap-2" style="display:none">
+                                    <span id="schedule-label-4"></span>
+                                    <div class="item-filter line-filter relative" id="time-track-4" data-min="0" data-max="1439">
+                                        <div class="line-dynamic" id="time-range-4"></div>
+                                        <svg id="time-dot-min-4" class="bs-icon c-blue price-dot" data-role="min">
+                                            <circle cx="7" cy="7" r="8" stroke-width="0" fill="currentColor"></circle>
+                                        </svg>
+                                        <svg id="time-dot-max-4" class="bs-icon c-blue price-dot" data-role="max">
+                                            <circle cx="7" cy="7" r="8" stroke-width="0" fill="currentColor"></circle>
+                                        </svg>
+                                    </div>
+                                    <div class="flex-r jc-b">
+                                        <span class="text-3" id="time-label-min-4">0h 00m</span>
+                                        <span class="text-3" id="time-label-max-4">23h 59m</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+                        </div>
+                        <div class="footer-modal">
+                            <button type="button" class="btn btn-primary w-full">Aplicar filtros</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="section-products span-6">
+            <div class="header-section flex-c lg:flex-r jc-b ai-c gap-3">
+                <div class="flex-c">
+                    <h1 class="flex-r text-5">
+                        <span>Lima</span>
+                        <svg class="bs-icon"><use xlink:href="#i-arrows-exchange"></use></svg>
+                        <span>Miami</span>
+                    </h1>
+                    <span class="text-4">13 Jul - 14 Sep </span>
+                </div>
+                <div class="content-actions flex-r gap-2">
+                    <a class="btn btn-outline active">Recomendado</a>
+                    <a class="btn btn-outline">Más barato</a>
+                    <a class="btn btn-outline">Más rápido</a>
+                    <a class="btn btn-outline outline-cyber">Cyber</a>
+                </div>
+            </div>
+
+            <div class="content-actions-mobile hidden max-md:flex-r gap-2">
+                <a class="btn btn-outline flex-r ai-c gap-1" data-toggle="modal" data-target="#modalBusqueda">
+                    <svg class="bs-icon"><use xlink:href="#i-search"></use></svg>
+                    Editar búsqueda
+                </a>
+                <a class="btn btn-outline flex-r ai-c gap-1" data-toggle="modal" data-target="#modalFiltros">
+                    <svg class="bs-icon"><use xlink:href="#i-filter"></use></svg>
+                    Filtros
+                </a>
+                <a class="btn btn-outline flex-r ai-c gap-1">
+                    <svg class="bs-icon"><use xlink:href="#i-table-options"></use></svg>
+                    Tabla precios
+                </a>
+                <a class="btn btn-outline flex-r ai-c gap-1">
+                    <svg class="bs-icon"><use xlink:href="#i-grafic-analytics"></use></svg>
+                    Curvas precios
+                </a>
+            </div>
+
+            <div id="results-content" class="results-list mt-4">
+                <script src="shared/_itineraryDirect.js"></script>
+                <script src="shared/_itineraryRoundtrip.js"></script>
+                <script src="shared/_itineraryDirect.js"></script>
+                <script src="shared/_itineraryStop.js"></script>
+                <script src="shared/_itineraryDirect.js"></script>
+                <script src="shared/_itineraryDirect.js"></script>
+                <script src="shared/_itineraryRoundtrip.js"></script>
+                <script src="shared/_itineraryDirect.js"></script>
+                <script src="shared/_itineraryStop.js"></script>
+                <script src="shared/_itineraryRoundtrip.js"></script>
+                <script src="shared/_itineraryDirect.js"></script>
+                <script src="shared/_itineraryStop.js"></script>
+            </div>
+        </section>
+        </div>
+    </main>
+    <footer>
+
+    </footer>
+
+    <!-- Modal del icono de info del subtotal (.btn-info-subtotal). En blanco por ahora: -->
+    <!-- completar header-modal/body-modal/footer-modal cuando se defina el contenido -->
+    <div class="modal" id="modalInfoSubtotal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="header-modal">
+                    <h3>Sub total</h3>
+                    <button type="button" class="modal-close" data-dismiss="modal">
+                        <svg class="bs-icon"><use xlink:href="#i-close"></use></svg>
+                    </button>
+                </div>
+                <div class="body-modal">
+                    <div class="content-subtotal flex-c gap-3">
+                        <div class="price-brand text-3 badge badge-blue upper-case w-fit">BASIC</div>
+                        <div class="flex-c gap-2">
+                            <div class="flex-r jc-b">
+                                <span>2 Adultos</span>
+                                <span class="price-adult">USD 320.00</span>
+                            </div>
+                            <div class="flex-r jc-b">
+                                <span>1 Niño</span>
+                                <span class="price-kids">USD 40.00</span>
+                            </div>
+                            
+                            <div class="flex-r jc-b">
+                                <span>Impuestos y tasas</span>
+                                <span class="price-tax">USD 387.76</span>
+                            </div>
+                            <div class="flex-r jc-b c-blue">
+                                <span>Descuentos</span>
+                                <span class="price-tax">USD 00.0</span>
+                            </div>
+                            <div class="flex-r jc-b c-blue">
+                                <span>Cupones</span>
+                                <span class="price-tax">USD 00.0</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-modal">
+                    <div class="flex-r jc-b ai-r w-full text-4.5">
+                        <span class="flex-c">
+                            <b>Total a pagar</b>
+                            <span class="text-3">Ida y Vuelta</span>
+                        </span>
+                        <span>USD <span class="price-total"><b>707.76</b></span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal del detalle de itinerario de IDA: Lima (LIM) -> Bogota (BOG) -> Miami (MIA) -->
+    <div class="modal" id="modalItinerarioIda">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="header-modal">
+                    <h3>Itinerario Ida</h3>
+                    <button type="button" class="modal-close" data-dismiss="modal">
+                        <svg class="bs-icon"><use xlink:href="#i-close"></use></svg>
+                    </button>
+                </div>
+                <div class="body-modal">
+                    <div class="flex-r jc-b ai-c mb-4">
+                        <span class="text-3.5 c-scale-500">Vie. 13 Sep · LATAM Airlines</span>
+                        <span class="badge badge-blue">1 escala · 5h 20m</span>
+                    </div>
+                    <div class="flex-c">
+                        <div class="itinerary-stop">
+                            <div class="itinerary-marker"><span class="itinerary-dot"></span></div>
+                            <div class="flex-c gap-1 pb-2">
+                                <span class="text-4 font-bold">06:10 · Lima (LIM)</span>
+                                <span class="text-3.5 c-scale-500">Aeropuerto Internacional Jorge Chávez</span>
+                            </div>
+                        </div>
+                        <div class="itinerary-connector">
+                            <div class="itinerary-marker"><span class="line-vertical-itinerary"></span></div>
+                            <div class="itinerary-connector-body flex-c gap-1">
+                                <div class="flex-r ai-c gap-2">
+                                    <img class="i-logos" src="../img/LA.png">
+                                    <span class="text-3.5 font-bold">LATAM Airlines · LA 2470</span>
+                                </div>
+                                <span class="text-3 c-scale-500">Airbus A320 · Duración 2h 05m</span>
+                            </div>
+                        </div>
+                        <div class="itinerary-stop">
+                            <div class="itinerary-marker"><span class="itinerary-dot"></span></div>
+                            <div class="flex-c gap-1 pb-2">
+                                <span class="text-4 font-bold">08:15 · Bogotá (BOG)</span>
+                                <span class="text-3.5 c-scale-500">Aeropuerto Internacional El Dorado</span>
+                            </div>
+                        </div>
+                        <div class="itinerary-connector">
+                            <div class="itinerary-marker"><span class="line-vertical-itinerary"></span></div>
+                            <div class="itinerary-connector-body flex-c jc-c">
+                                <span class="badge badge-pink flex-r ai-c gap-1 w-fit"><svg class="bs-icon"><use xlink:href="#i-time"></use></svg>Escala en Bogotá · 1h 00m</span>
+                            </div>
+                        </div>
+                        <div class="itinerary-stop">
+                            <div class="itinerary-marker"><span class="itinerary-dot"></span></div>
+                            <div class="flex-c gap-1 pb-2">
+                                <span class="text-4 font-bold">09:15 · Bogotá (BOG)</span>
+                                <span class="text-3.5 c-scale-500">Aeropuerto Internacional El Dorado</span>
+                            </div>
+                        </div>
+                        <div class="itinerary-connector">
+                            <div class="itinerary-marker"><span class="line-vertical-itinerary"></span></div>
+                            <div class="itinerary-connector-body flex-c gap-1">
+                                <div class="flex-r ai-c gap-2">
+                                    <img class="i-logos" src="../img/LA.png">
+                                    <span class="text-3.5 font-bold">LATAM Airlines · LA 1543</span>
+                                </div>
+                                <span class="text-3 c-scale-500">Boeing 787-9 · Duración 2h 15m</span>
+                            </div>
+                        </div>
+                        <div class="itinerary-stop">
+                            <div class="itinerary-marker"><span class="itinerary-dot"></span></div>
+                            <div class="flex-c gap-1">
+                                <span class="text-4 font-bold">12:45 · Miami (MIA)</span>
+                                <span class="text-3.5 c-scale-500">Aeropuerto Internacional de Miami</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-modal jc-b ai-c w-full">
+                    <span class="flex-c">
+                        <b>Duración total</b>
+                        <span class="text-3 c-scale-500">1 escala · 5h 20m</span>
+                    </span>
+                    <button type="button" class="btn btn-default-outline" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal del detalle de itinerario de VUELTA: Miami (MIA) -> Bogota (BOG) -> Lima (LIM) -->
+    <div class="modal" id="modalItinerarioVuelta">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="header-modal">
+                    <h3>Itinerario Vuelta</h3>
+                    <button type="button" class="modal-close" data-dismiss="modal">
+                        <svg class="bs-icon"><use xlink:href="#i-close"></use></svg>
+                    </button>
+                </div>
+                <div class="body-modal">
+                    <div class="flex-r jc-b ai-c mb-4">
+                        <span class="text-3.5 c-scale-500">Vie. 13 Sep · LATAM Airlines</span>
+                        <span class="badge badge-blue">1 escala · 5h 20m</span>
+                    </div>
+                    <div class="flex-c">
+                        <div class="itinerary-stop">
+                            <div class="itinerary-marker"><span class="itinerary-dot"></span></div>
+                            <div class="flex-c gap-1 pb-2">
+                                <span class="text-4 font-bold">06:10 · Miami (MIA)</span>
+                                <span class="text-3.5 c-scale-500">Aeropuerto Internacional de Miami</span>
+                            </div>
+                        </div>
+                        <div class="itinerary-connector">
+                            <div class="itinerary-marker"><span class="line-vertical-itinerary"></span></div>
+                            <div class="itinerary-connector-body flex-c gap-1">
+                                <div class="flex-r ai-c gap-2">
+                                    <img class="i-logos" src="../img/LA.png">
+                                    <span class="text-3.5 font-bold">LATAM Airlines · LA 1544</span>
+                                </div>
+                                <span class="text-3 c-scale-500">Boeing 787-9 · Duración 2h 10m</span>
+                            </div>
+                        </div>
+                        <div class="itinerary-stop">
+                            <div class="itinerary-marker"><span class="itinerary-dot"></span></div>
+                            <div class="flex-c gap-1 pb-2">
+                                <span class="text-4 font-bold">08:20 · Bogotá (BOG)</span>
+                                <span class="text-3.5 c-scale-500">Aeropuerto Internacional El Dorado</span>
+                            </div>
+                        </div>
+                        <div class="itinerary-connector">
+                            <div class="itinerary-marker"><span class="line-vertical-itinerary"></span></div>
+                            <div class="itinerary-connector-body flex-c jc-c">
+                                <span class="badge badge-pink flex-r ai-c gap-1 w-fit"><svg class="bs-icon"><use xlink:href="#i-time"></use></svg>Escala en Bogotá · 1h 00m</span>
+                            </div>
+                        </div>
+                        <div class="itinerary-stop">
+                            <div class="itinerary-marker"><span class="itinerary-dot"></span></div>
+                            <div class="flex-c gap-1 pb-2">
+                                <span class="text-4 font-bold">09:20 · Bogotá (BOG)</span>
+                                <span class="text-3.5 c-scale-500">Aeropuerto Internacional El Dorado</span>
+                            </div>
+                        </div>
+                        <div class="itinerary-connector">
+                            <div class="itinerary-marker"><span class="line-vertical-itinerary"></span></div>
+                            <div class="itinerary-connector-body flex-c gap-1">
+                                <div class="flex-r ai-c gap-2">
+                                    <img class="i-logos" src="../img/LA.png">
+                                    <span class="text-3.5 font-bold">LATAM Airlines · LA 2469</span>
+                                </div>
+                                <span class="text-3 c-scale-500">Airbus A320 · Duración 2h 10m</span>
+                            </div>
+                        </div>
+                        <div class="itinerary-stop">
+                            <div class="itinerary-marker"><span class="itinerary-dot"></span></div>
+                            <div class="flex-c gap-1">
+                                <span class="text-4 font-bold">12:45 · Lima (LIM)</span>
+                                <span class="text-3.5 c-scale-500">Aeropuerto Internacional Jorge Chávez</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-modal jc-b ai-c w-full">
+                    <span class="flex-c">
+                        <b>Duración total</b>
+                        <span class="text-3 c-scale-500">1 escala · 5h 20m</span>
+                    </span>
+                    <button type="button" class="btn btn-default-outline" data-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de agregar equipaje facturado (#btn-add-luggage). Stepper +/- por pasajero,
+         el total se recalcula en vivo (ver bloque "Añadir maletas" en script.js) -->
+    <div class="modal" id="modalAddLuggage">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="header-modal">
+                    <h3>Añadir maletas</h3>
+                    <button type="button" class="modal-close" data-dismiss="modal">
+                        <svg class="bs-icon"><use xlink:href="#i-close"></use></svg>
+                    </button>
+                </div>
+                <div class="body-modal">
+                    <div class="tabs-luggage flex-r gap-2 mb-4">
+                        <a class="btn btn-outline active" data-tab-target="luggage-panel-ida">Ida</a>
+                        <a class="btn btn-outline" data-tab-target="luggage-panel-vuelta">Vuelta</a>
+                    </div>
+                    <div class="tab-panel" id="luggage-panel-ida">
+                        <p class="text-3.5 c-scale-500 mb-4">Equipaje facturado (bodega) para el tramo de ida.</p>
+                        <div class="flex-c gap-4">
+                            <div class="luggage-row flex-r jc-b ai-c gap-3" data-price="45.00">
+                                <div class="flex-r ai-c gap-2">
+                                    <svg class="bs-icon bg-i-default m-0 text-5.5"><use xlink:href="#i-bodega"></use></svg>
+                                    <div class="flex-c">
+                                        <span class="font-bold">Adulto 1</span>
+                                        <span class="text-3 c-scale-500">23 kg · USD 45.00 c/u</span>
+                                    </div>
+                                </div>
+                                <div class="luggage-counter flex-r gap-2 ai-c">
+                                    <button type="button" class="btn-default btn-i text-c flex-c px-1.5" data-luggage-action="remove">
+                                        <svg class="bs-icon"><use xlink:href="#i-minus"></use></svg>
+                                    </button>
+                                    <span class="luggage-count" data-luggage-count>0</span>
+                                    <button type="button" class="btn-default btn-i text-c flex-c px-1.5" data-luggage-action="add">
+                                        <svg class="bs-icon"><use xlink:href="#i-plus"></use></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="luggage-row flex-r jc-b ai-c gap-3" data-price="45.00">
+                                <div class="flex-r ai-c gap-2">
+                                    <svg class="bs-icon bg-i-default m-0 text-5.5"><use xlink:href="#i-bodega"></use></svg>
+                                    <div class="flex-c">
+                                        <span class="font-bold">Adulto 2</span>
+                                        <span class="text-3 c-scale-500">23 kg · USD 45.00 c/u</span>
+                                    </div>
+                                </div>
+                                <div class="luggage-counter flex-r gap-2 ai-c">
+                                    <button type="button" class="btn-default btn-i text-c flex-c px-1.5" data-luggage-action="remove">
+                                        <svg class="bs-icon"><use xlink:href="#i-minus"></use></svg>
+                                    </button>
+                                    <span class="luggage-count" data-luggage-count>0</span>
+                                    <button type="button" class="btn-default btn-i text-c flex-c px-1.5" data-luggage-action="add">
+                                        <svg class="bs-icon"><use xlink:href="#i-plus"></use></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="luggage-row flex-r jc-b ai-c gap-3" data-price="35.00">
+                                <div class="flex-r ai-c gap-2">
+                                    <svg class="bs-icon bg-i-default m-0 text-5.5"><use xlink:href="#i-bodega"></use></svg>
+                                    <div class="flex-c">
+                                        <span class="font-bold">Niño 1</span>
+                                        <span class="text-3 c-scale-500">23 kg · USD 35.00 c/u</span>
+                                    </div>
+                                </div>
+                                <div class="luggage-counter flex-r gap-2 ai-c">
+                                    <button type="button" class="btn-default btn-i text-c flex-c px-1.5" data-luggage-action="remove">
+                                        <svg class="bs-icon"><use xlink:href="#i-minus"></use></svg>
+                                    </button>
+                                    <span class="luggage-count" data-luggage-count>0</span>
+                                    <button type="button" class="btn-default btn-i text-c flex-c px-1.5" data-luggage-action="add">
+                                        <svg class="bs-icon"><use xlink:href="#i-plus"></use></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-panel" id="luggage-panel-vuelta" style="display:none">
+                        <p class="text-3.5 c-scale-500 mb-4">Equipaje facturado (bodega) para el tramo de vuelta.</p>
+                        <div class="flex-c gap-4">
+                            <div class="luggage-row flex-r jc-b ai-c gap-3" data-price="45.00">
+                                <div class="flex-r ai-c gap-2">
+                                    <svg class="bs-icon bg-i-default m-0 text-5.5"><use xlink:href="#i-bodega"></use></svg>
+                                    <div class="flex-c">
+                                        <span class="font-bold">Adulto 1</span>
+                                        <span class="text-3 c-scale-500">23 kg · USD 45.00 c/u</span>
+                                    </div>
+                                </div>
+                                <div class="luggage-counter flex-r gap-2 ai-c">
+                                    <button type="button" class="btn-default btn-i text-c flex-c px-1.5" data-luggage-action="remove">
+                                        <svg class="bs-icon"><use xlink:href="#i-minus"></use></svg>
+                                    </button>
+                                    <span class="luggage-count" data-luggage-count>0</span>
+                                    <button type="button" class="btn-default btn-i text-c flex-c px-1.5" data-luggage-action="add">
+                                        <svg class="bs-icon"><use xlink:href="#i-plus"></use></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="luggage-row flex-r jc-b ai-c gap-3" data-price="45.00">
+                                <div class="flex-r ai-c gap-2">
+                                    <svg class="bs-icon bg-i-default m-0 text-5.5"><use xlink:href="#i-bodega"></use></svg>
+                                    <div class="flex-c">
+                                        <span class="font-bold">Adulto 2</span>
+                                        <span class="text-3 c-scale-500">23 kg · USD 45.00 c/u</span>
+                                    </div>
+                                </div>
+                                <div class="luggage-counter flex-r gap-2 ai-c">
+                                    <button type="button" class="btn-default btn-i text-c flex-c px-1.5" data-luggage-action="remove">
+                                        <svg class="bs-icon"><use xlink:href="#i-minus"></use></svg>
+                                    </button>
+                                    <span class="luggage-count" data-luggage-count>0</span>
+                                    <button type="button" class="btn-default btn-i text-c flex-c px-1.5" data-luggage-action="add">
+                                        <svg class="bs-icon"><use xlink:href="#i-plus"></use></svg>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="luggage-row flex-r jc-b ai-c gap-3" data-price="35.00">
+                                <div class="flex-r ai-c gap-2">
+                                    <svg class="bs-icon bg-i-default m-0 text-5.5"><use xlink:href="#i-bodega"></use></svg>
+                                    <div class="flex-c">
+                                        <span class="font-bold">Niño 1</span>
+                                        <span class="text-3 c-scale-500">23 kg · USD 35.00 c/u</span>
+                                    </div>
+                                </div>
+                                <div class="luggage-counter flex-r gap-2 ai-c">
+                                    <button type="button" class="btn-default btn-i text-c flex-c px-1.5" data-luggage-action="remove">
+                                        <svg class="bs-icon"><use xlink:href="#i-minus"></use></svg>
+                                    </button>
+                                    <span class="luggage-count" data-luggage-count>0</span>
+                                    <button type="button" class="btn-default btn-i text-c flex-c px-1.5" data-luggage-action="add">
+                                        <svg class="bs-icon"><use xlink:href="#i-plus"></use></svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="footer-modal jc-b ai-c w-full">
+                    <span class="flex-c">
+                        <b>Total maletas</b>
+                        <span class="text-3 c-scale-500">USD <span id="luggage-total">0.00</span></span>
+                    </span>
+                    <div class="flex-r gap-2">
+                        <button type="button" class="btn btn-default-outline" data-dismiss="modal">Cancelar</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/scriptCss.js"></script>
+    <script src="../js/destinations-data.js"></script>
+    <script src="../js/script.js"></script>
+</body>
+</html>

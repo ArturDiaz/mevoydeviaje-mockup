@@ -1,0 +1,1890 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ScriptCSS – Documentación</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg2: #f5f5f3;
+    --bg3: #eeeee9;
+    --text: #1a1a18;
+    --text2: #5c5c58;
+    --text3: #888884;
+    --border: rgba(0,0,0,0.1);
+    --accent: #5340b8;
+    --accent-bg: #f0effe;
+    --accent-text: #3c348a;
+    --green: #3b6d11;
+    --green-bg: #eaf3de;
+    --amber: #854f0b;
+    --amber-bg: #faeeda;
+    --red: #a32d2d;
+    --red-bg: #fcebeb;
+    --code-bg: #f0f0ec;
+    --code-text: #3c3489;
+    --radius: 8px;
+    --radius-lg: 12px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1c1a; --bg2: #242422; --bg3: #2c2c2a;
+      --text: #e8e8e0; --text2: #9c9a90; --text3: #6c6c64;
+      --border: rgba(255,255,255,0.1);
+      --accent: #9f93ef; --accent-bg: #26215c; --accent-text: #cec8f6;
+      --green: #97c459; --green-bg: #173404;
+      --amber: #ef9f27; --amber-bg: #412402;
+      --red: #f09595; --red-bg: #501313;
+      --code-bg: #2a2a28; --code-text: #a99fec;
+    }
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); font-size: 15px; line-height: 1.7; }
+  .layout { display: flex; min-height: 100vh; }
+
+  /* Sidebar */
+  .sidebar { width: 240px; min-width: 240px; border-right: 1px solid var(--border); padding: 24px 0; position: sticky; top: 0; height: 100vh; overflow-y: auto; background: var(--bg2); }
+  .sidebar-logo { padding: 0 20px 20px; border-bottom: 1px solid var(--border); margin-bottom: 12px; }
+  .sidebar-logo span { font-size: 18px; font-weight: 600; color: var(--accent); letter-spacing: -0.3px; }
+  .sidebar-logo small { display: block; font-size: 11px; color: var(--text3); margin-top: 2px; }
+  .nav-section { padding: 6px 20px 2px; font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.8px; color: var(--text3); margin-top: 8px; }
+  .sidebar a { display: block; padding: 5px 20px; font-size: 13px; color: var(--text2); text-decoration: none; transition: color 0.15s, background 0.15s; }
+  .sidebar a:hover { color: var(--text); background: var(--bg3); }
+  .sidebar a.active { color: var(--accent); font-weight: 500; border-left: 2px solid var(--accent); padding-left: 18px; }
+  .sidebar a .badge-new { display: inline-block; font-size: 9px; font-weight: 700; background: var(--accent-bg); color: var(--accent-text); padding: 1px 5px; border-radius: 3px; margin-left: 5px; vertical-align: middle; }
+
+  /* Main */
+  .main { flex: 1; max-width: 860px; padding: 40px 48px; }
+
+  section { margin-bottom: 56px; scroll-margin-top: 24px; }
+  h1 { font-size: 28px; font-weight: 600; color: var(--text); margin-bottom: 8px; letter-spacing: -0.4px; }
+  h2 { font-size: 20px; font-weight: 600; color: var(--text); margin: 40px 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  h3 { font-size: 15px; font-weight: 600; color: var(--text); margin: 24px 0 8px; }
+  p { color: var(--text2); margin-bottom: 12px; }
+  .lead { font-size: 16px; color: var(--text2); margin-bottom: 0; }
+
+  .badge { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; vertical-align: middle; }
+  .badge-purple { background: var(--accent-bg); color: var(--accent-text); }
+  .badge-green  { background: var(--green-bg);  color: var(--green);  }
+  .badge-amber  { background: var(--amber-bg);  color: var(--amber);  }
+  .badge-red    { background: var(--red-bg);    color: var(--red);    }
+  .badge-new-inline { background: var(--accent-bg); color: var(--accent-text); font-size: 10px; font-weight: 700; padding: 1px 6px; border-radius: 4px; vertical-align: middle; margin-left: 6px; }
+
+  code { font-family: 'Fira Code', 'Cascadia Code', monospace; font-size: 13px; background: var(--code-bg); color: var(--code-text); padding: 1px 6px; border-radius: 4px; }
+  pre { background: var(--code-bg); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 20px 24px; overflow-x: auto; margin: 12px 0 20px; }
+  pre code { background: none; padding: 0; font-size: 13px; line-height: 1.6; color: var(--text); }
+  .kw { color: var(--accent); }
+  .str { color: var(--green); }
+  .cmt { color: var(--text3); font-style: italic; }
+  .val { color: var(--amber); }
+
+  .table-wrap { overflow-x: auto; margin: 12px 0 20px; border-radius: var(--radius-lg); border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  th { background: var(--bg2); color: var(--text); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; padding: 10px 16px; text-align: left; }
+  td { padding: 9px 16px; border-top: 1px solid var(--border); color: var(--text2); vertical-align: top; }
+  tr:hover td { background: var(--bg2); }
+
+  .alert { border-radius: var(--radius); padding: 14px 16px; margin: 16px 0; font-size: 14px; }
+  .alert-info  { background: var(--accent-bg); color: var(--accent-text); border-left: 3px solid var(--accent); }
+  .alert-amber { background: var(--amber-bg);  color: var(--amber);        border-left: 3px solid var(--amber); }
+  .alert-green { background: var(--green-bg);  color: var(--green);        border-left: 3px solid var(--green); }
+
+  .bp-grid { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0; }
+  .bp-pill { background: var(--bg2); border: 1px solid var(--border); border-radius: 20px; padding: 6px 14px; font-size: 13px; }
+  .bp-pill code { background: none; padding: 0; font-size: 12px; }
+
+  .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin: 16px 0 24px; }
+  .project-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 18px 20px; }
+  .project-card h4 { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+  .project-card p  { font-size: 13px; color: var(--text2); margin: 0; }
+  .project-card .tag { display: inline-block; font-size: 11px; background: var(--bg3); color: var(--text3); padding: 2px 7px; border-radius: 4px; margin-bottom: 8px; }
+
+  /* w-responsive visual scale */
+  .wr-scale { margin: 16px 0 24px; }
+  .wr-row { display: flex; align-items: center; gap: 12px; margin-bottom: 8px; font-size: 13px; }
+  .wr-label { width: 36px; font-weight: 600; color: var(--accent); }
+  .wr-bar-wrap { flex: 1; background: var(--bg3); border-radius: 4px; height: 10px; overflow: hidden; }
+  .wr-bar-fill { height: 100%; background: var(--accent-bg); border-right: 2px solid var(--accent); border-radius: 4px; }
+  .wr-info { font-size: 12px; color: var(--text3); min-width: 180px; }
+
+  @media (max-width: 720px) {
+    .sidebar { display: none; }
+    .main { padding: 24px 20px; }
+  }
+</style>
+</head>
+<body>
+<div class="layout">
+
+<!-- ─── SIDEBAR ──────────────────────────────────────────────── -->
+<nav class="sidebar">
+  <div class="sidebar-logo">
+    <span>ScriptCSS</span>
+    <small>Utilidades CSS dinámicas</small>
+  </div>
+  <div class="nav-section">Inicio</div>
+  <a href="#intro">¿Qué es?</a>
+  <a href="#install">Instalación</a>
+  <a href="#como-funciona">Cómo funciona</a>
+  <div class="nav-section">Utilidades</div>
+  <a href="#spacing">Espaciado</a>
+  <a href="#spacing-multi">↳ shorthand 4 lados <span class="badge-new">NEW</span></a>
+  <a href="#layout">Layout</a>
+  <a href="#flexbox">Flexbox</a>
+  <a href="#flex-direction">↳ flex-direction</a>
+  <a href="#align-self">↳ align-self</a>
+  <a href="#grid">Grid</a>
+  <a href="#grid-template">↳ cl — columnas <span class="badge-new">UPD</span></a>
+  <a href="#grid-rw">↳ rw — filas <span class="badge-new">NEW</span></a>
+  <a href="#grid-gap">↳ gap</a>
+  <a href="#grid-placement">↳ col-start / col-end <span class="badge-new">NEW</span></a>
+  <a href="#grid-rows">↳ row-span / filas <span class="badge-new">NEW</span></a>
+  <a href="#posicion">Posición</a>
+  <a href="#transform">Transform <span class="badge-new">NEW</span></a>
+  <a href="#tamanio">Tamaño</a>
+  <a href="#tipografia">Tipografía</a>
+  <a href="#leading">↳ line-height</a>
+  <a href="#text-wrap">↳ text-wrap <span class="badge-new">NEW</span></a>
+  <a href="#text-transform">↳ text-transform <span class="badge-new">NEW</span></a>
+  <a href="#bordes">Bordes</a>
+  <a href="#bordes-lados">↳ lados individuales <span class="badge-new">NEW</span></a>
+  <a href="#bordes-multi">↳ shorthand 4 lados <span class="badge-new">NEW</span></a>
+  <a href="#bordes-radio">↳ radio por esquina <span class="badge-new">NEW</span></a>
+  <a href="#display">Display</a>
+  <a href="#overflow">Overflow</a>
+  <a href="#otros">Otros</a>
+  <div class="nav-section">Avanzado</div>
+  <a href="#responsive">Responsive <span class="badge-new">UPD</span></a>
+  <a href="#responsive-max">↳ max-* (hasta límite) <span class="badge-new">NEW</span></a>
+  <a href="#responsive-min">↳ min-* (desde límite) <span class="badge-new">NEW</span></a>
+  <a href="#important">!important</a>
+  <a href="#negativos">Valores negativos <span class="badge-new">NEW</span></a>
+  <a href="#w-responsive">w-responsive <span class="badge-new">UPD</span></a>
+  <a href="#cache">Caché interno</a>
+  <a href="#integracion">Integración</a>
+</nav>
+
+<!-- ─── MAIN ──────────────────────────────────────────────────── -->
+<main class="main">
+
+  <!-- INTRO -->
+  <section id="intro">
+    <h1>ScriptCSS <span class="badge badge-purple">v1.2</span></h1>
+    <p class="lead">Un motor de utilidades CSS generado dinámicamente desde el DOM, sin proceso de build ni dependencias.</p>
+    <p>Funciona de forma similar a Tailwind CSS pero con una diferencia clave: <strong>no requiere compilación</strong>. Agrega el script al final del <code>&lt;body&gt;</code> y todas las clases de utilidad se generan en tiempo real leyendo los elementos del DOM.</p>
+    <div class="alert alert-green">
+      <strong>Ventaja principal:</strong> Cero configuración. Escribe clases como <code>p-4</code>, <code>flex</code>, <code>md:grid</code> y el motor genera el CSS automáticamente.
+    </div>
+    <h3>Comparativa rápida</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Característica</th><th>ScriptCSS</th><th>Tailwind CSS</th></tr>
+        <tr><td>Proceso de build</td><td><span class="badge badge-green">No requiere</span></td><td><span class="badge badge-amber">Requerido</span></td></tr>
+        <tr><td>Clases en runtime</td><td><span class="badge badge-green">Sí</span></td><td><span class="badge badge-red">No (JIT offline)</span></td></tr>
+        <tr><td>Observa cambios DOM</td><td><span class="badge badge-green">Sí (MutationObserver)</span></td><td><span class="badge badge-red">No</span></td></tr>
+        <tr><td>Caché de reglas</td><td><span class="badge badge-green">Sí</span></td><td>–</td></tr>
+        <tr><td>Dependencias</td><td><span class="badge badge-green">Ninguna</span></td><td><span class="badge badge-amber">Node + CLI</span></td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- INSTALACIÓN -->
+  <section id="install">
+    <h2>Instalación</h2>
+    <p>Solo necesitas incluir el script al final del <code>&lt;body&gt;</code> de tu HTML:</p>
+    <pre><code><span class="kw">&lt;!DOCTYPE html&gt;</span>
+&lt;html lang=<span class="str">"es"</span>&gt;
+&lt;head&gt;
+  &lt;meta charset=<span class="str">"UTF-8"</span>&gt;
+  &lt;title&gt;Mi sitio&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+  &lt;div class=<span class="str">"flex jc-b ai-c p-4 gap-4"</span>&gt;
+    &lt;h1 class=<span class="str">"text-8 font-bold"</span>&gt;Hola mundo&lt;/h1&gt;
+    &lt;button class=<span class="str">"px-4 py-2 border-r-4"</span>&gt;Botón&lt;/button&gt;
+  &lt;/div&gt;
+
+  <span class="cmt">&lt;!-- Script al final del body, siempre --&gt;</span>
+  &lt;script src=<span class="str">"scriptCss.js"</span>&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    <div class="alert alert-amber">
+      <strong>Importante:</strong> El script debe estar al final del <code>&lt;body&gt;</code>, no en el <code>&lt;head&gt;</code>. Necesita que el DOM exista para leer las clases.
+    </div>
+  </section>
+
+  <!-- CÓMO FUNCIONA -->
+  <section id="como-funciona">
+    <h2>Cómo funciona</h2>
+    <p>Al cargarse, el script ejecuta este flujo:</p>
+    <ol style="color:var(--text2); padding-left: 24px; line-height: 2;">
+      <li>Recorre todos los elementos del DOM con <code>querySelectorAll('*')</code></li>
+      <li>Extrae todas las clases únicas encontradas</li>
+      <li>Clasifica cada clase: si es responsive (<code>md:flex</code>) o base (<code>flex</code>)</li>
+      <li>Genera las reglas CSS correspondientes</li>
+      <li>Las inyecta en un <code>&lt;style id="clases-generadas"&gt;</code> en el <code>&lt;head&gt;</code></li>
+      <li>Activa un <code>MutationObserver</code> para re-generar si el DOM cambia</li>
+    </ol>
+    <h3>Fórmula general de clases</h3>
+    <pre><code><span class="cmt">/* Clase base */</span>
+{tipo}-{valor}               <span class="cmt">→  p-4, m-2, text-6</span>
+
+<span class="cmt">/* Clase responsive */</span>
+{breakpoint}:{tipo}-{valor}  <span class="cmt">→  md:flex, sm:hide, lg:p-8</span>
+
+<span class="cmt">/* Clase con !important */</span>
+!{tipo}-{valor}              <span class="cmt">→  !p-4, !flex</span>
+
+<span class="cmt">/* Clase sin valor (toggle) */</span>
+{tipo}                       <span class="cmt">→  flex, grid, hide, relative</span></code></pre>
+
+    <h3>Conversión de valores numéricos</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>Cálculo</th><th>Resultado</th></tr>
+        <tr><td><code>p-4</code></td><td>4 × 0.25em</td><td><code>padding: 1em</code></td></tr>
+        <tr><td><code>p-8</code></td><td>8 × 0.25em</td><td><code>padding: 2em</code></td></tr>
+        <tr><td><code>text-6</code></td><td>6 × 0.25rem</td><td><code>font-size: 1.5rem</code></td></tr>
+        <tr><td><code>gap-3</code></td><td>3 × 0.25em</td><td><code>gap: 0.75em</code></td></tr>
+        <tr><td><code>border-r-4</code></td><td>4 × 0.25em</td><td><code>border-radius: 1em</code></td></tr>
+        <tr><td><code>rounded-8</code></td><td>8 × 0.25rem</td><td><code>border-radius: 2rem</code></td></tr>
+        <tr><td><code>leading-4</code></td><td>4 × 0.25rem</td><td><code>line-height: 1rem</code></td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- ESPACIADO -->
+  <section id="spacing">
+    <h2>Espaciado — padding y margin</h2>
+    <p>El valor numérico se multiplica por <code>0.25em</code>. Valor <code>0</code> genera exactamente <code>0</code> sin unidad.</p>
+    <h3>Padding</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>Propiedad CSS</th><th>Ejemplo</th></tr>
+        <tr><td><code>p-{n}</code></td><td><code>padding</code></td><td><code>p-4</code> → <code>padding: 1em</code></td></tr>
+        <tr><td><code>px-{n}</code></td><td><code>padding-left</code> + <code>padding-right</code></td><td><code>px-6</code> → <code>1.5em en ambos lados</code></td></tr>
+        <tr><td><code>py-{n}</code></td><td><code>padding-top</code> + <code>padding-bottom</code></td><td><code>py-2</code> → <code>0.5em arriba y abajo</code></td></tr>
+        <tr><td><code>pt-{n}</code></td><td><code>padding-top</code></td><td><code>pt-3</code> → <code>0.75em</code></td></tr>
+        <tr><td><code>pr-{n}</code></td><td><code>padding-right</code></td><td><code>pr-2</code></td></tr>
+        <tr><td><code>pb-{n}</code></td><td><code>padding-bottom</code></td><td><code>pb-4</code></td></tr>
+        <tr><td><code>pl-{n}</code></td><td><code>padding-left</code></td><td><code>pl-8</code></td></tr>
+      </table>
+    </div>
+    <h3>Margin</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>Propiedad CSS</th><th>Ejemplo</th></tr>
+        <tr><td><code>m-{n}</code></td><td><code>margin</code></td><td><code>m-4</code></td></tr>
+        <tr><td><code>m-auto</code></td><td><code>margin: auto</code></td><td>Centrar bloque en ambos ejes</td></tr>
+        <tr><td><code>mx-{n}</code></td><td><code>margin-left</code> + <code>margin-right</code></td><td><code>mx-6</code></td></tr>
+        <tr><td><code>mx-auto</code></td><td><code>margin-left: auto; margin-right: auto</code></td><td>Centrar horizontalmente — el más usado</td></tr>
+        <tr><td><code>my-{n}</code></td><td><code>margin-top</code> + <code>margin-bottom</code></td><td><code>my-6</code></td></tr>
+        <tr><td><code>my-auto</code></td><td><code>margin-top: auto; margin-bottom: auto</code></td><td>Centrar verticalmente (con altura definida)</td></tr>
+        <tr><td><code>mt-{n}</code></td><td><code>margin-top</code></td><td><code>mt-0</code></td></tr>
+        <tr><td><code>mt-auto</code></td><td><code>margin-top: auto</code></td><td>Empuja el elemento al fondo en flex-column</td></tr>
+        <tr><td><code>mr-{n}</code></td><td><code>margin-right</code></td><td><code>mr-4</code></td></tr>
+        <tr><td><code>mr-auto</code></td><td><code>margin-right: auto</code></td><td>Empuja el elemento a la izquierda</td></tr>
+        <tr><td><code>mb-{n}</code></td><td><code>margin-bottom</code></td><td><code>mb-8</code></td></tr>
+        <tr><td><code>mb-auto</code></td><td><code>margin-bottom: auto</code></td><td></td></tr>
+        <tr><td><code>ml-{n}</code></td><td><code>margin-left</code></td><td><code>ml-2</code></td></tr>
+        <tr><td><code>ml-auto</code></td><td><code>margin-left: auto</code></td><td>Empuja el elemento a la derecha</td></tr>
+      </table>
+    </div>
+    <pre><code><span class="cmt">&lt;!-- Ejemplos --&gt;</span>
+&lt;div class=<span class="str">"p-6"</span>&gt;Padding de 1.5em en todos lados&lt;/div&gt;
+&lt;div class=<span class="str">"px-8 py-4"</span>&gt;Padding horizontal 2em, vertical 1em&lt;/div&gt;
+&lt;div class=<span class="str">"mt-4 mb-8"</span>&gt;Margin top 1em, bottom 2em&lt;/div&gt;</code></pre>
+
+    <h2 id="spacing-multi">Shorthand de 4 lados <span class="badge-new-inline">NEW</span></h2>
+    <p>Permite especificar los cuatro lados en una sola clase usando la sintaxis <code>{tipo}-{top}-{right}-{bottom}-{left}</code>. El orden es el mismo que el shorthand CSS estándar.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th></tr>
+        <tr><td><code>p-{t}-{r}-{b}-{l}</code></td><td><code>padding: t×0.25em  r×0.25em  b×0.25em  l×0.25em</code></td></tr>
+        <tr><td><code>m-{t}-{r}-{b}-{l}</code></td><td><code>margin: t×0.25em  r×0.25em  b×0.25em  l×0.25em</code></td></tr>
+      </table>
+    </div>
+    <h3>Ejemplos</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th></tr>
+        <tr><td><code>p-2-2-10-2</code></td><td><code>padding: 0.5em 0.5em 2.5em 0.5em</code></td></tr>
+        <tr><td><code>p-4-8-4-0</code></td><td><code>padding: 1em 2em 1em 0</code></td></tr>
+        <tr><td><code>m-0-4-0-4</code></td><td><code>margin: 0 1em 0 1em</code></td></tr>
+        <tr><td><code>lg:p-6-12-6-12</code></td><td><code>padding: 1.5em 3em 1.5em 3em</code> (dentro de <code>lg</code>)</td></tr>
+      </table>
+    </div>
+    <div class="alert alert-info">
+      <strong>Valor 0:</strong> Se genera sin unidad (<code>0</code>, no <code>0em</code>), igual que el resto de utilidades de espaciado.
+    </div>
+    <pre><code><span class="cmt">&lt;!-- Más padding abajo que en los otros lados --&gt;</span>
+&lt;section class=<span class="str">"p-2-2-10-2"</span>&gt;...&lt;/section&gt;
+
+<span class="cmt">&lt;!-- Centrar con margin, sin afectar top/bottom --&gt;</span>
+&lt;div class=<span class="str">"m-0-4-0-4"</span>&gt;...&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Responsive: padding compacto en móvil, holgado en desktop --&gt;</span>
+&lt;div class=<span class="str">"p-2-2-4-2 lg:p-4-8-6-8"</span>&gt;...&lt;/div&gt;</code></pre>
+  </section>
+
+  <!-- LAYOUT -->
+  <section id="layout">
+    <h2>Layout general</h2>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th></tr>
+        <tr><td><code>block</code></td><td><code>display: block</code></td></tr>
+        <tr><td><code>inline</code></td><td><code>display: inline</code></td></tr>
+        <tr><td><code>inline-block</code></td><td><code>display: inline-block</code></td></tr>
+        <tr><td><code>hide</code></td><td><code>display: none</code></td></tr>
+        <tr><td><code>hidden</code></td><td><code>display: none</code></td></tr>
+      </table>
+    </div>
+  </section>
+
+  <!-- FLEXBOX -->
+  <section id="flexbox">
+    <h2>Flexbox</h2>
+
+    <h3>Activar Flex</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th></tr>
+        <tr><td><code>flex</code></td><td><code>display: flex</code></td></tr>
+        <tr><td><code>flex-r</code></td><td><code>display: flex; flex-direction: row</code></td></tr>
+        <tr><td><code>flex-c</code></td><td><code>display: flex; flex-direction: column</code></td></tr>
+        <tr><td><code>wrap</code></td><td><code>flex-wrap: wrap</code></td></tr>
+        <tr><td><code>nowrap</code></td><td><code>flex-wrap: nowrap</code></td></tr>
+        <tr><td><code>grow-{n}</code></td><td><code>flex-grow: {n}</code></td></tr>
+      </table>
+    </div>
+
+    <h3>justify-content</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>Valor</th></tr>
+        <tr><td><code>jc-c</code></td><td><code>justify-content: center</code></td></tr>
+        <tr><td><code>jc-b</code></td><td><code>justify-content: space-between</code></td></tr>
+        <tr><td><code>jc-a</code></td><td><code>justify-content: space-around</code></td></tr>
+        <tr><td><code>jc-e</code></td><td><code>justify-content: space-evenly</code></td></tr>
+        <tr><td><code>jc-l</code></td><td><code>justify-content: flex-start</code></td></tr>
+        <tr><td><code>jc-r</code></td><td><code>justify-content: flex-end</code></td></tr>
+      </table>
+    </div>
+
+    <h3>align-items</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>Valor</th></tr>
+        <tr><td><code>ai-c</code></td><td><code>align-items: center</code></td></tr>
+        <tr><td><code>ai-l</code></td><td><code>align-items: flex-start</code></td></tr>
+        <tr><td><code>ai-r</code></td><td><code>align-items: flex-end</code></td></tr>
+        <tr><td><code>ai-s</code></td><td><code>align-items: stretch</code></td></tr>
+      </table>
+    </div>
+
+    <h3 id="align-self">align-self</h3>
+    <p>Controla el alineamiento de un ítem individual dentro de su contenedor flex o grid, sobreescribiendo <code>align-items</code> del padre.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th></tr>
+        <tr><td><code>as-c</code></td><td><code>align-self: center</code></td></tr>
+        <tr><td><code>as-l</code></td><td><code>align-self: flex-start</code></td></tr>
+        <tr><td><code>as-r</code></td><td><code>align-self: flex-end</code></td></tr>
+        <tr><td><code>as-s</code></td><td><code>align-self: stretch</code></td></tr>
+      </table>
+    </div>
+    <pre><code><span class="cmt">&lt;!-- Todos los ítems centrados, excepto el último que se alinea al fondo --&gt;</span>
+&lt;div class=<span class="str">"flex ai-c gap-4"</span> style=<span class="str">"height: 120px"</span>&gt;
+  &lt;div&gt;Ítem A&lt;/div&gt;
+  &lt;div&gt;Ítem B&lt;/div&gt;
+  &lt;div class=<span class="str">"as-r"</span>&gt;Ítem C — pegado abajo&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+    <h3>Gap</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>Propiedad</th><th>Ejemplo</th></tr>
+        <tr><td><code>gap-{n}</code></td><td><code>gap</code></td><td><code>gap-4</code> → <code>gap: 1em</code></td></tr>
+        <tr><td><code>gap-x-{n}</code></td><td><code>column-gap</code></td><td><code>gap-x-2</code> → <code>column-gap: 0.5em</code></td></tr>
+        <tr><td><code>gap-y-{n}</code></td><td><code>row-gap</code></td><td><code>gap-y-6</code> → <code>row-gap: 1.5em</code></td></tr>
+      </table>
+    </div>
+
+    <pre><code><span class="cmt">&lt;!-- Navbar típico --&gt;</span>
+&lt;nav class=<span class="str">"flex jc-b ai-c px-6 py-3 gap-4"</span>&gt;
+  &lt;a href=<span class="str">"/"</span>&gt;Logo&lt;/a&gt;
+  &lt;ul class=<span class="str">"flex gap-6 ai-c"</span>&gt;
+    &lt;li&gt;Inicio&lt;/li&gt;
+    &lt;li&gt;Acerca&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+  </section>
+
+  <!-- FLEX-DIRECTION -->
+  <section id="flex-direction">
+    <h2>flex-direction</h2>
+    <p>Además de <code>flex-r</code> y <code>flex-c</code>, el script soporta las variantes <strong>reverse</strong> y el control de <code>flex-wrap</code> inverso.</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th><th>Descripción</th></tr>
+        <tr><td><code>flex-r</code></td><td><code>display: flex; flex-direction: row</code></td><td>Fila izquierda → derecha (por defecto)</td></tr>
+        <tr><td><code>flex-c</code></td><td><code>display: flex; flex-direction: column</code></td><td>Columna arriba → abajo</td></tr>
+        <tr><td><code>flex-r-revert</code></td><td><code>display: flex; flex-direction: row-reverse</code></td><td>Fila derecha → izquierda</td></tr>
+        <tr><td><code>flex-c-revert</code></td><td><code>display: flex; flex-direction: column-reverse</code></td><td>Columna abajo → arriba</td></tr>
+        <tr><td><code>wrap</code></td><td><code>flex-wrap: wrap</code></td><td>Permite salto de línea</td></tr>
+        <tr><td><code>nowrap</code></td><td><code>flex-wrap: nowrap</code></td><td>Fuerza una sola línea</td></tr>
+        <tr><td><code>wrap-revert</code></td><td><code>flex-wrap: wrap-reverse</code></td><td>Salto de línea invertido</td></tr>
+      </table>
+    </div>
+
+    <div class="alert alert-info">
+      <strong>Nota:</strong> <code>flex-r-revert</code> y <code>flex-c-revert</code> ya incluyen <code>display: flex</code>, por lo que no necesitas combinarlos con <code>flex</code>.
+    </div>
+
+    <pre><code><span class="cmt">&lt;!-- Lista de pasos en orden inverso --&gt;</span>
+&lt;ul class=<span class="str">"flex-c-revert gap-3"</span>&gt;
+  &lt;li&gt;Paso 1 (se renderiza al fondo)&lt;/li&gt;
+  &lt;li&gt;Paso 2&lt;/li&gt;
+  &lt;li&gt;Paso 3 (se renderiza arriba)&lt;/li&gt;
+&lt;/ul&gt;
+
+<span class="cmt">&lt;!-- Botones de acción derecha a izquierda --&gt;</span>
+&lt;div class=<span class="str">"flex-r-revert gap-3"</span>&gt;
+  &lt;button&gt;Cancelar&lt;/button&gt;
+  &lt;button&gt;Confirmar&lt;/button&gt; <span class="cmt">&lt;!-- queda a la izquierda visualmente --&gt;</span>
+&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Responsive: columna en móvil, fila invertida en tablet --&gt;</span>
+&lt;div class=<span class="str">"flex-c md:flex-r-revert gap-4"</span>&gt;
+  &lt;aside&gt;Sidebar&lt;/aside&gt;
+  &lt;main&gt;Contenido principal&lt;/main&gt;
+&lt;/div&gt;</code></pre>
+  </section>
+
+  <!-- GRID -->
+  <section id="grid">
+    <h2>Grid</h2>
+    <p>Sistema de grid CSS completo. Las clases del contenedor definen la estructura; las clases de los ítems controlan el posicionamiento y la expansión.</p>
+
+    <h3>Contenedor</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th><th>Descripción</th></tr>
+        <tr><td><code>grid</code></td><td><code>display: grid</code></td><td>Activa el grid</td></tr>
+        <tr><td><code>cl-{n}</code></td><td><code>grid-template-columns: repeat(n, minmax(0, 1fr))</code></td><td>N columnas iguales</td></tr>
+        <tr><td><code>rw-{n}</code></td><td><code>grid-template-rows: repeat(n, minmax(0, 1fr))</code></td><td>N filas iguales <span class="badge-new-inline">NEW</span></td></tr>
+        <tr><td><code>rw-none</code></td><td><code>grid-template-rows: none</code></td><td>Sin filas explícitas <span class="badge-new-inline">NEW</span></td></tr>
+        <tr><td><code>rw-auto</code></td><td><code>grid-template-rows: auto</code></td><td>Filas automáticas <span class="badge-new-inline">NEW</span></td></tr>
+      </table>
+    </div>
+
+    <h3>Ítems — columnas</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th><th>Descripción</th></tr>
+        <tr><td><code>span-{n}</code></td><td><code>grid-column: span n / span n</code></td><td>Ocupa n columnas</td></tr>
+        <tr><td><code>col-start-{n}</code></td><td><code>grid-column-start: n</code></td><td>Empieza en la columna n (1–13)</td></tr>
+        <tr><td><code>col-end-{n}</code></td><td><code>grid-column-end: n</code></td><td>Termina antes de la línea n</td></tr>
+        <tr><td><code>col-start-auto</code></td><td><code>grid-column-start: auto</code></td><td>Posición automática</td></tr>
+      </table>
+    </div>
+
+    <h3>Ítems — filas</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th><th>Descripción</th></tr>
+        <tr><td><code>row-span-{n}</code></td><td><code>grid-row: span n / span n</code></td><td>Ocupa n filas</td></tr>
+        <tr><td><code>row-span-full</code></td><td><code>grid-row: 1 / -1</code></td><td>Ocupa todas las filas del grid <span class="badge-new-inline">NEW</span></td></tr>
+        <tr><td><code>row-start-{n}</code></td><td><code>grid-row-start: n</code></td><td>Empieza en la fila n</td></tr>
+        <tr><td><code>row-end-{n}</code></td><td><code>grid-row-end: n</code></td><td>Termina antes de la línea n</td></tr>
+        <tr><td><code>row-start-auto</code></td><td><code>grid-row-start: auto</code></td><td>Posición automática</td></tr>
+      </table>
+    </div>
+
+    <pre><code><span class="cmt">&lt;!-- Grid con 3 columnas y 2 filas explícitas iguales --&gt;</span>
+&lt;div class=<span class="str">"grid cl-3 rw-2 gap-4"</span>&gt;
+  &lt;div&gt;A&lt;/div&gt;&lt;div&gt;B&lt;/div&gt;&lt;div&gt;C&lt;/div&gt;
+  &lt;div&gt;D&lt;/div&gt;&lt;div&gt;E&lt;/div&gt;&lt;div&gt;F&lt;/div&gt;
+&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Elemento destacado que abarca cols y filas (efecto magazine) --&gt;</span>
+&lt;div class=<span class="str">"grid cl-3 gap-4"</span>&gt;
+  &lt;div class=<span class="str">"span-2 row-span-2"</span>&gt;Principal (grande)&lt;/div&gt;
+  &lt;div&gt;Secundario 1&lt;/div&gt;
+  &lt;div&gt;Secundario 2&lt;/div&gt;
+  &lt;div class=<span class="str">"span-3"</span>&gt;Footer&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </section>
+
+  <!-- GRID — PLANTILLA DE COLUMNAS -->
+  <section id="grid-template">
+    <h2>Grid — plantilla de columnas (<code>cl</code>) <span class="badge-new-inline">UPD</span></h2>
+    <p>La clase <code>cl</code> define <code>grid-template-columns</code> en el contenedor. Además del clásico <code>cl-{n}</code> con columnas iguales, ahora acepta variantes para columnas que se adaptan al contenido o se distribuyen automáticamente.</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th><th>Cuándo usarla</th></tr>
+        <tr><td><code>cl-{n}</code></td><td><code>repeat(n, minmax(0, 1fr))</code></td><td>N columnas iguales que comparten el espacio disponible</td></tr>
+        <tr><td><code>cl-auto</code></td><td><code>auto</code></td><td>Una sola columna cuyo ancho se adapta al contenido</td></tr>
+        <tr><td><code>cl-min</code></td><td><code>min-content</code></td><td>Columna tan estrecha como su contenido mínimo</td></tr>
+        <tr><td><code>cl-max</code></td><td><code>max-content</code></td><td>Columna tan ancha como su contenido máximo</td></tr>
+        <tr><td><code>cl-fit-{dim}</code></td><td><code>repeat(auto-fit, minmax({dim}, 1fr))</code></td><td>Tantas columnas como quepan; las vacías colapsan</td></tr>
+        <tr><td><code>cl-fill-{dim}</code></td><td><code>repeat(auto-fill, minmax({dim}, 1fr))</code></td><td>Tantas columnas como quepan; reserva espacio aunque estén vacías</td></tr>
+      </table>
+    </div>
+
+    <div class="alert alert-info">
+      <strong><code>auto-fit</code> vs <code>auto-fill</code>:</strong> Con <code>cl-fit-*</code> las columnas vacías colapsan y las existentes se estiran para llenar el espacio. Con <code>cl-fill-*</code> las columnas vacías mantienen su espacio mínimo — útil cuando el número de ítems puede crecer dinámicamente.
+    </div>
+
+    <h3>El valor <code>{dim}</code> acepta las mismas unidades que <code>w</code></h3>
+    <div class="bp-grid">
+      <div class="bp-pill"><code>cl-fit-200px</code></div>
+      <div class="bp-pill"><code>cl-fit-16rem</code></div>
+      <div class="bp-pill"><code>cl-fit-40</code> → <code>10rem</code></div>
+      <div class="bp-pill"><code>cl-fill-240px</code></div>
+    </div>
+
+    <pre><code><span class="cmt">&lt;!-- Grid fijo: 4 columnas iguales --&gt;</span>
+&lt;div class=<span class="str">"grid cl-4 gap-4"</span>&gt; ... &lt;/div&gt;
+
+<span class="cmt">&lt;!-- Grid responsive automático: mínimo 240px por columna --&gt;</span>
+&lt;div class=<span class="str">"grid cl-fit-240px gap-6"</span>&gt;
+  <span class="cmt">&lt;!-- En 1200px caben ~4 columnas; en 600px caben ~2 --&gt;</span>
+  &lt;div class=<span class="str">"p-6 border-1 rounded-4"</span>&gt;Card 1&lt;/div&gt;
+  &lt;div class=<span class="str">"p-6 border-1 rounded-4"</span>&gt;Card 2&lt;/div&gt;
+  &lt;div class=<span class="str">"p-6 border-1 rounded-4"</span>&gt;Card 3&lt;/div&gt;
+&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Grid responsive con breakpoints explícitos --&gt;</span>
+&lt;div class=<span class="str">"grid cl-1 md:cl-2 lg:cl-3 gap-6"</span>&gt;
+  &lt;div&gt;Card 1&lt;/div&gt;
+  &lt;div&gt;Card 2&lt;/div&gt;
+  &lt;div&gt;Card 3&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </section>
+
+  <!-- GRID — PLANTILLA DE FILAS -->
+  <section id="grid-rw">
+    <h2>Grid — plantilla de filas (<code>rw</code>) <span class="badge-new-inline">NEW</span></h2>
+    <p>Espejo exacto de <code>cl</code> pero para el eje vertical. Define <code>grid-template-rows</code> en el contenedor, estableciendo filas de altura igual que se reparten el espacio disponible.</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th><th>Cuándo usarla</th></tr>
+        <tr><td><code>rw-{n}</code></td><td><code>grid-template-rows: repeat(n, minmax(0, 1fr))</code></td><td>N filas iguales que se reparten la altura del contenedor</td></tr>
+        <tr><td><code>rw-auto</code></td><td><code>grid-template-rows: auto</code></td><td>Altura de fila determinada por el contenido</td></tr>
+        <tr><td><code>rw-none</code></td><td><code>grid-template-rows: none</code></td><td>Sin filas explícitas — el grid las genera implícitamente</td></tr>
+      </table>
+    </div>
+
+    <div class="alert alert-info">
+      <strong>Diferencia clave con <code>cl</code>:</strong> Para que <code>rw-{n}</code> reparta el espacio equitativamente el contenedor debe tener una altura definida (p. ej. <code>h-screen</code>, <code>h-full</code>, o un valor fijo). Sin altura fija las filas colapsan al tamaño de su contenido, igual que sin <code>rw</code>.
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>Comparativa</th><th><code>cl</code> — columnas</th><th><code>rw</code> — filas</th></tr>
+        <tr><td>Propiedad CSS</td><td><code>grid-template-columns</code></td><td><code>grid-template-rows</code></td></tr>
+        <tr><td>Ítem que se extiende</td><td><code>span-{n}</code></td><td><code>row-span-{n}</code></td></tr>
+        <tr><td>Posición inicio</td><td><code>col-start-{n}</code></td><td><code>row-start-{n}</code></td></tr>
+        <tr><td>Posición fin</td><td><code>col-end-{n}</code></td><td><code>row-end-{n}</code></td></tr>
+        <tr><td>Ocupa todo</td><td><code>span-{total-cols}</code></td><td><code>row-span-full</code></td></tr>
+      </table>
+    </div>
+
+    <pre><code><span class="cmt">&lt;!-- Panel de dashboard: 3 cols × 2 filas, altura de pantalla completa --&gt;</span>
+&lt;div class=<span class="str">"grid cl-3 rw-2 gap-4 h-screen"</span>&gt;
+  &lt;div class=<span class="str">"span-2"</span>&gt;Gráfico principal&lt;/div&gt;
+  &lt;div class=<span class="str">"row-span-2"</span>&gt;Panel lateral (toda la altura)&lt;/div&gt;
+  &lt;div&gt;Métrica A&lt;/div&gt;
+  &lt;div&gt;Métrica B&lt;/div&gt;
+&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Layout de app: header + contenido + footer con alturas fijas --&gt;</span>
+&lt;div class=<span class="str">"grid rw-3 h-screen gap-0"</span> style=<span class="str">"grid-template-rows: auto 1fr auto"</span>&gt;
+  &lt;header&gt;Nav&lt;/header&gt;
+  &lt;main&gt;Contenido (se estira)&lt;/main&gt;
+  &lt;footer&gt;Pie&lt;/footer&gt;
+&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Responsive: 1 col en móvil, grid 2×2 en desktop --&gt;</span>
+&lt;div class=<span class="str">"grid cl-1 lg:cl-2 lg:rw-2 gap-4 lg:h-96"</span>&gt;
+  &lt;div&gt;A&lt;/div&gt;&lt;div&gt;B&lt;/div&gt;
+  &lt;div&gt;C&lt;/div&gt;&lt;div&gt;D&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </section>
+
+  <!-- GRID — GAP -->
+  <section id="grid-gap">
+    <h2>Grid — espaciado entre columnas y filas</h2>
+    <p>Las clases de gap funcionan igual en grid que en flexbox. Puedes controlar el espaciado de columnas y filas de forma independiente.</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>Propiedad CSS</th><th>Ejemplo</th></tr>
+        <tr><td><code>gap-{n}</code></td><td><code>gap</code></td><td><code>gap-4</code> → <code>gap: 1em</code> (columnas y filas)</td></tr>
+        <tr><td><code>gap-x-{n}</code></td><td><code>column-gap</code></td><td><code>gap-x-6</code> → <code>column-gap: 1.5em</code></td></tr>
+        <tr><td><code>gap-y-{n}</code></td><td><code>row-gap</code></td><td><code>gap-y-4</code> → <code>row-gap: 1em</code></td></tr>
+      </table>
+    </div>
+
+    <pre><code><span class="cmt">&lt;!-- Más espacio entre columnas que entre filas --&gt;</span>
+&lt;div class=<span class="str">"grid cl-3 gap-x-8 gap-y-4"</span>&gt;
+  &lt;div&gt;A&lt;/div&gt;&lt;div&gt;B&lt;/div&gt;&lt;div&gt;C&lt;/div&gt;
+  &lt;div&gt;D&lt;/div&gt;&lt;div&gt;E&lt;/div&gt;&lt;div&gt;F&lt;/div&gt;
+&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Gap responsive: más espacio en pantallas grandes --&gt;</span>
+&lt;div class=<span class="str">"grid cl-fit-200px gap-4 lg:gap-8"</span>&gt; ... &lt;/div&gt;</code></pre>
+  </section>
+
+  <!-- GRID — POSICIONAMIENTO DE COLUMNAS -->
+  <section id="grid-placement">
+    <h2>Grid — posicionamiento de columnas <span class="badge-new-inline">NUEVO</span></h2>
+    <p>Controla exactamente en qué columna comienza o termina un elemento, sin depender del flujo automático. Útil para dejar espacios vacíos o alinear elementos en columnas específicas.</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th><th>Descripción</th></tr>
+        <tr><td><code>col-start-{n}</code></td><td><code>grid-column-start: n</code></td><td>El ítem empieza en la línea de columna <em>n</em> (1–13)</td></tr>
+        <tr><td><code>col-end-{n}</code></td><td><code>grid-column-end: n</code></td><td>El ítem termina antes de la línea <em>n</em></td></tr>
+        <tr><td><code>col-start-auto</code></td><td><code>grid-column-start: auto</code></td><td>Colocación automática (comportamiento por defecto)</td></tr>
+        <tr><td><code>col-end-auto</code></td><td><code>grid-column-end: auto</code></td><td>Fin automático</td></tr>
+        <tr><td><code>span-{n}</code></td><td><code>grid-column: span n / span n</code></td><td>Ocupa <em>n</em> columnas desde su posición actual</td></tr>
+      </table>
+    </div>
+
+    <div class="alert alert-info">
+      <strong>Líneas de columna vs. columnas:</strong> En un grid de 4 columnas hay 5 líneas (1, 2, 3, 4, 5). <code>col-start-1</code> coloca el ítem al inicio; <code>col-start-4</code> lo coloca en la última columna. <code>col-end-5</code> es equivalente a "termina al final del grid de 4 columnas".
+    </div>
+
+    <pre><code><span class="cmt">&lt;!-- Dos divs: uno en columna 1, otro en columna 4 (dejan col 2 y 3 vacías) --&gt;</span>
+&lt;div class=<span class="str">"grid cl-4 gap-4"</span>&gt;
+  &lt;div class=<span class="str">"col-start-1"</span>&gt;Columna 1&lt;/div&gt;
+  &lt;div class=<span class="str">"col-start-4"</span>&gt;Columna 4&lt;/div&gt;
+&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Elemento que ocupa de la columna 2 a la 4 (span 3) --&gt;</span>
+&lt;div class=<span class="str">"grid cl-4 gap-4"</span>&gt;
+  &lt;div&gt;Col 1&lt;/div&gt;
+  &lt;div class=<span class="str">"col-start-2 span-3"</span>&gt;Ocupa cols 2, 3 y 4&lt;/div&gt;
+&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Layout asimétrico: sidebar + contenido + panel --&gt;</span>
+&lt;div class=<span class="str">"grid cl-12 gap-4"</span>&gt;
+  &lt;aside  class=<span class="str">"col-start-1  span-2"</span>&gt;Sidebar (2 cols)&lt;/aside&gt;
+  &lt;main   class=<span class="str">"col-start-3  span-8"</span>&gt;Contenido (8 cols)&lt;/main&gt;
+  &lt;aside  class=<span class="str">"col-start-11 span-2"</span>&gt;Panel (2 cols)&lt;/aside&gt;
+&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Responsive: posición cambia por breakpoint --&gt;</span>
+&lt;div class=<span class="str">"grid cl-4 gap-4"</span>&gt;
+  &lt;div class=<span class="str">"col-start-1 md:col-start-2 lg:col-start-3"</span>&gt;Se mueve según el breakpoint&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+  </section>
+
+  <!-- GRID — FILAS -->
+  <section id="grid-rows">
+    <h2>Grid — posicionamiento de filas <span class="badge-new-inline">NEW</span></h2>
+    <p>Control completo del posicionamiento y expansión en el eje vertical. Equivalente a <code>span</code>, <code>col-start</code> y <code>col-end</code> pero para filas.</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th><th>Descripción</th></tr>
+        <tr><td><code>row-span-{n}</code></td><td><code>grid-row: span n / span n</code></td><td>Ocupa <em>n</em> filas hacia abajo desde su posición</td></tr>
+        <tr><td><code>row-span-full</code></td><td><code>grid-row: 1 / -1</code></td><td>Ocupa <strong>todas</strong> las filas del grid <span class="badge-new-inline">NEW</span></td></tr>
+        <tr><td><code>row-start-{n}</code></td><td><code>grid-row-start: n</code></td><td>Empieza en la línea de fila <em>n</em> (1–13)</td></tr>
+        <tr><td><code>row-end-{n}</code></td><td><code>grid-row-end: n</code></td><td>Termina antes de la línea de fila <em>n</em></td></tr>
+        <tr><td><code>row-start-auto</code></td><td><code>grid-row-start: auto</code></td><td>Colocación automática (flujo normal)</td></tr>
+        <tr><td><code>row-end-auto</code></td><td><code>grid-row-end: auto</code></td><td>Fin automático</td></tr>
+      </table>
+    </div>
+
+    <div class="alert alert-info">
+      <strong><code>row-span-full</code>:</strong> Genera <code>grid-row: 1 / -1</code> — la línea <code>-1</code> siempre apunta al final del grid explícito, independientemente de cuántas filas tenga. Requiere que las filas estén definidas con <code>rw-{n}</code> para funcionar correctamente.
+    </div>
+
+    <pre><code><span class="cmt">&lt;!-- Sidebar que ocupa toda la altura del grid (row-span-full) --&gt;</span>
+&lt;div class=<span class="str">"grid cl-4 rw-3 gap-4 h-screen"</span>&gt;
+  &lt;aside class=<span class="str">"row-span-full"</span>&gt;Sidebar (3 filas de alto)&lt;/aside&gt;
+  &lt;div class=<span class="str">"span-3"</span>&gt;Header&lt;/div&gt;
+  &lt;div class=<span class="str">"span-3"</span>&gt;Contenido&lt;/div&gt;
+  &lt;div class=<span class="str">"span-3"</span>&gt;Footer&lt;/div&gt;
+&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Efecto magazine: artículo grande + pequeños a la derecha --&gt;</span>
+&lt;div class=<span class="str">"grid cl-3 gap-4"</span>&gt;
+  &lt;div class=<span class="str">"span-2 row-span-2"</span>&gt;Artículo principal&lt;/div&gt;
+  &lt;div&gt;Secundario 1&lt;/div&gt;
+  &lt;div&gt;Secundario 2&lt;/div&gt;
+  &lt;div class=<span class="str">"span-3"</span>&gt;Footer del grid&lt;/div&gt;
+&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Posicionamiento explícito: ítem en fila 2 col 2, abarcando 2 filas --&gt;</span>
+&lt;div class=<span class="str">"grid cl-3 rw-3 gap-4"</span>&gt;
+  &lt;div class=<span class="str">"row-start-1 col-start-1"</span>&gt;Fila 1, Col 1&lt;/div&gt;
+  &lt;div class=<span class="str">"row-start-1 col-start-3"</span>&gt;Fila 1, Col 3&lt;/div&gt;
+  &lt;div class=<span class="str">"row-start-1 col-start-2 row-span-2"</span>&gt;Col 2, filas 1–2&lt;/div&gt;
+  &lt;div class=<span class="str">"row-start-3 span-3"</span>&gt;Fila 3 completa&lt;/div&gt;
+&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Responsive: sin filas explícitas en móvil, grid 2×2 en desktop --&gt;</span>
+&lt;div class=<span class="str">"grid cl-1 lg:cl-2 lg:rw-2 gap-4 lg:h-80"</span>&gt;
+  &lt;div class=<span class="str">"lg:row-span-2"</span>&gt;Destacado&lt;/div&gt;
+  &lt;div&gt;B&lt;/div&gt;
+  &lt;div&gt;C&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+    <h3>Resumen visual — sistema grid completo</h3>
+    <pre><code><span class="cmt">&lt;!-- Dashboard con áreas definidas por clase --&gt;</span>
+&lt;div class=<span class="str">"grid cl-12 gap-4 p-4"</span>&gt;
+
+  <span class="cmt">&lt;!-- Header: toda la fila --&gt;</span>
+  &lt;header class=<span class="str">"col-start-1 span-12"</span>&gt;Header&lt;/header&gt;
+
+  <span class="cmt">&lt;!-- Sidebar izquierdo: 2 cols, 3 filas de alto --&gt;</span>
+  &lt;nav class=<span class="str">"col-start-1 span-2 row-start-2 row-span-3"</span>&gt;Sidebar&lt;/nav&gt;
+
+  <span class="cmt">&lt;!-- Contenido: 8 cols centrales --&gt;</span>
+  &lt;main class=<span class="str">"col-start-3 span-8 row-start-2"</span>&gt;
+    &lt;div class=<span class="str">"grid cl-fit-200px gap-4"</span>&gt;
+      &lt;div&gt;Widget A&lt;/div&gt;
+      &lt;div&gt;Widget B&lt;/div&gt;
+      &lt;div&gt;Widget C&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/main&gt;
+
+  <span class="cmt">&lt;!-- Panel derecho: 2 cols --&gt;</span>
+  &lt;aside class=<span class="str">"col-start-11 span-2 row-start-2"</span>&gt;Panel&lt;/aside&gt;
+
+&lt;/div&gt;</code></pre>
+  </section>
+
+  <!-- POSICIÓN -->
+  <section id="posicion">
+    <h2>Posición</h2>
+    <h3>Tipo de posición</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS</th></tr>
+        <tr><td><code>relative</code></td><td><code>position: relative</code></td></tr>
+        <tr><td><code>absolute</code></td><td><code>position: absolute</code></td></tr>
+        <tr><td><code>fixed</code></td><td><code>position: fixed</code></td></tr>
+        <tr><td><code>static</code></td><td><code>position: static</code></td></tr>
+        <tr><td><code>sticky</code></td><td><code>position: sticky</code></td></tr>
+      </table>
+    </div>
+
+    <h3>Coordenadas — <code>top / left / right / bottom</code></h3>
+    <p>Soportan los mismos valores que <code>w</code> y <code>h</code>: numérico escalado, palabras clave, fracciones y unidades explícitas. También aceptan valores negativos con el prefijo <code>-</code>.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th><th>Notas</th></tr>
+        <tr><td><code>top-{n}</code></td><td><code>top: n×0.25rem</code></td><td>Ej: <code>top-4</code> → <code>top: 1rem</code></td></tr>
+        <tr><td><code>top-auto</code></td><td><code>top: auto</code></td><td>Valor automático del navegador</td></tr>
+        <tr><td><code>top-full</code></td><td><code>top: 100%</code></td><td>100% relativo al padre</td></tr>
+        <tr><td><code>top-screen</code></td><td><code>top: 100vw</code></td><td>Ancho completo del viewport</td></tr>
+        <tr><td><code>top-min</code></td><td><code>top: min-content</code></td><td></td></tr>
+        <tr><td><code>top-max</code></td><td><code>top: max-content</code></td><td></td></tr>
+        <tr><td><code>top-fit</code></td><td><code>top: fit-content</code></td><td></td></tr>
+        <tr><td><code>left-1/2</code></td><td><code>left: 50%</code></td><td>Fracción → porcentaje</td></tr>
+        <tr><td><code>left-3/4</code></td><td><code>left: 75%</code></td><td></td></tr>
+        <tr><td><code>left-4px</code></td><td><code>left: 4px</code></td><td>Unidad explícita</td></tr>
+        <tr><td><code>bottom-50%</code></td><td><code>bottom: 50%</code></td><td>% directo</td></tr>
+        <tr><td><code>right-2rem</code></td><td><code>right: 2rem</code></td><td>rem directo</td></tr>
+        <tr><td><code>-top-4</code></td><td><code>top: -1rem</code></td><td>Negativo numérico</td></tr>
+        <tr><td><code>-left-full</code></td><td><code>left: -100%</code></td><td>Negativo + keyword</td></tr>
+        <tr><td><code>-bottom-50%</code></td><td><code>bottom: -50%</code></td><td>Negativo + unidad</td></tr>
+        <tr><td><code>z-{n}</code></td><td><code>z-index: {n}</code></td><td>Acepta negativos: <code>-z-1</code></td></tr>
+      </table>
+    </div>
+
+    <div class="alert alert-info">
+      Aplica igual a <code>top</code>, <code>left</code>, <code>right</code> y <code>bottom</code>. Los ejemplos de la tabla usan <code>top</code> / <code>left</code> pero la sintaxis es idéntica para los cuatro.
+    </div>
+
+    <pre><code><span class="cmt">&lt;!-- Badge superpuesto arriba a la derecha --&gt;</span>
+&lt;div class=<span class="str">"relative"</span>&gt;
+  &lt;span class=<span class="str">"absolute top-2 right-2 z-10"</span>&gt;Badge&lt;/span&gt;
+  Contenido principal
+&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Header fijo --&gt;</span>
+&lt;header class=<span class="str">"fixed top-0 left-0 w-full z-50"</span>&gt;Navbar&lt;/header&gt;
+
+<span class="cmt">&lt;!-- Centrado absoluto clásico (left 50% + transform) --&gt;</span>
+&lt;div class=<span class="str">"absolute top-1/2 left-1/2"</span>&gt;Centrado&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Elemento que sobresale del padre --&gt;</span>
+&lt;div class=<span class="str">"absolute -top-4 -left-4"</span>&gt;Fuera del borde&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Posición con unidad explícita --&gt;</span>
+&lt;div class=<span class="str">"absolute top-0 left-4px"</span>&gt;4px desde la izquierda&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Responsive: posición cambia por breakpoint --&gt;</span>
+&lt;div class=<span class="str">"absolute -left-4 md:-left-6 lg:-left-8 xg:-left-10"</span>&gt;Se aleja más en pantallas grandes&lt;/div&gt;</code></pre>
+  </section>
+
+  <!-- TRANSFORM -->
+  <section id="transform">
+    <h2>Transform <span class="badge-new-inline">NUEVO</span></h2>
+    <p>Utilidades para <code>transform</code> equivalentes a Tailwind. Cada clase genera la función de transformación correspondiente. Soportan prefijos responsive y valores negativos con <code>-</code>.</p>
+
+    <h3>translate-x / translate-y</h3>
+    <p>Acepta los mismos valores que <code>w</code> y <code>h</code>: numérico escalado, keywords, fracciones y unidades explícitas.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th></tr>
+        <tr><td><code>translate-x-{n}</code></td><td><code>transform: translateX(n×0.25rem)</code></td></tr>
+        <tr><td><code>translate-x-full</code></td><td><code>transform: translateX(100%)</code></td></tr>
+        <tr><td><code>translate-x-1/2</code></td><td><code>transform: translateX(50%)</code></td></tr>
+        <tr><td><code>translate-x-4px</code></td><td><code>transform: translateX(4px)</code></td></tr>
+        <tr><td><code>translate-x-auto</code></td><td><code>transform: translateX(auto)</code></td></tr>
+        <tr><td><code>-translate-x-4</code></td><td><code>transform: translateX(-1rem)</code></td></tr>
+        <tr><td><code>-translate-x-1/2</code></td><td><code>transform: translateX(-50%)</code></td></tr>
+        <tr><td><code>-translate-x-full</code></td><td><code>transform: translateX(-100%)</code></td></tr>
+        <tr><td><code>translate-y-{n}</code></td><td><code>transform: translateY(n×0.25rem)</code></td></tr>
+        <tr><td><code>-translate-y-1/2</code></td><td><code>transform: translateY(-50%)</code></td></tr>
+      </table>
+    </div>
+
+    <h3>rotate</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th></tr>
+        <tr><td><code>rotate-0</code></td><td><code>transform: rotate(0deg)</code></td></tr>
+        <tr><td><code>rotate-45</code></td><td><code>transform: rotate(45deg)</code></td></tr>
+        <tr><td><code>rotate-90</code></td><td><code>transform: rotate(90deg)</code></td></tr>
+        <tr><td><code>rotate-180</code></td><td><code>transform: rotate(180deg)</code></td></tr>
+        <tr><td><code>-rotate-45</code></td><td><code>transform: rotate(-45deg)</code></td></tr>
+        <tr><td><code>-rotate-90</code></td><td><code>transform: rotate(-90deg)</code></td></tr>
+      </table>
+    </div>
+
+    <h3>scale / scale-x / scale-y</h3>
+    <p>El valor representa el porcentaje: <code>scale-100</code> = escala normal, <code>scale-50</code> = mitad, <code>scale-150</code> = 1.5×.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th></tr>
+        <tr><td><code>scale-0</code></td><td><code>transform: scale(0)</code></td></tr>
+        <tr><td><code>scale-50</code></td><td><code>transform: scale(0.5)</code></td></tr>
+        <tr><td><code>scale-75</code></td><td><code>transform: scale(0.75)</code></td></tr>
+        <tr><td><code>scale-90</code></td><td><code>transform: scale(0.9)</code></td></tr>
+        <tr><td><code>scale-100</code></td><td><code>transform: scale(1)</code> (sin cambio)</td></tr>
+        <tr><td><code>scale-110</code></td><td><code>transform: scale(1.1)</code></td></tr>
+        <tr><td><code>scale-150</code></td><td><code>transform: scale(1.5)</code></td></tr>
+        <tr><td><code>scale-x-50</code></td><td><code>transform: scaleX(0.5)</code> (solo horizontal)</td></tr>
+        <tr><td><code>scale-y-50</code></td><td><code>transform: scaleY(0.5)</code> (solo vertical)</td></tr>
+      </table>
+    </div>
+
+    <h3>skew-x / skew-y</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th></tr>
+        <tr><td><code>skew-x-6</code></td><td><code>transform: skewX(6deg)</code></td></tr>
+        <tr><td><code>skew-x-12</code></td><td><code>transform: skewX(12deg)</code></td></tr>
+        <tr><td><code>-skew-x-6</code></td><td><code>transform: skewX(-6deg)</code></td></tr>
+        <tr><td><code>skew-y-6</code></td><td><code>transform: skewY(6deg)</code></td></tr>
+        <tr><td><code>-skew-y-6</code></td><td><code>transform: skewY(-6deg)</code></td></tr>
+      </table>
+    </div>
+
+    <div class="alert alert-amber">
+      <strong>Una transformación por clase:</strong> Si aplicas <code>translate-x-4</code> y <code>rotate-45</code> al mismo elemento, la segunda sobreescribe la primera (ambas apuntan a la propiedad <code>transform</code>). Para combinar múltiples transforms, usa el atributo <code>style</code> directamente o una clase CSS personalizada.
+    </div>
+
+    <div class="alert alert-info">
+      <strong>Negativos en transform:</strong> El prefijo <code>-</code> invierte el valor <em>dentro</em> de la función — <code>-rotate-45</code> genera <code>rotate(-45deg)</code>, no <code>-rotate(45deg)</code>.
+    </div>
+
+    <h3>Casos de uso</h3>
+    <pre><code><span class="cmt">&lt;!-- Centrado absoluto clásico (top/left 50% + translate negativo) --&gt;</span>
+&lt;div class=<span class="str">"absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"</span>&gt;
+  Centrado perfectamente
+&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Icono girado 180° --&gt;</span>
+&lt;svg class=<span class="str">"rotate-180"</span>&gt;...&lt;/svg&gt;
+
+<span class="cmt">&lt;!-- Imagen espejada horizontalmente --&gt;</span>
+&lt;img class=<span class="str">"scale-x-100"</span> style=<span class="str">"transform: scaleX(-1)"</span>&gt;
+
+<span class="cmt">&lt;!-- Panel que aparece desde la izquierda (off-screen) --&gt;</span>
+&lt;div class=<span class="str">"fixed top-0 left-0 -translate-x-full"</span>&gt;Drawer&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Tarjeta con efecto de zoom suave (requiere CSS transition) --&gt;</span>
+&lt;div class=<span class="str">"scale-100 lg:scale-105"</span>&gt;Card&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Elemento inclinado decorativo --&gt;</span>
+&lt;div class=<span class="str">"skew-x-6 px-8 py-2"</span>&gt;Banner diagonal&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Responsive: rotación solo en mobile --&gt;</span>
+&lt;svg class=<span class="str">"rotate-0 sm:rotate-90"</span>&gt;...&lt;/svg&gt;</code></pre>
+  </section>
+
+  <!-- TAMAÑO -->
+  <section id="tamanio">
+    <h2>Tamaño <span class="badge-new-inline">UPD</span></h2>
+    <p>Los valores numéricos se convierten a <code>rem</code> con la fórmula <code>n × 0.25rem</code>. El rango numérico soportado es <strong>1–999</strong> (máx: 999 → 249.75rem). También acepta fracciones, unidades explícitas y palabras clave.</p>
+    <div class="alert alert-green">
+      <strong>Rango ampliado:</strong> El límite anterior era 96 (24rem). Ahora se aceptan hasta 3 dígitos — <code>w-200</code> → <code>50rem</code>, <code>max-w-320</code> → <code>80rem</code>, <code>h-400</code> → <code>100rem</code>.
+    </div>
+    <h3>Width</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS</th></tr>
+        <tr><td><code>w-{n}</code></td><td><code>width: n×0.25rem</code> — n de 0 a 999</td></tr>
+        <tr><td><code>w-full</code></td><td><code>width: 100%</code></td></tr>
+        <tr><td><code>w-screen</code></td><td><code>width: 100vw</code></td></tr>
+        <tr><td><code>w-auto</code></td><td><code>width: auto</code></td></tr>
+        <tr><td><code>w-min</code></td><td><code>width: min-content</code></td></tr>
+        <tr><td><code>w-max</code></td><td><code>width: max-content</code></td></tr>
+        <tr><td><code>w-fit</code></td><td><code>width: fit-content</code></td></tr>
+        <tr><td><code>w-1/2</code></td><td><code>width: 50%</code></td></tr>
+        <tr><td><code>w-3/4</code></td><td><code>width: 75%</code></td></tr>
+        <tr><td><code>min-w-{n}</code></td><td><code>min-width: ...</code></td></tr>
+        <tr><td><code>max-w-{n}</code></td><td><code>max-width: ...</code></td></tr>
+      </table>
+    </div>
+    <h3>Height</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS</th></tr>
+        <tr><td><code>h-{n}</code></td><td><code>height: n×0.25rem</code> — n de 0 a 999</td></tr>
+        <tr><td><code>h-full</code></td><td><code>height: 100%</code></td></tr>
+        <tr><td><code>h-screen</code></td><td><code>height: 100vh</code></td></tr>
+        <tr><td><code>h-auto</code></td><td><code>height: auto</code></td></tr>
+        <tr><td><code>min-h-{n}</code></td><td><code>min-height: ...</code></td></tr>
+        <tr><td><code>max-h-{n}</code></td><td><code>max-height: ...</code></td></tr>
+      </table>
+    </div>
+    <h3>Tamaño simultáneo</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS</th></tr>
+        <tr><td><code>size-{n}</code></td><td><code>width: n×0.25rem; height: n×0.25rem</code></td></tr>
+        <tr><td><code>size-full</code></td><td><code>width: 100%; height: 100%</code></td></tr>
+      </table>
+    </div>
+    <h3>Tabla de referencia rápida — valores numéricos</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>rem generado</th><th>Clase</th><th>rem generado</th></tr>
+        <tr><td><code>w-4</code></td><td><code>1rem</code></td><td><code>w-100</code></td><td><code>25rem</code></td></tr>
+        <tr><td><code>w-8</code></td><td><code>2rem</code></td><td><code>w-120</code></td><td><code>30rem</code></td></tr>
+        <tr><td><code>w-16</code></td><td><code>4rem</code></td><td><code>w-160</code></td><td><code>40rem</code></td></tr>
+        <tr><td><code>w-24</code></td><td><code>6rem</code></td><td><code>w-200</code></td><td><code>50rem</code></td></tr>
+        <tr><td><code>w-48</code></td><td><code>12rem</code></td><td><code>w-320</code></td><td><code>80rem</code></td></tr>
+        <tr><td><code>w-64</code></td><td><code>16rem</code></td><td><code>w-560</code></td><td><code>140rem</code></td></tr>
+        <tr><td><code>w-96</code></td><td><code>24rem</code></td><td><code>w-999</code></td><td><code>249.75rem</code></td></tr>
+      </table>
+    </div>
+    <h3>Unidades explícitas</h3>
+    <p>Puedes pasar valores con unidad directamente cuando necesitas precisión absoluta:</p>
+    <pre><code><span class="cmt">&lt;!-- Valores numéricos escalados (n × 0.25rem) --&gt;</span>
+&lt;div class=<span class="str">"w-200"</span>&gt;50rem de ancho&lt;/div&gt;
+&lt;div class=<span class="str">"max-w-320"</span>&gt;Máximo 80rem&lt;/div&gt;
+&lt;div class=<span class="str">"h-160"</span>&gt;40rem de alto&lt;/div&gt;
+&lt;div class=<span class="str">"size-100"</span>&gt;25rem × 25rem&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Unidades explícitas (sin escalar) --&gt;</span>
+&lt;div class=<span class="str">"w-200px"</span>&gt;200px de ancho&lt;/div&gt;
+&lt;div class=<span class="str">"h-50vh"</span>&gt;50vh de alto&lt;/div&gt;
+&lt;div class=<span class="str">"max-w-1280px"</span>&gt;Máximo 1280px exactos&lt;/div&gt;
+&lt;div class=<span class="str">"w-1/3"</span>&gt;Un tercio del padre (33.33%)&lt;/div&gt;
+&lt;img class=<span class="str">"size-16"</span>&gt; <span class="cmt">&lt;!-- 4rem × 4rem --&gt;</span>
+
+<span class="cmt">&lt;!-- Contenedor centrado con ancho máximo grande --&gt;</span>
+&lt;main class=<span class="str">"w-full max-w-320 mx-auto px-6"</span>&gt;Hasta 80rem, centrado&lt;/main&gt;</code></pre>
+  </section>
+
+  <!-- TIPOGRAFÍA -->
+  <section id="tipografia">
+    <h2>Tipografía</h2>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th></tr>
+        <tr><td><code>text-{n}</code></td><td><code>font-size: n×0.25rem</code></td></tr>
+        <tr><td><code>text-c</code></td><td><code>text-align: center</code></td></tr>
+        <tr><td><code>text-l</code></td><td><code>text-align: start</code></td></tr>
+        <tr><td><code>text-r</code></td><td><code>text-align: end</code></td></tr>
+        <tr><td><code>text-j</code></td><td><code>text-align: justify</code></td></tr>
+        <tr><td><code>text-i</code></td><td><code>text-align: initial</code></td></tr>
+      </table>
+    </div>
+    <h3>Pesos de fuente</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>font-weight</th></tr>
+        <tr><td><code>font-thin</code></td><td><code>100</code></td></tr>
+        <tr><td><code>font-light</code></td><td><code>300</code></td></tr>
+        <tr><td><code>font-normal</code></td><td><code>400</code></td></tr>
+        <tr><td><code>font-medium</code></td><td><code>500</code></td></tr>
+        <tr><td><code>font-semibold</code></td><td><code>600</code></td></tr>
+        <tr><td><code>font-bold</code></td><td><code>700</code></td></tr>
+        <tr><td><code>font-extrabold</code></td><td><code>800</code></td></tr>
+        <tr><td><code>font-black</code></td><td><code>900</code></td></tr>
+        <tr><td><code>font-{100–900}</code></td><td>Numérico directo (múltiplos de 100)</td></tr>
+      </table>
+    </div>
+    <pre><code>&lt;h1 class=<span class="str">"text-12 font-bold text-c"</span>&gt;Título centrado&lt;/h1&gt;
+&lt;p  class=<span class="str">"text-4 font-normal leading-normal"</span>&gt;Párrafo estándar&lt;/p&gt;
+&lt;small class=<span class="str">"text-3 font-light text-r"</span>&gt;Nota alineada a la derecha&lt;/small&gt;</code></pre>
+  </section>
+
+  <!-- LINE-HEIGHT -->
+  <section id="leading">
+    <h2>line-height — <code>leading</code></h2>
+    <p>Controla el interlineado del texto. Puedes usar palabras clave predefinidas o valores numéricos que se convierten a <code>rem</code> con la fórmula <code>n × 0.25rem</code>.</p>
+
+    <h3>Palabras clave</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th><th>Uso recomendado</th></tr>
+        <tr><td><code>leading-none</code></td><td><code>line-height: 1</code></td><td>Títulos grandes sin espacio extra</td></tr>
+        <tr><td><code>leading-tight</code></td><td><code>line-height: 1.25</code></td><td>Títulos compactos</td></tr>
+        <tr><td><code>leading-snug</code></td><td><code>line-height: 1.375</code></td><td>Subtítulos</td></tr>
+        <tr><td><code>leading-normal</code></td><td><code>line-height: 1.5</code></td><td>Texto de cuerpo estándar</td></tr>
+        <tr><td><code>leading-relaxed</code></td><td><code>line-height: 1.625</code></td><td>Lectura cómoda en artículos</td></tr>
+        <tr><td><code>leading-loose</code></td><td><code>line-height: 2</code></td><td>Textos con mucho espacio</td></tr>
+      </table>
+    </div>
+
+    <h3>Valor numérico</h3>
+    <p>También puedes pasar un número: se convierte con <code>n × 0.25rem</code>.</p>
+    <div class="bp-grid">
+      <div class="bp-pill"><code>leading-4</code> → <code>1rem</code></div>
+      <div class="bp-pill"><code>leading-6</code> → <code>1.5rem</code></div>
+      <div class="bp-pill"><code>leading-8</code> → <code>2rem</code></div>
+      <div class="bp-pill"><code>leading-0</code> → <code>0</code></div>
+    </div>
+
+    <div class="alert alert-info">
+      <strong>Diferencia clave:</strong> Las palabras clave generan valores <em>sin unidad</em> (relativo al font-size del elemento), mientras que los valores numéricos generan <code>rem</code> (fijo). Para texto de cuerpo usa siempre palabras clave.
+    </div>
+
+    <pre><code><span class="cmt">&lt;!-- Título sin espacio extra entre líneas --&gt;</span>
+&lt;h1 class=<span class="str">"text-16 font-bold leading-none"</span>&gt;Headline compacto&lt;/h1&gt;
+
+<span class="cmt">&lt;!-- Párrafo con interlineado cómodo --&gt;</span>
+&lt;p class=<span class="str">"text-4 leading-relaxed"</span>&gt;
+  Este párrafo tiene un interlineado de 1.625, ideal para artículos largos.
+&lt;/p&gt;
+
+<span class="cmt">&lt;!-- Responsive: más espacio en desktop --&gt;</span>
+&lt;p class=<span class="str">"leading-normal lg:leading-relaxed"</span>&gt;
+  Texto que respira más en pantallas grandes.
+&lt;/p&gt;</code></pre>
+  </section>
+
+  <!-- TEXT-WRAP -->
+  <section id="text-wrap">
+    <h2>text-wrap <span class="badge-new-inline">NUEVO</span></h2>
+    <p>Controla cómo el texto hace salto de línea dentro de su contenedor. Especialmente útil para títulos y bloques de texto donde el quiebre de línea importa visualmente.</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th><th>Comportamiento</th></tr>
+        <tr><td><code>text-wrap-wrap</code></td><td><code>text-wrap: wrap</code></td><td>Salto de línea normal (comportamiento por defecto del navegador)</td></tr>
+        <tr><td><code>text-wrap-nowrap</code></td><td><code>text-wrap: nowrap</code></td><td>Sin salto de línea — el texto desborda si es muy largo</td></tr>
+        <tr><td><code>text-wrap-balance</code></td><td><code>text-wrap: balance</code></td><td>Equilibra el largo de cada línea — ideal para títulos centrados</td></tr>
+        <tr><td><code>text-wrap-pretty</code></td><td><code>text-wrap: pretty</code></td><td>Evita palabras huérfanas al final del párrafo</td></tr>
+        <tr><td><code>text-wrap-stable</code></td><td><code>text-wrap: stable</code></td><td>Estabiliza el layout durante edición — evita re-flujos</td></tr>
+      </table>
+    </div>
+
+    <div class="alert alert-amber">
+      <strong>Soporte del navegador:</strong> <code>balance</code> y <code>pretty</code> tienen soporte en Chrome 114+ y Firefox 121+. Úsalas como mejora progresiva — sin soporte, el texto simplemente usa <code>wrap</code> normal.
+    </div>
+
+    <pre><code><span class="cmt">&lt;!-- Título con líneas equilibradas --&gt;</span>
+&lt;h1 class=<span class="str">"text-14 font-bold text-c text-wrap-balance"</span>&gt;
+  Un título largo que se equilibra automáticamente entre líneas
+&lt;/h1&gt;
+
+<span class="cmt">&lt;!-- Párrafo sin palabras sueltas al final --&gt;</span>
+&lt;p class=<span class="str">"text-4 leading-relaxed text-wrap-pretty"</span>&gt;
+  Este párrafo evita que una sola palabra quede sola en la última línea.
+&lt;/p&gt;
+
+<span class="cmt">&lt;!-- Badge que nunca corta su texto --&gt;</span>
+&lt;span class=<span class="str">"text-wrap-nowrap px-3 py-1 border-r-8"</span>&gt;Etiqueta sin corte&lt;/span&gt;
+
+<span class="cmt">&lt;!-- Responsive: balance solo en desktop --&gt;</span>
+&lt;h2 class=<span class="str">"text-wrap-wrap lg:text-wrap-balance"</span>&gt;Subtítulo adaptativo&lt;/h2&gt;</code></pre>
+  </section>
+
+  <!-- TEXT-TRANSFORM -->
+  <section id="text-transform">
+    <h2>text-transform <span class="badge-new-inline">NUEVO</span></h2>
+    <p>Controla la capitalización del texto. Son clases <strong>sin valor</strong> (keyword-only), como <code>flex</code> o <code>hidden</code>. Soportan prefijos responsive y el modificador <code>!</code>.</p>
+
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th><th>Resultado</th></tr>
+        <tr><td><code>uppercase</code></td><td><code>text-transform: uppercase</code></td><td>TODO EN MAYÚSCULAS</td></tr>
+        <tr><td><code>lowercase</code></td><td><code>text-transform: lowercase</code></td><td>todo en minúsculas</td></tr>
+        <tr><td><code>capitalize</code></td><td><code>text-transform: capitalize</code></td><td>Primera Letra De Cada Palabra</td></tr>
+        <tr><td><code>normal-case</code></td><td><code>text-transform: none</code></td><td>Sin transformación (anula herencia)</td></tr>
+      </table>
+    </div>
+
+    <div class="alert alert-info">
+      <strong>capitalize vs uppercase:</strong> <code>capitalize</code> pone en mayúscula solo la primera letra de cada palabra. <code>uppercase</code> convierte todas las letras. Para títulos de sección o botones suele preferirse <code>uppercase</code>; para nombres propios en formularios, <code>capitalize</code>.
+    </div>
+
+    <pre><code><span class="cmt">&lt;!-- Etiqueta de categoría en mayúsculas --&gt;</span>
+&lt;span class=<span class="str">"uppercase text-3 font-semibold"</span>&gt;destacado&lt;/span&gt;
+
+<span class="cmt">&lt;!-- Nombre de pasajero: primera letra de cada palabra --&gt;</span>
+&lt;p class=<span class="str">"capitalize"</span>&gt;juan pérez garcía&lt;/p&gt;
+
+<span class="cmt">&lt;!-- Código o referencia: todo en minúsculas --&gt;</span>
+&lt;code class=<span class="str">"lowercase"</span>&gt;REF-ABC123&lt;/code&gt;
+
+<span class="cmt">&lt;!-- Anular herencia de un padre que aplica uppercase --&gt;</span>
+&lt;nav class=<span class="str">"uppercase"</span>&gt;
+  &lt;a href=<span class="str">"#"</span>&gt;Inicio&lt;/a&gt;
+  &lt;a href=<span class="str">"#"</span> class=<span class="str">"normal-case"</span>&gt;sin transformar&lt;/a&gt;
+&lt;/nav&gt;
+
+<span class="cmt">&lt;!-- Responsive: mayúsculas solo en desktop --&gt;</span>
+&lt;h2 class=<span class="str">"normal-case lg:uppercase"</span>&gt;Título&lt;/h2&gt;
+
+<span class="cmt">&lt;!-- Con !important para sobreescribir librerías --&gt;</span>
+&lt;span class=<span class="str">"!uppercase"</span>&gt;Forzado mayúsculas&lt;/span&gt;</code></pre>
+  </section>
+
+  <!-- BORDES -->
+  <section id="bordes">
+    <h2>Bordes y opacidad <span class="badge-new-inline">UPD</span></h2>
+    <h3>Ancho global — <code>border-{n}</code></h3>
+    <p>Define solo el ancho del borde en <code>px</code>. El estilo y color quedan a cargo del CSS base del elemento.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th></tr>
+        <tr><td><code>border-{n}</code></td><td><code>border-width: npx</code> (valor 0 → sin unidad)</td></tr>
+        <tr><td><code>border-r-{n}</code></td><td><code>border-radius: n×0.25em</code></td></tr>
+        <tr><td><code>rounded-{n}</code></td><td><code>border-radius: n×0.25rem</code></td></tr>
+        <tr><td><code>rounded-full</code></td><td><code>border-radius: 9999px</code> (circular)</td></tr>
+        <tr><td><code>opacity-{n}</code></td><td><code>opacity: 0 / 0.25 / 0.5 / 0.75 / 1</code></td></tr>
+      </table>
+    </div>
+
+    <h3 id="bordes-estilo">Ancho + estilo — <code>border-{n}-{estilo}</code> <span class="badge-new-inline">NEW</span></h3>
+    <p>Define el ancho y el estilo de línea en una sola clase. Genera <code>border: npx estilo</code>. Soporta todos los estilos de borde de CSS.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th><th>Apariencia</th></tr>
+        <tr><td><code>border-1-solid</code></td><td><code>border: 1px solid</code></td><td>Línea continua (más común)</td></tr>
+        <tr><td><code>border-2-dashed</code></td><td><code>border: 2px dashed</code></td><td>Línea discontinua (guiones)</td></tr>
+        <tr><td><code>border-1-dotted</code></td><td><code>border: 1px dotted</code></td><td>Línea de puntos</td></tr>
+        <tr><td><code>border-3-double</code></td><td><code>border: 3px double</code></td><td>Línea doble (requiere ≥ 3px)</td></tr>
+        <tr><td><code>border-4-groove</code></td><td><code>border: 4px groove</code></td><td>Efecto tallado 3D</td></tr>
+        <tr><td><code>border-4-ridge</code></td><td><code>border: 4px ridge</code></td><td>Efecto relieve 3D</td></tr>
+        <tr><td><code>border-3-inset</code></td><td><code>border: 3px inset</code></td><td>Efecto hundido 3D</td></tr>
+        <tr><td><code>border-3-outset</code></td><td><code>border: 3px outset</code></td><td>Efecto elevado 3D</td></tr>
+        <tr><td><code>border-1-none</code></td><td><code>border: 0 none</code></td><td>Sin borde</td></tr>
+        <tr><td><code>border-1-hidden</code></td><td><code>border: 1px hidden</code></td><td>Oculto (útil en tablas)</td></tr>
+      </table>
+    </div>
+    <div class="alert alert-info">
+      <strong>Combinación con color:</strong> La clase solo define ancho y estilo — el color del borde lo define tu CSS base o una variable CSS. Para colorear, usa <code>style="border-color: #333"</code> o una clase de color personalizada.
+    </div>
+    <pre><code><span class="cmt">&lt;!-- Borde sólido clásico --&gt;</span>
+&lt;div class=<span class="str">"border-1-solid rounded-4 p-4"</span>&gt;Card con borde sólido&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Borde discontinuo para zona de drop / upload --&gt;</span>
+&lt;div class=<span class="str">"border-2-dashed border-r-4 p-8 text-c"</span>&gt;Arrastra archivos aquí&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Borde punteado decorativo --&gt;</span>
+&lt;figure class=<span class="str">"border-1-dotted p-4 rounded-4"</span>&gt;
+  &lt;img src=<span class="str">"foto.jpg"</span> alt=<span class="str">"foto"</span>&gt;
+&lt;/figure&gt;
+
+<span class="cmt">&lt;!-- Borde doble — efecto premium --&gt;</span>
+&lt;blockquote class=<span class="str">"border-4-double pl-6 py-2"</span>&gt;Cita destacada&lt;/blockquote&gt;
+
+<span class="cmt">&lt;!-- Efecto 3D con groove / ridge --&gt;</span>
+&lt;div class=<span class="str">"border-4-groove p-4 rounded-4"</span>&gt;Panel con efecto grabado&lt;/div&gt;
+&lt;button class=<span class="str">"border-3-outset px-6 py-2"</span>&gt;Botón elevado&lt;/button&gt;
+
+<span class="cmt">&lt;!-- Responsive: sólido en móvil, discontinuo en desktop --&gt;</span>
+&lt;div class=<span class="str">"border-1-solid lg:border-2-dashed p-4"</span>&gt;Cambia de estilo por breakpoint&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Sin borde (sobreescribe reglas heredadas) --&gt;</span>
+&lt;div class=<span class="str">"border-1-none"</span>&gt;Sin borde visible&lt;/div&gt;</code></pre>
+
+    <pre><code><span class="cmt">/* Sin la nueva sintaxis (antes) */</span>
+&lt;div class=<span class="str">"border-2"</span> style=<span class="str">"border-style: dashed"</span>&gt;Requería style inline&lt;/div&gt;
+
+<span class="cmt">/* Con la nueva sintaxis (ahora) */</span>
+&lt;div class=<span class="str">"border-2-dashed"</span>&gt;Todo en una clase&lt;/div&gt;</code></pre>
+  </section>
+
+  <!-- BORDES — LADOS INDIVIDUALES -->
+  <section id="bordes-lados">
+    <h2>Bordes — lados individuales <span class="badge-new-inline">NEW</span></h2>
+    <p>Aplica borde a un lado específico con estilo <code>solid</code> por defecto. El valor es el ancho en <code>px</code>.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th></tr>
+        <tr><td><code>border-t-{n}</code></td><td><code>border-top: npx solid</code></td></tr>
+        <tr><td><code>border-b-{n}</code></td><td><code>border-bottom: npx solid</code></td></tr>
+        <tr><td><code>border-l-{n}</code></td><td><code>border-left: npx solid</code></td></tr>
+        <tr><td><code>border-ri-{n}</code></td><td><code>border-right: npx solid</code></td></tr>
+        <tr><td><code>border-t-0</code></td><td><code>border-top: 0</code> (elimina el borde)</td></tr>
+      </table>
+    </div>
+    <div class="alert alert-amber">
+      <strong>Nota de nomenclatura:</strong> El lado derecho usa <code>border-ri</code> (no <code>border-r</code>) porque <code>border-r</code> está reservado para <code>border-radius</code>.
+    </div>
+    <pre><code><span class="cmt">&lt;!-- Separador inferior --&gt;</span>
+&lt;div class=<span class="str">"border-b-1 pb-4"</span>&gt;Título con línea inferior&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Acento lateral izquierdo --&gt;</span>
+&lt;blockquote class=<span class="str">"border-l-4 pl-4"</span>&gt;Cita destacada&lt;/blockquote&gt;
+
+<span class="cmt">&lt;!-- Responsive: solo borde en desktop --&gt;</span>
+&lt;div class=<span class="str">"lg:border-ri-1 lg:pr-6"</span>&gt;Columna con separador&lt;/div&gt;</code></pre>
+  </section>
+
+  <!-- BORDES — SHORTHAND 4 LADOS -->
+  <section id="bordes-multi">
+    <h2>Bordes — shorthand de 4 lados <span class="badge-new-inline">NEW</span></h2>
+    <p>Define el ancho de los cuatro bordes en una sola clase con la sintaxis <code>border-{top}-{right}-{bottom}-{left}</code>. Los valores son en <code>px</code>; el valor <code>0</code> se genera sin unidad.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th></tr>
+        <tr><td><code>border-{t}-{r}-{b}-{l}</code></td><td><code>border-width: tpx  rpx  bpx  lpx</code></td></tr>
+        <tr><td><code>border-2-0-2-0</code></td><td><code>border-width: 2px 0 2px 0</code></td></tr>
+        <tr><td><code>border-1-0-1-1</code></td><td><code>border-width: 1px 0 1px 1px</code></td></tr>
+        <tr><td><code>border-0-0-2-0</code></td><td><code>border-width: 0 0 2px 0</code></td></tr>
+      </table>
+    </div>
+    <pre><code><span class="cmt">&lt;!-- Solo bordes top y bottom --&gt;</span>
+&lt;div class=<span class="str">"border-2-0-2-0"</span>&gt;...&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Input con borde inferior únicamente --&gt;</span>
+&lt;input class=<span class="str">"border-0-0-1-0 pb-1"</span> type=<span class="str">"text"</span>&gt;
+
+<span class="cmt">&lt;!-- Responsive --&gt;</span>
+&lt;div class=<span class="str">"border-1 lg:border-2-0-2-0"</span>&gt;...&lt;/div&gt;</code></pre>
+  </section>
+
+  <!-- BORDES — RADIO POR ESQUINA -->
+  <section id="bordes-radio">
+    <h2>Bordes — radio por esquina <span class="badge-new-inline">NEW</span></h2>
+    <p>Controla el radio de cada esquina individualmente con la sintaxis <code>border-r-{tl}-{tr}-{br}-{bl}</code>. El orden es: <strong>top-left · top-right · bottom-right · bottom-left</strong> (igual que CSS shorthand). Los valores se multiplican por <code>0.25em</code>.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS generado</th></tr>
+        <tr><td><code>border-r-{tl}-{tr}-{br}-{bl}</code></td><td><code>border-radius: tl×0.25em  tr×0.25em  br×0.25em  bl×0.25em</code></td></tr>
+        <tr><td><code>border-r-0-4-4-0</code></td><td><code>border-radius: 0 1em 1em 0</code> (cápsula derecha)</td></tr>
+        <tr><td><code>border-r-4-0-0-4</code></td><td><code>border-radius: 1em 0 0 1em</code> (cápsula izquierda)</td></tr>
+        <tr><td><code>border-r-4-4-0-0</code></td><td><code>border-radius: 1em 1em 0 0</code> (solo arriba)</td></tr>
+        <tr><td><code>border-r-0-0-4-4</code></td><td><code>border-radius: 0 0 1em 1em</code> (solo abajo)</td></tr>
+      </table>
+    </div>
+    <div class="alert alert-info">
+      <strong>Compatibilidad:</strong> <code>border-r-{n}</code> (valor único) sigue funcionando igual — aplica el mismo radio a las 4 esquinas.
+    </div>
+    <pre><code><span class="cmt">&lt;!-- Tab activo: radio solo arriba --&gt;</span>
+&lt;button class=<span class="str">"border-r-4-4-0-0 px-4 py-2"</span>&gt;Tab&lt;/button&gt;
+
+<span class="cmt">&lt;!-- Pill solo lado derecho (ej: tag de apertura) --&gt;</span>
+&lt;span class=<span class="str">"border-r-0-4-4-0 px-3 py-1"</span>&gt;Etiqueta&lt;/span&gt;
+
+<span class="cmt">&lt;!-- Responsive: radio completo en móvil, solo abajo en desktop --&gt;</span>
+&lt;div class=<span class="str">"border-r-4 lg:border-r-0-0-4-4"</span>&gt;...&lt;/div&gt;</code></pre>
+  </section>
+
+  <!-- DISPLAY -->
+  <section id="display">
+    <h2>Display y visibilidad</h2>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS</th></tr>
+        <tr><td><code>block</code></td><td><code>display: block</code></td></tr>
+        <tr><td><code>inline</code></td><td><code>display: inline</code></td></tr>
+        <tr><td><code>inline-block</code></td><td><code>display: inline-block</code></td></tr>
+        <tr><td><code>hide</code></td><td><code>display: none</code></td></tr>
+        <tr><td><code>hidden</code></td><td><code>display: none</code></td></tr>
+      </table>
+    </div>
+    <pre><code><span class="cmt">&lt;!-- Solo visible en móvil --&gt;</span>
+&lt;div class=<span class="str">"block md:hide"</span>&gt;Solo en móvil y tablet&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Solo visible en desktop --&gt;</span>
+&lt;div class=<span class="str">"hide lg:block"</span>&gt;Solo en desktop&lt;/div&gt;</code></pre>
+  </section>
+
+  <!-- OVERFLOW -->
+  <section id="overflow">
+    <h2>Overflow y cursor</h2>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>CSS</th></tr>
+        <tr><td><code>overflow-auto</code></td><td><code>overflow: auto</code></td></tr>
+        <tr><td><code>overflow-hidden</code></td><td><code>overflow: hidden</code></td></tr>
+        <tr><td><code>overflow-visible</code></td><td><code>overflow: visible</code></td></tr>
+        <tr><td><code>overflow-scroll</code></td><td><code>overflow: scroll</code></td></tr>
+        <tr><td><code>overflow-x-{val}</code></td><td><code>overflow-x: {val}</code></td></tr>
+        <tr><td><code>overflow-y-{val}</code></td><td><code>overflow-y: {val}</code></td></tr>
+        <tr><td><code>cursor-pointer</code></td><td><code>cursor: pointer</code></td></tr>
+        <tr><td><code>cursor-default</code></td><td><code>cursor: default</code></td></tr>
+        <tr><td><code>cursor-text</code></td><td><code>cursor: text</code></td></tr>
+        <tr><td><code>cursor-move</code></td><td><code>cursor: move</code></td></tr>
+        <tr><td><code>cursor-not-allowed</code></td><td><code>cursor: not-allowed</code></td></tr>
+      </table>
+    </div>
+    <pre><code><span class="cmt">&lt;!-- Tabla con scroll horizontal --&gt;</span>
+&lt;div class=<span class="str">"overflow-x-auto"</span>&gt;&lt;table&gt;...&lt;/table&gt;&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Botón deshabilitado --&gt;</span>
+&lt;button class=<span class="str">"cursor-not-allowed opacity-50"</span> disabled&gt;No disponible&lt;/button&gt;</code></pre>
+  </section>
+
+  <!-- OTROS -->
+  <section id="otros">
+    <h2>Otros — z-index y opacity</h2>
+    <pre><code><span class="cmt">&lt;!-- z-index acepta valores negativos --&gt;</span>
+&lt;div class=<span class="str">"z-10"</span>&gt;Capa 10&lt;/div&gt;
+&lt;div class=<span class="str">"-z-1"</span>&gt;Capa -1 (detrás)&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Modal típico con overlay --&gt;</span>
+&lt;div class=<span class="str">"fixed top-0 left-0 w-full h-full z-40 opacity-50"</span>&gt;Overlay&lt;/div&gt;
+&lt;div class=<span class="str">"fixed top-0 left-0 w-full z-50"</span>&gt;Modal por encima&lt;/div&gt;</code></pre>
+  </section>
+
+  <!-- RESPONSIVE -->
+  <section id="responsive">
+    <h2>Clases responsive <span class="badge-new-inline">UPD</span></h2>
+    <p>Agrega un prefijo de breakpoint antes de cualquier clase con el separador <code>:</code>. El sistema cuenta con <strong>16 breakpoints</strong> organizados en tres grupos: base, <code>max-*</code> y <code>min-*</code>.</p>
+
+    <h3>Breakpoints base</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Prefijo</th><th>Media query generada</th><th>Rango de pantalla</th></tr>
+        <tr><td><code>xs:</code></td><td><code>@media (max-width: 550px)</code></td><td>Pantallas muy pequeñas (≤ 550px)</td></tr>
+        <tr><td><code>sm:</code></td><td><code>@media (max-width: 767px)</code></td><td>Móviles (≤ 767px)</td></tr>
+        <tr><td><code>md:</code></td><td><code>@media (min-width: 768px) and (max-width: 1023px)</code></td><td>Tablets — rango acotado (768px–1023px)</td></tr>
+        <tr><td><code>md-max:</code></td><td><code>@media (max-width: 1023px)</code></td><td>Todo hasta tablet inclusive (≤ 1023px)</td></tr>
+        <tr><td><code>lg:</code></td><td><code>@media (min-width: 1024px)</code></td><td>Escritorio (≥ 1024px)</td></tr>
+        <tr><td><code>xl:</code></td><td><code>@media (min-width: 1400px)</code></td><td>Pantallas grandes (≥ 1400px)</td></tr>
+        <tr><td><code>xg:</code></td><td><code>@media (min-width: 1600px)</code></td><td>Pantallas extra grandes (≥ 1600px)</td></tr>
+      </table>
+    </div>
+
+    <h3 id="responsive-max">Variantes <code>max-*</code> — hasta un límite superior <span class="badge-new-inline">NEW</span></h3>
+    <p>Aplican en pantallas <strong>iguales o menores</strong> al límite indicado. Útiles para aplicar estilos en cualquier pantalla por debajo de un breakpoint específico, sin importar el inicio del rango.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Prefijo</th><th>Media query generada</th><th>Afecta</th></tr>
+        <tr><td><code>max-xs:</code></td><td><code>@media (max-width: 550px)</code></td><td>≤ 550px</td></tr>
+        <tr><td><code>max-sm:</code></td><td><code>@media (max-width: 767px)</code></td><td>≤ 767px</td></tr>
+        <tr><td><code>max-md:</code></td><td><code>@media (max-width: 1023px)</code></td><td>≤ 1023px (equivalente a <code>md-max:</code>)</td></tr>
+        <tr><td><code>max-lg:</code></td><td><code>@media (max-width: 1399px)</code></td><td>≤ 1399px — todo excepto <code>xl</code> y <code>xg</code></td></tr>
+        <tr><td><code>max-xl:</code></td><td><code>@media (max-width: 1599px)</code></td><td>≤ 1599px — todo excepto <code>xg</code></td></tr>
+      </table>
+    </div>
+
+    <h3 id="responsive-min">Variantes <code>min-*</code> — desde un límite inferior <span class="badge-new-inline">NEW</span></h3>
+    <p>Aplican en pantallas <strong>iguales o mayores</strong> al límite indicado. Permiten activar estilos desde un punto exacto sin depender de los alias semánticos.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Prefijo</th><th>Media query generada</th><th>Afecta</th></tr>
+        <tr><td><code>min-sm:</code></td><td><code>@media (min-width: 551px)</code></td><td>≥ 551px — excluye solo <code>xs</code></td></tr>
+        <tr><td><code>min-md:</code></td><td><code>@media (min-width: 768px)</code></td><td>≥ 768px — tablet en adelante</td></tr>
+        <tr><td><code>min-lg:</code></td><td><code>@media (min-width: 1024px)</code></td><td>≥ 1024px (equivalente a <code>lg:</code>)</td></tr>
+        <tr><td><code>min-xl:</code></td><td><code>@media (min-width: 1400px)</code></td><td>≥ 1400px (equivalente a <code>xl:</code>)</td></tr>
+        <tr><td><code>min-xg:</code></td><td><code>@media (min-width: 1600px)</code></td><td>≥ 1600px (equivalente a <code>xg:</code>)</td></tr>
+      </table>
+    </div>
+
+    <div class="alert alert-info">
+      <strong>¿Cuándo usar <code>max-*</code> vs <code>min-*</code>?</strong> Usa <code>max-*</code> cuando quieras <em>limitar</em> un estilo a pantallas pequeñas ("solo aplica hasta tablet"). Usa <code>min-*</code> cuando quieras <em>activar</em> un estilo a partir de cierto tamaño ("aplica desde tablet en adelante"). La diferencia con los alias base (<code>sm:</code>, <code>lg:</code>, etc.) es semántica: los alias tienen rangos predefinidos fijos, mientras que <code>max-*</code> y <code>min-*</code> son explícitos sobre el límite exacto.
+    </div>
+
+    <h3>Mapa visual — todos los breakpoints</h3>
+    <div class="wr-scale">
+      <div class="wr-row">
+        <span class="wr-label" style="width:72px;font-size:11px">xs / max-xs</span>
+        <div class="wr-bar-wrap"><div class="wr-bar-fill" style="width:15%"></div></div>
+        <span class="wr-info">0px – 550px</span>
+      </div>
+      <div class="wr-row">
+        <span class="wr-label" style="width:72px;font-size:11px">sm / max-sm</span>
+        <div class="wr-bar-wrap"><div class="wr-bar-fill" style="width:26%"></div></div>
+        <span class="wr-info">0px – 767px</span>
+      </div>
+      <div class="wr-row">
+        <span class="wr-label" style="width:72px;font-size:11px">min-sm</span>
+        <div class="wr-bar-wrap"><div class="wr-bar-fill" style="margin-left:15%;width:85%"></div></div>
+        <span class="wr-info">≥ 551px</span>
+      </div>
+      <div class="wr-row">
+        <span class="wr-label" style="width:72px;font-size:11px">md</span>
+        <div class="wr-bar-wrap"><div style="height:10px;background:var(--accent-bg);border:1px solid var(--accent);border-radius:4px;margin-left:26%;width:28%"></div></div>
+        <span class="wr-info">768px – 1023px (rango cerrado)</span>
+      </div>
+      <div class="wr-row">
+        <span class="wr-label" style="width:72px;font-size:11px">md-max / max-md</span>
+        <div class="wr-bar-wrap"><div class="wr-bar-fill" style="width:54%"></div></div>
+        <span class="wr-info">0px – 1023px</span>
+      </div>
+      <div class="wr-row">
+        <span class="wr-label" style="width:72px;font-size:11px">min-md</span>
+        <div class="wr-bar-wrap"><div class="wr-bar-fill" style="margin-left:26%;width:74%"></div></div>
+        <span class="wr-info">≥ 768px</span>
+      </div>
+      <div class="wr-row">
+        <span class="wr-label" style="width:72px;font-size:11px">lg / min-lg</span>
+        <div class="wr-bar-wrap"><div class="wr-bar-fill" style="margin-left:54%;width:46%"></div></div>
+        <span class="wr-info">≥ 1024px</span>
+      </div>
+      <div class="wr-row">
+        <span class="wr-label" style="width:72px;font-size:11px">max-lg</span>
+        <div class="wr-bar-wrap"><div class="wr-bar-fill" style="width:75%"></div></div>
+        <span class="wr-info">0px – 1399px</span>
+      </div>
+      <div class="wr-row">
+        <span class="wr-label" style="width:72px;font-size:11px">xl / min-xl</span>
+        <div class="wr-bar-wrap"><div class="wr-bar-fill" style="margin-left:75%;width:25%"></div></div>
+        <span class="wr-info">≥ 1400px</span>
+      </div>
+      <div class="wr-row">
+        <span class="wr-label" style="width:72px;font-size:11px">max-xl</span>
+        <div class="wr-bar-wrap"><div class="wr-bar-fill" style="width:85%"></div></div>
+        <span class="wr-info">0px – 1599px</span>
+      </div>
+      <div class="wr-row">
+        <span class="wr-label" style="width:72px;font-size:11px">xg / min-xg</span>
+        <div class="wr-bar-wrap"><div class="wr-bar-fill" style="margin-left:85%;width:15%"></div></div>
+        <span class="wr-info">≥ 1600px</span>
+      </div>
+    </div>
+
+    <h3>Ejemplos — breakpoints base</h3>
+    <pre><code><span class="cmt">&lt;!-- Grid adaptativo --&gt;</span>
+&lt;div class=<span class="str">"grid cl-1 md:cl-2 lg:cl-3 gap-6"</span>&gt;
+  &lt;div&gt;Card 1&lt;/div&gt;
+  &lt;div&gt;Card 2&lt;/div&gt;
+  &lt;div&gt;Card 3&lt;/div&gt;
+&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Flex-column en móvil, fila en desktop --&gt;</span>
+&lt;div class=<span class="str">"flex-c lg:flex-r gap-4"</span>&gt;
+  &lt;div&gt;Ítem 1&lt;/div&gt;
+  &lt;div&gt;Ítem 2&lt;/div&gt;
+&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Ocultar en móvil --&gt;</span>
+&lt;nav class=<span class="str">"sm:hide"</span>&gt;Solo visible en tablet y desktop&lt;/nav&gt;
+
+<span class="cmt">&lt;!-- Padding creciente por breakpoint --&gt;</span>
+&lt;section class=<span class="str">"py-6 md:py-10 lg:py-16 xg:py-20"</span>&gt;
+  Más espacio en pantallas grandes
+&lt;/section&gt;</code></pre>
+
+    <h3>Ejemplos — variantes <code>max-*</code></h3>
+    <pre><code><span class="cmt">&lt;!-- Texto centrado SOLO en pantallas pequeñas y medianas --&gt;</span>
+&lt;h1 class=<span class="str">"max-md:text-c"</span>&gt;Centrado hasta 1023px, normal en desktop&lt;/h1&gt;
+
+<span class="cmt">&lt;!-- Menú hamburguesa: visible hasta lg, oculto en xl+ --&gt;</span>
+&lt;button class=<span class="str">"max-lg:block hide"</span>&gt;☰ Menú&lt;/button&gt;
+
+<span class="cmt">&lt;!-- Columna única hasta tablet, grid en desktop --&gt;</span>
+&lt;div class=<span class="str">"max-md:flex-c lg:grid lg:cl-3 gap-4"</span>&gt;
+  &lt;div&gt;A&lt;/div&gt;
+  &lt;div&gt;B&lt;/div&gt;
+  &lt;div&gt;C&lt;/div&gt;
+&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Padding extra solo en pantallas que NO son extra grandes --&gt;</span>
+&lt;section class=<span class="str">"p-8 max-xl:p-4"</span>&gt;Padding reducido hasta 1599px&lt;/section&gt;
+
+<span class="cmt">&lt;!-- Elemento solo visible en xs (oculto en todo lo demás) --&gt;</span>
+&lt;div class=<span class="str">"max-xs:block hide"</span>&gt;Solo en pantallas ≤ 550px&lt;/div&gt;</code></pre>
+
+    <h3>Ejemplos — variantes <code>min-*</code></h3>
+    <pre><code><span class="cmt">&lt;!-- Tipografía más grande desde tablet en adelante --&gt;</span>
+&lt;p class=<span class="str">"text-4 min-md:text-5 min-xl:text-6"</span>&gt;Texto que crece con la pantalla&lt;/p&gt;
+
+<span class="cmt">&lt;!-- Sidebar visible solo desde sm (excluye xs) --&gt;</span>
+&lt;aside class=<span class="str">"xs:hide min-sm:block"</span>&gt;Sidebar&lt;/aside&gt;
+
+<span class="cmt">&lt;!-- Sticky header solo en pantallas medianas en adelante --&gt;</span>
+&lt;header class=<span class="str">"min-md:sticky min-md:top-0 min-md:z-50"</span>&gt;Nav&lt;/header&gt;
+
+<span class="cmt">&lt;!-- Gap más grande en pantallas grandes --&gt;</span>
+&lt;div class=<span class="str">"flex-c gap-3 min-lg:flex-r min-lg:gap-8"</span>&gt;
+  &lt;div&gt;Ítem 1&lt;/div&gt;
+  &lt;div&gt;Ítem 2&lt;/div&gt;
+&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Contenedor con ancho máximo solo en pantallas grandes --&gt;</span>
+&lt;main class=<span class="str">"w-full min-xl:max-w-1400px min-xl:mx-auto"</span>&gt;Contenido&lt;/main&gt;</code></pre>
+
+    <h3>Combinando <code>max-*</code>, <code>min-*</code> y base</h3>
+    <pre><code><span class="cmt">&lt;!-- Sidebar: oculto en xs, compacto en sm-md, completo en lg+ --&gt;</span>
+&lt;aside class=<span class="str">"xs:hide max-md:w-16 min-lg:w-64 flex-c gap-3"</span>&gt;
+  &lt;span class=<span class="str">"max-md:hide"</span>&gt;Texto solo en desktop&lt;/span&gt;
+&lt;/aside&gt;
+
+<span class="cmt">&lt;!-- Layout que cambia radicalmente según el tamaño --&gt;</span>
+&lt;div class=<span class="str">"flex-c sm:gap-2 min-md:flex-r min-md:gap-6 min-xl:gap-12"</span>&gt;
+  &lt;main class=<span class="str">"w-full min-md:w-3/4"</span>&gt;Contenido&lt;/main&gt;
+  &lt;aside class=<span class="str">"xs:hide min-md:w-1/4"</span>&gt;Panel&lt;/aside&gt;
+&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Tipografía fluida en 4 etapas --&gt;</span>
+&lt;h1 class=<span class="str">"text-8 min-sm:text-10 min-lg:text-14 min-xl:text-18"</span>&gt;
+  Título que crece progresivamente
+&lt;/h1&gt;</code></pre>
+  </section>
+
+  <!-- !IMPORTANT -->
+  <section id="important">
+    <h2>Modificador <code>!</code> (important)</h2>
+    <p>Agrega <code>!</code> al inicio de cualquier clase para añadir <code>!important</code> al CSS generado. Funciona con clases base y responsive.</p>
+    <pre><code><span class="cmt">&lt;!-- padding: 2em !important --&gt;</span>
+&lt;div class=<span class="str">"!p-8"</span>&gt;Padding forzado&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Con responsive --&gt;</span>
+&lt;div class=<span class="str">"md:!flex-c"</span>&gt;Flex-column forzado en tablet&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Sobreescribir Bootstrap --&gt;</span>
+&lt;div class=<span class="str">"container !px-8 !py-4"</span>&gt;
+  Padding de Bootstrap sobreescrito
+&lt;/div&gt;</code></pre>
+    <div class="alert alert-amber">
+      Usa <code>!</code> con moderación, solo cuando necesites sobreescribir estilos de librerías externas o especificidades muy altas.
+    </div>
+  </section>
+
+  <!-- NEGATIVOS -->
+  <section id="negativos">
+    <h2>Valores negativos <span class="badge-new-inline">NUEVO</span></h2>
+    <p>Agrega <code>-</code> al inicio de cualquier clase cuya propiedad soporte valores negativos. La sintaxis es idéntica a Tailwind v3.</p>
+
+    <pre><code><span class="cmt">/* Fórmula */</span>
+-{tipo}-{valor}              <span class="cmt">→  -mt-10, -top-4, -z-1</span>
+{breakpoint}:-{tipo}-{valor} <span class="cmt">→  sm:-mt-6, lg:-top-8</span>
+!-{tipo}-{valor}             <span class="cmt">→  !-mb-4  (negativo + !important)</span></code></pre>
+
+    <h3>Propiedades que soportan negativos</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Grupo</th><th>Clases</th><th>Ejemplo</th><th>CSS generado</th></tr>
+        <tr>
+          <td>Margin</td>
+          <td><code>-m</code> <code>-mx</code> <code>-my</code> <code>-mt</code> <code>-mr</code> <code>-mb</code> <code>-ml</code></td>
+          <td><code>-mt-10</code></td>
+          <td><code>margin-top: -2.5rem</code></td>
+        </tr>
+        <tr>
+          <td>Posición</td>
+          <td><code>-top</code> <code>-left</code> <code>-right</code> <code>-bottom</code></td>
+          <td><code>-top-4</code><br><code>-left-50%</code><br><code>-bottom-4px</code></td>
+          <td><code>top: -1rem</code><br><code>left: -50%</code><br><code>bottom: -4px</code></td>
+        </tr>
+        <tr>
+          <td>Z-index</td>
+          <td><code>-z</code></td>
+          <td><code>-z-1</code></td>
+          <td><code>z-index: -1</code></td>
+        </tr>
+        <tr>
+          <td>Gap</td>
+          <td><code>-gap</code> <code>-gap-x</code> <code>-gap-y</code></td>
+          <td><code>-gap-2</code></td>
+          <td><code>gap: -0.5em</code></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="alert alert-green">
+      <strong>Posición soporta unidades explícitas:</strong> <code>top</code>, <code>left</code>, <code>right</code> y <code>bottom</code> aceptan valores con unidad directa — <code>-left-4px</code>, <code>-top-50%</code>, <code>-bottom-2rem</code>, <code>-right-10vw</code>. Sin unidad, el valor se escala × 0.25 rem (<code>-left-4</code> → <code>-1rem</code>).
+    </div>
+
+    <div class="alert alert-info">
+      <strong>Regla del cero:</strong> <code>-mt-0</code>, <code>-top-0</code> y cualquier negativo con valor <code>0</code> siempre genera <code>0</code> sin signo — nunca <code>-0</code>.
+    </div>
+
+    <div class="alert alert-amber">
+      <strong>Padding no soporta negativos:</strong> <code>-p-4</code>, <code>-px-2</code>, etc. no son válidos en CSS. El script los ignorará y no generará ninguna regla.
+    </div>
+
+    <h3>Casos de uso</h3>
+    <pre><code><span class="cmt">&lt;!-- Solapar un elemento sobre su contenedor padre --&gt;</span>
+&lt;div class=<span class="str">"relative"</span>&gt;
+  &lt;img class=<span class="str">"w-full"</span>&gt;
+  &lt;div class=<span class="str">"absolute -bottom-6 left-4 p-4 border-r-4"</span>&gt;Badge superpuesto&lt;/div&gt;
+&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Compensar margen de un componente interno --&gt;</span>
+&lt;section class=<span class="str">"px-8"</span>&gt;
+  &lt;div class=<span class="str">"-mx-8 bg-gray"</span>&gt;Elemento full-bleed dentro del padding&lt;/div&gt;
+&lt;/section&gt;
+
+<span class="cmt">&lt;!-- Poner un elemento detrás del fondo --&gt;</span>
+&lt;div class=<span class="str">"relative z-10"</span>&gt;Contenido principal&lt;/div&gt;
+&lt;div class=<span class="str">"absolute -z-1"</span>&gt;Elemento decorativo detrás&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Responsive: solo negativo en móvil --&gt;</span>
+&lt;div class=<span class="str">"mt-8 sm:-mt-4"</span>&gt;Margin ajustado en pantallas pequeñas&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Posición negativa responsive con todos los breakpoints --&gt;</span>
+&lt;div class=<span class="str">"absolute -left-4 md:-left-6 lg:-left-8 xg:-left-10"</span>&gt;Se desplaza más en pantallas grandes&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Posición con unidades explícitas --&gt;</span>
+&lt;div class=<span class="str">"absolute -top-50% lg:-top-4px"</span>&gt;Porcentaje en móvil, píxeles en desktop&lt;/div&gt;
+
+<span class="cmt">&lt;!-- Negativo + !important --&gt;</span>
+&lt;div class=<span class="str">"!-mb-4"</span>&gt;margin-bottom: -1rem !important&lt;/div&gt;</code></pre>
+
+    <h3>Implementación interna</h3>
+    <p>El motor detecta el prefijo <code>-</code> en <code>parsearClase()</code>, extrae el tipo base y lo valida contra <code>TIPOS_NEGATIVOS</code>. Si el tipo está permitido, <code>generarCSSParaClase()</code> antepone <code>-</code> al valor CSS calculado.</p>
+    <pre><code><span class="cmt">// Tipos que aceptan negativos (definido en scriptCss.js)</span>
+<span class="kw">const</span> TIPOS_NEGATIVOS = <span class="kw">new</span> Set([
+    <span class="str">'m'</span>, <span class="str">'mx'</span>, <span class="str">'my'</span>, <span class="str">'mt'</span>, <span class="str">'mr'</span>, <span class="str">'mb'</span>, <span class="str">'ml'</span>,
+    <span class="str">'top'</span>, <span class="str">'left'</span>, <span class="str">'right'</span>, <span class="str">'bottom'</span>,
+    <span class="str">'z'</span>, <span class="str">'gap'</span>, <span class="str">'gap-x'</span>, <span class="str">'gap-y'</span>
+]);</code></pre>
+  </section>
+
+  <!-- W-RESPONSIVE -->
+  <section id="w-responsive">
+    <h2>Clase especial: <code>w-responsive</code></h2>
+    <p>Contenedor inteligente que centra el contenido y adapta su ancho según el breakpoint. <strong>En pantallas grandes aplica un ancho fijo</strong>, evitando que el contenido se estire en monitores anchos.</p>
+
+    <div class="alert alert-green">
+      <strong>¿Por qué ancho fijo en lg/xl?</strong> Con <code>width: 100%</code> en una pantalla de 1920px, el contenido se estira horizontalmente y se vuelve ilegible. Un ancho fijo de <code>1024px</code> o <code>1400px</code> centrado con <code>margin: auto</code> mantiene la lectura cómoda sin importar el tamaño del monitor.
+    </div>
+
+    <h3>Comportamiento de la clase base (sin prefijo)</h3>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Breakpoint activo</th><th>Rango de pantalla</th><th><code>width</code></th><th><code>padding</code></th><th>Comportamiento</th></tr>
+        <tr><td>Base (xs / sm)</td><td>≤ 767px</td><td><code>100%</code></td><td><code>0 1rem</code></td><td>Full-width con respiro lateral</td></tr>
+        <tr><td>md interno</td><td>768px – 1023px</td><td><code>100%</code></td><td><code>0 1.5rem</code></td><td>Full-width con más margen interno</td></tr>
+        <tr><td>lg interno</td><td>≥ 1024px</td><td><strong><code>1024px</code> (fijo)</strong></td><td><code>0</code></td><td>Ancho fijo, centrado con <code>margin: auto</code></td></tr>
+        <tr><td>xl interno</td><td>≥ 1400px</td><td><strong><code>1400px</code> (fijo)</strong></td><td><code>0</code></td><td>Ancho fijo ampliado, centrado</td></tr>
+      </table>
+    </div>
+
+    <h3>Variantes con prefijo responsive</h3>
+    <p>Puedes usar <code>w-responsive</code> con cualquier prefijo de breakpoint para aplicar el contenedor solo en ese rango específico. Esto es útil para componentes que deben estar contenidos únicamente en ciertos tamaños de pantalla.</p>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Clase</th><th>Media query</th><th><code>width</code></th><th><code>padding</code></th></tr>
+        <tr><td><code>xs:w-responsive</code></td><td><code>@media (max-width: 550px)</code></td><td><code>100%</code></td><td><code>0 1rem</code></td></tr>
+        <tr><td><code>sm:w-responsive</code></td><td><code>@media (max-width: 767px)</code></td><td><code>100%</code></td><td><code>0 1rem</code></td></tr>
+        <tr><td><code>md:w-responsive</code></td><td><code>@media (min-width: 768px) and (max-width: 1023px)</code></td><td><code>100%</code></td><td><code>0 1.5rem</code></td></tr>
+        <tr><td><code>lg:w-responsive</code></td><td><code>@media (min-width: 1024px)</code></td><td><strong><code>1024px</code></strong></td><td><code>0</code></td></tr>
+        <tr><td><code>xl:w-responsive</code></td><td><code>@media (min-width: 1400px)</code></td><td><strong><code>1400px</code></strong></td><td><code>0</code></td></tr>
+      </table>
+    </div>
+
+    <div class="alert alert-info">
+      <strong>Base vs. prefijo:</strong> <code>w-responsive</code> aplica el comportamiento completo en todos los breakpoints progresivamente (un solo elemento que se adapta a todo). Las variantes con prefijo (<code>lg:w-responsive</code>) se activan <em>únicamente</em> dentro de ese rango — el resto de breakpoints no recibe ningún estilo adicional.
+    </div>
+
+    <h3>Uso típico — estructura de página completa</h3>
+    <pre><code><span class="cmt">&lt;!-- Estructura tipo: header + main + footer centrados --&gt;</span>
+&lt;header&gt;
+  &lt;nav class=<span class="str">"w-responsive flex jc-b ai-c py-4"</span>&gt;
+    &lt;span class=<span class="str">"text-6 font-bold"</span>&gt;Logo&lt;/span&gt;
+    &lt;ul class=<span class="str">"flex gap-6 sm:hide"</span>&gt;
+      &lt;li&gt;Inicio&lt;/li&gt;&lt;li&gt;Servicios&lt;/li&gt;&lt;li&gt;Contacto&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+&lt;/header&gt;
+
+&lt;main&gt;
+  &lt;section class=<span class="str">"w-responsive py-12"</span>&gt;
+    &lt;h1 class=<span class="str">"text-14 font-bold leading-tight text-wrap-balance"</span>&gt;
+      Título principal
+    &lt;/h1&gt;
+    &lt;div class=<span class="str">"grid cl-1 md:cl-2 lg:cl-3 gap-6 mt-8"</span>&gt;
+      &lt;div class=<span class="str">"p-6 border-1 rounded-4"</span>&gt;Card 1&lt;/div&gt;
+      &lt;div class=<span class="str">"p-6 border-1 rounded-4"</span>&gt;Card 2&lt;/div&gt;
+      &lt;div class=<span class="str">"p-6 border-1 rounded-4"</span>&gt;Card 3&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+&lt;/main&gt;
+
+&lt;footer&gt;
+  &lt;div class=<span class="str">"w-responsive flex jc-b py-6"</span>&gt;
+    &lt;span&gt;© 2025&lt;/span&gt;
+    &lt;nav class=<span class="str">"flex gap-4"</span>&gt;&lt;a&gt;Aviso&lt;/a&gt;&lt;a&gt;Privacidad&lt;/a&gt;&lt;/nav&gt;
+  &lt;/div&gt;
+&lt;/footer&gt;
+
+&lt;script src=<span class="str">"scriptCss.js"</span>&gt;&lt;/script&gt;</code></pre>
+
+    <h3>Caso avanzado — hero full-bleed con texto acotado</h3>
+    <pre><code><span class="cmt">&lt;!-- El fondo cubre toda la pantalla,
+     pero el texto queda centrado y acotado --&gt;</span>
+&lt;section style=<span class="str">"background: #0a0a0a"</span>&gt;
+  &lt;div class=<span class="str">"w-responsive py-20 text-c"</span>&gt;
+    &lt;h1 class=<span class="str">"text-16 font-bold text-wrap-balance"</span>&gt;Hero section&lt;/h1&gt;
+    &lt;p class=<span class="str">"text-5 leading-relaxed text-wrap-pretty mt-4"</span>&gt;Descripción&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/section&gt;
+
+<span class="cmt">&lt;!-- Aplicar contenedor solo en desktop --&gt;</span>
+&lt;div class=<span class="str">"lg:w-responsive"</span>&gt;
+  &lt;p&gt;Sin acotar en móvil — fijo en desktop.&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+  </section>
+
+  <!-- CACHÉ -->
+  <section id="cache">
+    <h2>Sistema de caché interno</h2>
+    <div class="table-wrap">
+      <table>
+        <tr><th>Caché</th><th>Almacena</th><th>Beneficio</th></tr>
+        <tr><td><code>CACHE.parsedClases</code></td><td>Resultado de parsear cada clase (tipo, valor, breakpoint)</td><td>No re-parsea clases ya vistas</td></tr>
+        <tr><td><code>CACHE.cssGenerado</code></td><td>String CSS final para cada clase</td><td>No re-genera reglas existentes</td></tr>
+      </table>
+    </div>
+    <p>El <code>MutationObserver</code> observa cambios en atributos <code>class</code> y nodos nuevos con <strong>debounce de 100ms</strong>. El caché <strong>no se borra</strong> entre ciclos — solo se generan reglas CSS para clases nuevas que aparezcan en el DOM.</p>
+    <pre><code><span class="cmt">// Limpiar el caché manualmente (casos excepcionales):</span>
+CACHE.limpiar();</code></pre>
+    <div class="alert alert-amber">
+      Solo limpia el caché si cambias clases dinámicamente con JavaScript en formas no estándar. El <code>MutationObserver</code> ya maneja el 99% de los casos automáticamente.
+    </div>
+  </section>
+
+  <!-- INTEGRACIÓN -->
+  <section id="integracion">
+    <h2>Integración en proyectos reales</h2>
+    <p>ScriptCSS es compatible con cualquier stack web que sirva HTML.</p>
+
+    <div class="project-grid">
+      <div class="project-card">
+        <div class="tag">HTML estático</div>
+        <h4>Sitio simple</h4>
+        <p>Incluye el script y escribe clases directamente. Ideal para landing pages o prototipos.</p>
+      </div>
+      <div class="project-card">
+        <div class="tag">ASP.NET / Razor</div>
+        <h4>Vistas del servidor</h4>
+        <p>Agrega el <code>&lt;script&gt;</code> en <code>_Layout.cshtml</code>. Funciona en Views, Partials y componentes.</p>
+      </div>
+      <div class="project-card">
+        <div class="tag">PHP / Laravel Blade</div>
+        <h4>Templates del servidor</h4>
+        <p>Agrega en el layout base. Las clases en parciales se recogen automáticamente.</p>
+      </div>
+      <div class="project-card">
+        <div class="tag">Vanilla JS / SPA</div>
+        <h4>Apps sin framework</h4>
+        <p>El MutationObserver detecta clases inyectadas dinámicamente sin configuración extra.</p>
+      </div>
+    </div>
+
+    <h3>Patrón 1 — HTML estático</h3>
+    <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang=<span class="str">"es"</span>&gt;
+&lt;head&gt;
+  &lt;meta charset=<span class="str">"UTF-8"</span>&gt;
+  &lt;meta name=<span class="str">"viewport"</span> content=<span class="str">"width=device-width, initial-scale=1"</span>&gt;
+  &lt;link rel=<span class="str">"stylesheet"</span> href=<span class="str">"global.css"</span>&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;nav class=<span class="str">"w-responsive flex jc-b ai-c py-4"</span>&gt;
+    &lt;span class=<span class="str">"text-6 font-bold"</span>&gt;Marca&lt;/span&gt;
+    &lt;ul class=<span class="str">"flex gap-6 sm:hide"</span>&gt;
+      &lt;li&gt;Inicio&lt;/li&gt;&lt;li&gt;Blog&lt;/li&gt;&lt;li&gt;Contacto&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/nav&gt;
+  &lt;main class=<span class="str">"w-responsive py-16"</span>&gt;
+    &lt;h1 class=<span class="str">"text-16 font-bold leading-tight text-wrap-balance"</span>&gt;Título&lt;/h1&gt;
+    &lt;div class=<span class="str">"grid cl-1 md:cl-2 lg:cl-3 gap-6 mt-8"</span>&gt;
+      &lt;div class=<span class="str">"p-6 border-1 rounded-4"</span>&gt;Feature 1&lt;/div&gt;
+      &lt;div class=<span class="str">"p-6 border-1 rounded-4"</span>&gt;Feature 2&lt;/div&gt;
+      &lt;div class=<span class="str">"p-6 border-1 rounded-4"</span>&gt;Feature 3&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/main&gt;
+  &lt;script src=<span class="str">"scriptCss.js"</span>&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+    <h3>Patrón 2 — ASP.NET Razor (_Layout.cshtml)</h3>
+    <pre><code><span class="cmt">&lt;!-- Views/Shared/_Layout.cshtml --&gt;</span>
+&lt;!DOCTYPE html&gt;
+&lt;html lang=<span class="str">"es"</span>&gt;
+&lt;head&gt;
+  &lt;meta charset=<span class="str">"utf-8"</span>&gt;
+  &lt;meta name=<span class="str">"viewport"</span> content=<span class="str">"width=device-width, initial-scale=1"</span>&gt;
+  &lt;title&gt;@ViewData["Title"]&lt;/title&gt;
+  &lt;link rel=<span class="str">"stylesheet"</span> href=<span class="str">"~/css/site.css"</span>&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  @await Html.PartialAsync("_Header")
+  &lt;main class=<span class="str">"w-responsive py-8"</span>&gt;
+    @RenderBody()
+  &lt;/main&gt;
+  @await Html.PartialAsync("_Footer")
+  &lt;script src=<span class="str">"~/js/scriptCss.js"</span>&gt;&lt;/script&gt;
+  @await RenderSectionAsync("Scripts", required: false)
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+
+    <h3>Patrón 3 — JavaScript dinámico (fetch / HTMX)</h3>
+    <pre><code><span class="cmt">// El HTML retornado por la API puede usar clases ScriptCSS libremente.</span>
+<span class="cmt">// El MutationObserver las detecta y genera el CSS automáticamente.</span>
+<span class="kw">async function</span> cargarTarjetas() {
+  <span class="kw">const</span> res  = <span class="kw">await</span> fetch(<span class="str">'/api/tarjetas'</span>);
+  <span class="kw">const</span> html = <span class="kw">await</span> res.text();
+  document.getElementById(<span class="str">'grid'</span>).innerHTML = html;
+  <span class="cmt">// No necesitas llamar a ninguna función manualmente.</span>
+}</code></pre>
+
+    <h3>Patrón 4 — Coexistencia con Bootstrap u otras librerías</h3>
+    <pre><code>&lt;div class=<span class="str">"container !px-8"</span>&gt; <span class="cmt">&lt;!-- padding de Bootstrap sobreescrito --&gt;</span>
+  &lt;div class=<span class="str">"row"</span>&gt;
+    &lt;div class=<span class="str">"col-md-6 flex-c gap-4"</span>&gt;
+      &lt;h2 class=<span class="str">"text-8 font-bold leading-tight text-wrap-balance"</span>&gt;Título&lt;/h2&gt;
+      &lt;p class=<span class="str">"leading-relaxed text-wrap-pretty"</span>&gt;Descripción&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+
+    <div class="alert alert-amber">
+      <strong>Recomendación:</strong> Define en tu <code>global.css</code> las variables de color, fuentes y reset base. Deja a ScriptCSS para el layout y espaciado de componentes, y a la otra librería para su sistema de grids o componentes propios.
+    </div>
+  </section>
+
+</main>
+</div>
+
+<script>
+  const links = document.querySelectorAll('.sidebar a');
+  const sections = document.querySelectorAll('section[id]');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        links.forEach(l => l.classList.remove('active'));
+        const a = document.querySelector(`.sidebar a[href="#${e.target.id}"]`);
+        if (a) a.classList.add('active');
+      }
+    });
+  }, { rootMargin: '-20% 0px -70% 0px' });
+  sections.forEach(s => obs.observe(s));
+  links.forEach(l => l.addEventListener('click', e => {
+    e.preventDefault();
+    document.querySelector(l.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+  }));
+</script>
+</body>
+</html>

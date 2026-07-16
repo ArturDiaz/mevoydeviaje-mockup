@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "static-server",
+      "runtimeExecutable": "powershell",
+      "runtimeArgs": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "C:\\Users\\jdiaz\\AppData\\Local\\Temp\\claude\\D--Arturo-Mevoydeviaje-Replica-MVDV\\d2fa009d-388d-4641-af7c-7b55f49b20a3\\scratchpad\\static-server.ps1"],
+      "port": 8080,
+      "autoPort": true
+    }
+  ]
+}
