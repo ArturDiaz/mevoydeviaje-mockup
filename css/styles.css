@@ -196,13 +196,6 @@ ul, li, a{
     list-style: none;
 }
 
-/* Utilidades base reforzadas en CSS estatico: scriptCss.js genera estas mismas
-   clases en runtime (leyendo el DOM), pero al correr al final del <body> deja
-   una fraccion de segundo sin layout (flex/grid) antes de inyectar su <style>,
-   causando un parpadeo de contenido descuadrado. Repetir aqui el subset de
-   clases "de valor fijo" (sin variantes numericas) elimina ese parpadeo en el
-   primer pintado. Si cambias alguno de estos valores en scriptCss.js
-   (CONFIG.valoresEspeciales), actualiza tambien aqui para que no diverjan. */
 .flex { display: flex; }
 .flex-r { display: flex; flex-direction: row; }
 .flex-c { display: flex; flex-direction: column; }
@@ -247,6 +240,8 @@ ul, li, a{
 .w-min { width: min-content; }
 .w-max { width: max-content; }
 .w-fit { width: fit-content; }
+.max-w-15 {max-width: 3.75rem;}
+.max-w-40 {max-width: 10rem;}
 
 .h-full { height: 100%; }
 .h-auto { height: auto; }
@@ -700,6 +695,11 @@ input[type="text"], input[type="email"], input[type="tel"], input[type="password
     animation: skeleton-loading 1.4s ease infinite;
     border-radius: 6px;
 }
+.results-list .flight-result-card .badge-blue{display: none;}
+.results-list .flight-result-card:nth-of-type(1) {
+    border: 2px solid var(--primary);
+    .badge-blue{display: flex !important;}
+}
 /* Utilidad para el patron "skeleton -> contenido real": oculta el contenedor sin
    importar que otras clases de layout tenga (flex-c, lg:grid, etc.), ya que esas
    utilidades se auto-generan sin !important y a veces le ganan a .hidden por orden
@@ -1048,4 +1048,96 @@ body.modal-open {
     .modal-sidebar .footer-modal {
         justify-content: stretch;
     }
+}
+
+/* Tarjetas de tarifa (#modalAddLuggage: Basic/Light/Standard). Una tarjeta por
+   nivel de tarifa, con su indicador de equipaje incluido (reutiliza el mismo
+   patron .c-blue / .c-scale-300 de los iconos de maleta en las tarjetas de
+   vuelo) y una lista de beneficios/penalidades */
+.fare-card {
+    border: 1px solid var(--scale-300);
+    border-radius: 12px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.fare-card.is-selected {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 1px var(--primary);
+}
+.fare-card-header {
+    background: var(--scale-100);
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid var(--scale-200);
+}
+.fare-card-body {
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1;
+}
+.fare-select-btn {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    background: transparent;
+    border-radius: 999px;
+    padding: 0.6em 1em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background .2s ease;
+}
+.fare-select-btn:hover {
+    background: var(--primary-50);
+}
+.fare-selected-indicator {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--primary);
+    font-weight: 600;
+}
+.fare-card.is-selected .fare-select-btn {
+    display: none;
+}
+.fare-card.is-selected .fare-selected-indicator {
+    display: flex;
+}
+.fare-check-circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #fff;
+    flex-shrink: 0;
+}
+.fare-check-circle .bs-icon {
+    width: 13px;
+    height: 13px;
+    margin: 0;
+}
+.fare-more-link {
+    color: var(--primary);
+    font-weight: 600;
+    cursor: pointer;
+}
+.fare-more-link:hover {
+    text-decoration: underline;
+}
+.fare-feature .bs-icon {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+}
+/* Footer del modal de tarifas: precio + boton "Continuar" pegados a la izquierda
+   (el resto de footer-modal en el sitio los alinea a la derecha por defecto) */
+#modalAddLuggage .footer-modal {
+    justify-content: flex-start;
 }

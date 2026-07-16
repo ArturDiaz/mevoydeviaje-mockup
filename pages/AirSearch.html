@@ -11,7 +11,7 @@
     <script src="shared/_header.js"></script>
     <main class="w-responsive py-7">
         <div id="page-skeleton" class="flex-c gap-5 lg:grid lg:cl-8">
-            <div class="span-2 flex-c gap-4">
+            <div class="span-2 flex-c gap-4 max-md:hidden">
                 <div class="skeleton skeleton-block"></div>
                 <div class="skeleton skeleton-line skeleton-line-lg"></div>
                 <div class="skeleton skeleton-line skeleton-line-sm"></div>
@@ -101,7 +101,7 @@
                             <svg class="bs-icon toggle-icon"><use xlink:href="#i-arrow-botton"></use></svg>
                         </a>
                         <div id="escalas-collapse" class="">
-                            <div class="flex-c gap-3">
+                            <div class="flex-c gap-3 px-3">
                                 <div class="item-filter flex-r jc-b gap-3">
                                     <div class="flex-r gap-2">
                                         <input type="radio" name="filter-stops" value="-1" id="filter-escala-1" data-bind="checked: Filters.Stops" checked="">
@@ -140,7 +140,7 @@
                             <svg class="bs-icon toggle-icon"><use xlink:href="#i-arrow-botton"></use></svg>
                         </a>
                         <div id="equipaje-collapse" class="">
-                            <div class="flex-c gap-3">
+                            <div class="flex-c gap-3 px-3">
                                 <div class="item-filter flex-r jc-b gap-3">
                                     <div class="flex-r gap-2">
                                         <input type="checkbox" id="filter-maleta-all" name="filter-baggage-all" checked="">
@@ -179,7 +179,7 @@
                             <svg class="bs-icon toggle-icon"><use xlink:href="#i-arrow-botton"></use></svg>
                         </a>
                         <div id="price-collapse" class="">
-                            <div class="flex-c gap-5">
+                            <div class="flex-c gap-5 px-3">
                                 <div class="item-filter line-filter relative" id="price-track" data-min="150" data-max="5000">
                                     <div class="line-dynamic" id="price-range"></div>
                                     <svg id="dot-star" class="bs-icon c-blue price-dot" data-role="min">
@@ -203,7 +203,7 @@
                             <svg class="bs-icon toggle-icon"><use xlink:href="#i-arrow-botton"></use></svg>
                         </a>
                         <div id="airlines-collapse">
-                            <div id="airlines-list" class="flex-c gap-3">
+                            <div id="airlines-list" class="flex-c gap-3 px-3">
 
                                 <!-- Template: fila "Todas las aerolíneas" — visible, se actualiza su contador -->
                                 <div id="airline-row-all" class="item-filter flex-r jc-b gap-3">
@@ -268,7 +268,7 @@
                             <svg class="bs-icon toggle-icon"><use xlink:href="#i-arrow-botton"></use></svg>
                         </a>
                         <div id="schedule-collapse">
-                            <div class="flex-c gap-5">
+                            <div class="flex-c gap-5 px-3">
 
                                 <!-- Tramo 1 — placeholder estático (rango/dots posicionados por JS al cablear) -->
                                 <div id="schedule-leg-0" class="flex-c gap-2">
@@ -375,17 +375,23 @@
             </div>
         </div>
 
-        <section class="section-products span-6">
+        <section class="section-products span-6 flex-c gap-5">
             <div class="header-section flex-c lg:flex-r jc-b ai-c gap-3">
-                <div class="flex-c">
-                    <h1 class="flex-r text-5">
-                        <span>Lima</span>
-                        <svg class="bs-icon"><use xlink:href="#i-arrows-exchange"></use></svg>
-                        <span>Miami</span>
-                    </h1>
-                    <span class="text-4">13 Jul - 14 Sep </span>
+                <div class="flex-r jc-b max-md:w-full">
+                    <div class="flex-c">
+                        <h1 class="flex-r text-5">
+                            <span>Lima</span>
+                            <svg class="bs-icon"><use xlink:href="#i-arrows-exchange"></use></svg>
+                            <span>Miami</span>
+                        </h1>
+                        <span class="text-4">13 Jul - 14 Sep </span>
+                    </div>
+                    <a class="btn btn-outline flex-r ai-c gap-1 min-md:hidden" data-toggle="modal" data-target="#modalBusqueda">
+                        <svg class="bs-icon"><use xlink:href="#i-search"></use></svg>
+                        Buscar
+                    </a>
                 </div>
-                <div class="content-actions flex-r gap-2">
+                <div class="content-actions flex-r gap-2 max-md:hidden">
                     <a class="btn btn-outline active">Recomendado</a>
                     <a class="btn btn-outline">Más barato</a>
                     <a class="btn btn-outline">Más rápido</a>
@@ -394,10 +400,6 @@
             </div>
 
             <div class="content-actions-mobile hidden max-md:flex-r gap-2">
-                <a class="btn btn-outline flex-r ai-c gap-1" data-toggle="modal" data-target="#modalBusqueda">
-                    <svg class="bs-icon"><use xlink:href="#i-search"></use></svg>
-                    Editar búsqueda
-                </a>
                 <a class="btn btn-outline flex-r ai-c gap-1" data-toggle="modal" data-target="#modalFiltros">
                     <svg class="bs-icon"><use xlink:href="#i-filter"></use></svg>
                     Filtros
@@ -412,9 +414,9 @@
                 </a>
             </div>
 
-            <div id="results-content" class="results-list mt-4">
-                <script src="shared/_itineraryDirect.js"></script>
+            <div id="results-content" class="results-list">
                 <script src="shared/_itineraryRoundtrip.js"></script>
+                <script src="shared/_itineraryDirect.js"></script>
                 <script src="shared/_itineraryDirect.js"></script>
                 <script src="shared/_itineraryStop.js"></script>
                 <script src="shared/_itineraryDirect.js"></script>
@@ -651,150 +653,142 @@
         </div>
     </div>
 
-    <!-- Modal de agregar equipaje facturado (#btn-add-luggage). Stepper +/- por pasajero,
-         el total se recalcula en vivo (ver bloque "Añadir maletas" en script.js) -->
+    <!-- Modal de tarifas (#btn-add-luggage). Tarjetas Basic/Light/Standard: cada una
+         trae su propio equipaje incluido (iconos .c-blue vs .c-scale-300, mismo patron
+         que en las tarjetas de vuelo) y penalidades/beneficios. La tarifa aplica a todo
+         el viaje (ida y vuelta), no hay pestañas por tramo. El precio del footer se
+         actualiza segun la tarjeta seleccionada (ver bloque "Tarjetas de tarifa" en script.js) -->
     <div class="modal" id="modalAddLuggage">
-        <div class="modal-dialog">
+        <div class="modal-dialog modal-xl">
             <div class="modal-content">
                 <div class="header-modal">
-                    <h3>Añadir maletas</h3>
+                    <h3>Selecciona tu tarifa y mejora tu vuelo</h3>
                     <button type="button" class="modal-close" data-dismiss="modal">
                         <svg class="bs-icon"><use xlink:href="#i-close"></use></svg>
                     </button>
                 </div>
                 <div class="body-modal">
-                    <div class="tabs-luggage flex-r gap-2 mb-4">
-                        <a class="btn btn-outline active" data-tab-target="luggage-panel-ida">Ida</a>
-                        <a class="btn btn-outline" data-tab-target="luggage-panel-vuelta">Vuelta</a>
-                    </div>
-                    <div class="tab-panel" id="luggage-panel-ida">
-                        <p class="text-3.5 c-scale-500 mb-4">Equipaje facturado (bodega) para el tramo de ida.</p>
-                        <div class="flex-c gap-4">
-                            <div class="luggage-row flex-r jc-b ai-c gap-3" data-price="45.00">
-                                <div class="flex-r ai-c gap-2">
-                                    <svg class="bs-icon bg-i-default m-0 text-5.5"><use xlink:href="#i-bodega"></use></svg>
-                                    <div class="flex-c">
-                                        <span class="font-bold">Adulto 1</span>
-                                        <span class="text-3 c-scale-500">23 kg · USD 45.00 c/u</span>
-                                    </div>
+                        <div class="fare-cards grid cl-3 max-sm:cl-1 gap-4">
+                            <div class="fare-card is-selected">
+                                <div class="fare-card-header">
+                                    <span class="font-bold">Basic</span>
+                                    <span class="text-3 c-scale-500">Cabina Económica</span>
                                 </div>
-                                <div class="luggage-counter flex-r gap-2 ai-c">
-                                    <button type="button" class="btn-default btn-i text-c flex-c px-1.5" data-luggage-action="remove">
-                                        <svg class="bs-icon"><use xlink:href="#i-minus"></use></svg>
-                                    </button>
-                                    <span class="luggage-count" data-luggage-count>0</span>
-                                    <button type="button" class="btn-default btn-i text-c flex-c px-1.5" data-luggage-action="add">
-                                        <svg class="bs-icon"><use xlink:href="#i-plus"></use></svg>
-                                    </button>
+                                <div class="fare-card-body">
+                                    <div class="flex-c text-c">
+                                        <span class="text-6 font-bold">+ US$ 0</span>
+                                        <span class="text-3 c-scale-500">Por persona</span>
+                                    </div>
+                                    <button type="button" class="fare-select-btn" data-fare-select>Seleccionar</button>
+                                    <div class="fare-selected-indicator">
+                                        <span class="fare-check-circle"><svg class="bs-icon"><use xlink:href="#i-checkmark"></use></svg></span>
+                                        Seleccionado
+                                    </div>
+                                    <div class="line-horizontal"></div>
+                                    <div class="flex-r jc-b ai-c">
+                                        <span class="flex-r gap-2 ai-c c-scale-300">
+                                            <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-mochila"></use></svg>
+                                            <svg class="bs-icon m-0"><use xlink:href="#i-maleta-mano"></use></svg>
+                                            <svg class="bs-icon m-0"><use xlink:href="#i-bodega"></use></svg>
+                                        </span>
+                                        <a class="fare-more-link text-3">Ver más</a>
+                                    </div>
+                                    <div class="line-horizontal"></div>
+                                    <div class="flex-c gap-2">
+                                        <span class="fare-feature flex-r gap-2 ai-c text-3 c-scale-500">
+                                            <svg class="bs-icon"><use xlink:href="#i-dolar"></use></svg>
+                                            Cambio de fecha con penalidad de US$ 100
+                                        </span>
+                                        <span class="fare-feature flex-r gap-2 ai-c text-3 c-scale-500">
+                                            <svg class="bs-icon"><use xlink:href="#i-dolar"></use></svg>
+                                            Selección de asiento con costo extra
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="luggage-row flex-r jc-b ai-c gap-3" data-price="45.00">
-                                <div class="flex-r ai-c gap-2">
-                                    <svg class="bs-icon bg-i-default m-0 text-5.5"><use xlink:href="#i-bodega"></use></svg>
-                                    <div class="flex-c">
-                                        <span class="font-bold">Adulto 2</span>
-                                        <span class="text-3 c-scale-500">23 kg · USD 45.00 c/u</span>
-                                    </div>
+                            <div class="fare-card">
+                                <div class="fare-card-header">
+                                    <span class="font-bold">Light</span>
+                                    <span class="text-3 c-scale-500">Cabina Económica</span>
                                 </div>
-                                <div class="luggage-counter flex-r gap-2 ai-c">
-                                    <button type="button" class="btn-default btn-i text-c flex-c px-1.5" data-luggage-action="remove">
-                                        <svg class="bs-icon"><use xlink:href="#i-minus"></use></svg>
-                                    </button>
-                                    <span class="luggage-count" data-luggage-count>0</span>
-                                    <button type="button" class="btn-default btn-i text-c flex-c px-1.5" data-luggage-action="add">
-                                        <svg class="bs-icon"><use xlink:href="#i-plus"></use></svg>
-                                    </button>
+                                <div class="fare-card-body">
+                                    <div class="flex-c text-c">
+                                        <span class="text-6 font-bold">+ US$ 83</span>
+                                        <span class="text-3 c-scale-500">Por persona</span>
+                                    </div>
+                                    <button type="button" class="fare-select-btn" data-fare-select>Seleccionar</button>
+                                    <div class="fare-selected-indicator">
+                                        <span class="fare-check-circle"><svg class="bs-icon"><use xlink:href="#i-checkmark"></use></svg></span>
+                                        Seleccionado
+                                    </div>
+                                    <div class="line-horizontal"></div>
+                                    <div class="flex-r jc-b ai-c">
+                                        <span class="flex-r gap-2 ai-c c-scale-300">
+                                            <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-mochila"></use></svg>
+                                            <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-maleta-mano"></use></svg>
+                                            <svg class="bs-icon m-0"><use xlink:href="#i-bodega"></use></svg>
+                                        </span>
+                                        <a class="fare-more-link text-3">Ver más</a>
+                                    </div>
+                                    <div class="line-horizontal"></div>
+                                    <div class="flex-c gap-2">
+                                        <span class="fare-feature flex-r gap-2 ai-c text-3 c-scale-500">
+                                            <svg class="bs-icon"><use xlink:href="#i-dolar"></use></svg>
+                                            Cambio de fecha con penalidad de US$ 100
+                                        </span>
+                                        <span class="fare-feature flex-r gap-2 ai-c text-3 c-scale-500">
+                                            <svg class="bs-icon"><use xlink:href="#i-dolar"></use></svg>
+                                            Selección de asiento con costo extra
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="luggage-row flex-r jc-b ai-c gap-3" data-price="35.00">
-                                <div class="flex-r ai-c gap-2">
-                                    <svg class="bs-icon bg-i-default m-0 text-5.5"><use xlink:href="#i-bodega"></use></svg>
-                                    <div class="flex-c">
-                                        <span class="font-bold">Niño 1</span>
-                                        <span class="text-3 c-scale-500">23 kg · USD 35.00 c/u</span>
+                            <div class="fare-card">
+                                <div class="fare-card-header">
+                                    <span class="font-bold">Standard</span>
+                                    <span class="text-3 c-scale-500">Cabina Económica</span>
+                                </div>
+                                <div class="fare-card-body">
+                                    <div class="flex-c text-c">
+                                        <span class="text-6 font-bold">+ US$ 138</span>
+                                        <span class="text-3 c-scale-500">Por persona</span>
                                     </div>
-                                </div>
-                                <div class="luggage-counter flex-r gap-2 ai-c">
-                                    <button type="button" class="btn-default btn-i text-c flex-c px-1.5" data-luggage-action="remove">
-                                        <svg class="bs-icon"><use xlink:href="#i-minus"></use></svg>
-                                    </button>
-                                    <span class="luggage-count" data-luggage-count>0</span>
-                                    <button type="button" class="btn-default btn-i text-c flex-c px-1.5" data-luggage-action="add">
-                                        <svg class="bs-icon"><use xlink:href="#i-plus"></use></svg>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="tab-panel" id="luggage-panel-vuelta" style="display:none">
-                        <p class="text-3.5 c-scale-500 mb-4">Equipaje facturado (bodega) para el tramo de vuelta.</p>
-                        <div class="flex-c gap-4">
-                            <div class="luggage-row flex-r jc-b ai-c gap-3" data-price="45.00">
-                                <div class="flex-r ai-c gap-2">
-                                    <svg class="bs-icon bg-i-default m-0 text-5.5"><use xlink:href="#i-bodega"></use></svg>
-                                    <div class="flex-c">
-                                        <span class="font-bold">Adulto 1</span>
-                                        <span class="text-3 c-scale-500">23 kg · USD 45.00 c/u</span>
+                                    <button type="button" class="fare-select-btn" data-fare-select>Seleccionar</button>
+                                    <div class="fare-selected-indicator">
+                                        <span class="fare-check-circle"><svg class="bs-icon"><use xlink:href="#i-checkmark"></use></svg></span>
+                                        Seleccionado
                                     </div>
-                                </div>
-                                <div class="luggage-counter flex-r gap-2 ai-c">
-                                    <button type="button" class="btn-default btn-i text-c flex-c px-1.5" data-luggage-action="remove">
-                                        <svg class="bs-icon"><use xlink:href="#i-minus"></use></svg>
-                                    </button>
-                                    <span class="luggage-count" data-luggage-count>0</span>
-                                    <button type="button" class="btn-default btn-i text-c flex-c px-1.5" data-luggage-action="add">
-                                        <svg class="bs-icon"><use xlink:href="#i-plus"></use></svg>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="luggage-row flex-r jc-b ai-c gap-3" data-price="45.00">
-                                <div class="flex-r ai-c gap-2">
-                                    <svg class="bs-icon bg-i-default m-0 text-5.5"><use xlink:href="#i-bodega"></use></svg>
-                                    <div class="flex-c">
-                                        <span class="font-bold">Adulto 2</span>
-                                        <span class="text-3 c-scale-500">23 kg · USD 45.00 c/u</span>
+                                    <div class="line-horizontal"></div>
+                                    <div class="flex-r jc-b ai-c">
+                                        <span class="flex-r gap-2 ai-c c-scale-300">
+                                            <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-mochila"></use></svg>
+                                            <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-maleta-mano"></use></svg>
+                                            <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-bodega"></use></svg>
+                                        </span>
+                                        <a class="fare-more-link text-3">Ver más</a>
                                     </div>
-                                </div>
-                                <div class="luggage-counter flex-r gap-2 ai-c">
-                                    <button type="button" class="btn-default btn-i text-c flex-c px-1.5" data-luggage-action="remove">
-                                        <svg class="bs-icon"><use xlink:href="#i-minus"></use></svg>
-                                    </button>
-                                    <span class="luggage-count" data-luggage-count>0</span>
-                                    <button type="button" class="btn-default btn-i text-c flex-c px-1.5" data-luggage-action="add">
-                                        <svg class="bs-icon"><use xlink:href="#i-plus"></use></svg>
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="luggage-row flex-r jc-b ai-c gap-3" data-price="35.00">
-                                <div class="flex-r ai-c gap-2">
-                                    <svg class="bs-icon bg-i-default m-0 text-5.5"><use xlink:href="#i-bodega"></use></svg>
-                                    <div class="flex-c">
-                                        <span class="font-bold">Niño 1</span>
-                                        <span class="text-3 c-scale-500">23 kg · USD 35.00 c/u</span>
+                                    <div class="line-horizontal"></div>
+                                    <div class="flex-c gap-2">
+                                        <span class="fare-feature flex-r gap-2 ai-c text-3 c-scale-500">
+                                            <svg class="bs-icon"><use xlink:href="#i-dolar"></use></svg>
+                                            Cambio de fecha con penalidad de US$ 100
+                                        </span>
+                                        <span class="fare-feature flex-r gap-2 ai-c text-3 c-blue">
+                                            <svg class="bs-icon"><use xlink:href="#i-checkmark"></use></svg>
+                                            Selección de asiento sin costo extra
+                                        </span>
                                     </div>
-                                </div>
-                                <div class="luggage-counter flex-r gap-2 ai-c">
-                                    <button type="button" class="btn-default btn-i text-c flex-c px-1.5" data-luggage-action="remove">
-                                        <svg class="bs-icon"><use xlink:href="#i-minus"></use></svg>
-                                    </button>
-                                    <span class="luggage-count" data-luggage-count>0</span>
-                                    <button type="button" class="btn-default btn-i text-c flex-c px-1.5" data-luggage-action="add">
-                                        <svg class="bs-icon"><use xlink:href="#i-plus"></use></svg>
-                                    </button>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <p class="text-3 c-scale-500 mt-4">Los beneficios y penalidades de la tarifa aplican a los cargos de la aerolínea, y no incluyen los cargos por servicio.</p>
                 </div>
-                <div class="footer-modal jc-b ai-c w-full">
+                <div class="footer-modal">
                     <span class="flex-c">
-                        <b>Total maletas</b>
-                        <span class="text-3 c-scale-500">USD <span id="luggage-total">0.00</span></span>
+                        <b class="text-4.5" id="fare-selected-price">+ US$ 0</b>
+                        <span class="text-3 c-scale-500">Por persona</span>
                     </span>
-                    <div class="flex-r gap-2">
-                        <button type="button" class="btn btn-default-outline" data-dismiss="modal">Cancelar</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">Agregar</button>
-                    </div>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Continuar</button>
                 </div>
             </div>
         </div>

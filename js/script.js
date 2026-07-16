@@ -180,37 +180,26 @@ document.addEventListener('DOMContentLoaded', () => {
     observer.observe(sentinel);
 });
 
-// Modal "Añadir maletas": stepper +/- por pasajero (.luggage-row), el total se
-// recalcula en vivo sumando precio x cantidad de cada fila (de ambos tramos, ida y vuelta)
+// Tarjetas de tarifa (#modalAddLuggage: Basic/Light/Standard): clic en "Seleccionar"
+// marca esa .fare-card como .is-selected (revela el indicador "Seleccionado" via CSS),
+// desmarca a las demas tarjetas del mismo .fare-cards, y refleja su precio en el
+// footer (id="fare-selected-price"), ya que la tarifa aplica a todo el viaje
 document.addEventListener('DOMContentLoaded', () => {
-    const luggageModal = document.getElementById('modalAddLuggage');
-    if (!luggageModal) return;
+    const priceEl = document.getElementById('fare-selected-price');
 
-    const totalEl = luggageModal.querySelector('#luggage-total');
-    const MAX_PER_PASSENGER = 3;
+    document.querySelectorAll('[data-fare-select]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+            const card = btn.closest('.fare-card');
+            const group = card.closest('.fare-cards');
 
-    const updateLuggageTotal = () => {
-        let total = 0;
-        luggageModal.querySelectorAll('.luggage-row').forEach((row) => {
-            const price = parseFloat(row.dataset.price);
-            const count = parseInt(row.querySelector('[data-luggage-count]').textContent, 10);
-            total += price * count;
+            group.querySelectorAll('.fare-card').forEach((c) => c.classList.remove('is-selected'));
+            card.classList.add('is-selected');
+
+            if (priceEl) {
+                const price = card.querySelector('.fare-card-body .text-6');
+                if (price) priceEl.textContent = price.textContent;
+            }
         });
-        totalEl.textContent = total.toFixed(2);
-    };
-
-    luggageModal.addEventListener('click', (e) => {
-        const btn = e.target.closest('[data-luggage-action]');
-        if (!btn) return;
-
-        const countEl = btn.closest('.luggage-row').querySelector('[data-luggage-count]');
-        let count = parseInt(countEl.textContent, 10);
-
-        if (btn.dataset.luggageAction === 'add' && count < MAX_PER_PASSENGER) count++;
-        if (btn.dataset.luggageAction === 'remove' && count > 0) count--;
-
-        countEl.textContent = count;
-        updateLuggageTotal();
     });
 });
 
