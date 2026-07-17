@@ -692,6 +692,9 @@ input[type="text"], input[type="email"], input[type="tel"], input[type="password
     color: var(--scale-500);
     flex-shrink: 0;
 }
+.btn-action-itinerary {
+    /* margin-left: calc(35px + 0.75em); */
+}
 .skeleton {
     background: linear-gradient(90deg, var(--scale-100) 25%, var(--scale-200) 37%, var(--scale-100) 63%);
     background-size: 400% 100%;

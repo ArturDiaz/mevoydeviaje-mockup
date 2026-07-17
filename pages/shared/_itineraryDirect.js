@@ -13,7 +13,7 @@
         <div class="content-tramos flex-c gap-4 span-3">
             <div class="item-tramo flex-c gap-2">
                 <span class="text-3"><b>IDA</b> - LATAM Airlines</span>
-                <div class="flex-r gap-3">
+                <div class="flex-r ai-c gap-3">
                     <div class="airline-logo flex-c ai-c jc-c">
                         <img class="airline-logo" src="../img/AA.png">
                     </div>
@@ -44,7 +44,7 @@
             </div>
             <div class="item-tramo flex-c gap-2">
                 <span class="text-3"><b>VUELTA</b> - LATAM Airlines</span>
-                <div class="flex-r gap-3">
+                <div class="flex-r ai-c gap-3">
                     <div class="airline-logo flex-c ai-c jc-c">
                         <img class="airline-logo" src="../img/AA.png">
                     </div>

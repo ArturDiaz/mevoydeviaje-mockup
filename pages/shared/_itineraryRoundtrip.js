@@ -13,7 +13,7 @@
         <div class="content-tramos flex-c gap-4 span-3">
             <div class="item-tramo flex-c gap-2">
                 <span class="text-3"><b>IDA</b> - LATAM Airlines</span>
-                <div class="flex-r gap-3">
+                <div class="flex-r ai-c gap-3">
                     <div class="airline-logo flex-c ai-c jc-c">
                         <img class=" airline-logo" src="../img/LA.png">
                     </div>
@@ -38,12 +38,11 @@
             </div>
             <div class="item-tramo flex-c gap-2">
                 <span class="text-3"><b>VUELTA</b> - LATAM Airlines</span>
-                <div class="flex-r gap-3">
+                <div class="flex-r ai-c gap-3 ai-c">
                     <div class="airline-logo flex-c ai-c jc-c">
                         <img class=" airline-logo" src="../img/LA.png">
                     </div>
-                    <div class="flex-c gap-3 w-full">
-                        <div class="list-itinerario list-toggle-2 flex-c gap-2.5">
+                    <div class="list-itinerario list-toggle-2 flex-c gap-2.5 w-full">
                             <span class="text-3.5 flex-r gap-1 ai-c"><input type="radio" name="itinerary-b-${uid}" id="itinerary-b1-${uid}" checked>
                                 <label class="grid cl-4 ai-c gap-3 w-full" for="itinerary-b1-${uid}">
                                     <span class="span-3 ml-2"><b>06:10</b> MIA — <b>12:45</b> LIM <span class="text-3 min-md:ml-4">1 escala <span class="sm:hidden">· 5h 20m</span></span></span>
@@ -83,12 +82,11 @@
                                     </div>
                                 </label>
                             </span>
-                        </div>
-                        <div class="btn-action-itinerary flex-r jc-b gap-2">
-                            <a class="btn btn-default-outline text-3 flex-r ai-c gap-1 btn-toggle-more"><svg class="bs-icon bg-i-default m-0 toggle-icon"><use xlink:href="#i-plus"></use></svg><span class="btn-toggle-more-label">más horarios</span></a>
-                            <a id="btn-add-luggage-${uid}" class="btn btn-default-outline text-3 flex-r ai-c gap-1" data-toggle="modal" data-target="#modalAddLuggage"><svg class="bs-icon bg-i-default m-0"><use xlink:href="#i-plus"></use></svg>Añadir Maletas</a>
-                        </div>
                     </div>
+                </div>
+                <div class="btn-action-itinerary flex-r jc-b gap-2">
+                    <a class="btn btn-default-outline text-3 flex-r ai-c gap-1 btn-toggle-more"><svg class="bs-icon bg-i-default m-0 toggle-icon"><use xlink:href="#i-plus"></use></svg><span class="btn-toggle-more-label">más horarios</span></a>
+                    <a id="btn-add-luggage-${uid}" class="btn btn-default-outline text-3 flex-r ai-c gap-1" data-toggle="modal" data-target="#modalAddLuggage"><svg class="bs-icon bg-i-default m-0"><use xlink:href="#i-plus"></use></svg>Añadir Maletas</a>
                 </div>
             </div>
         </div>
