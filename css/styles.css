@@ -994,6 +994,18 @@ body.modal-open {
     height: 1.2em;
 }
 
+/* Collapse tipo Bootstrap: cualquier [data-toggle="collapse"] data-target="#id" alterna
+   la clase .show en el/los elemento(s) que matchee ese selector, animando su alto de 0
+   al alto real del contenido (y viceversa) via JS (ver script.js). Generico y reutilizable
+   en cualquier parte del sitio (ej. "Tabla precios"/"Curvas precios" en mobile) */
+.collapse:not(.show):not(.collapsing) {
+    display: none;
+}
+.collapsing {
+    overflow: hidden;
+    transition: height .3s ease;
+}
+
 /* Modales tipo sidebar (.modal-sidebar, ej. #modalFiltros y #modalBusqueda):
    en escritorio (>=1024px) son la misma sidebar de siempre (sin comportamiento
    de modal), en movil (<=1023px) se vuelven un bottom sheet que se activa
@@ -1157,11 +1169,6 @@ body.modal-open {
     width: 1em;
     height: 1em;
     flex-shrink: 0;
-}
-/* Footer del modal de tarifas: precio + boton "Continuar" pegados a la izquierda
-   (el resto de footer-modal en el sitio los alinea a la derecha por defecto) */
-#modalAddLuggage .footer-modal {
-    justify-content: flex-start;
 }
 
 /* Carrusel de tarifas (5 tarjetas: Basic/Light/Standard/Plus/Flex). En mobile

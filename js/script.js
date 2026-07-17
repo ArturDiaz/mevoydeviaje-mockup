@@ -98,6 +98,65 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Collapse tipo Bootstrap: cualquier [data-toggle="collapse"] data-target="#id" (o un
+// selector CSS que matchee varios elementos) alterna la clase .show en el/los target(s),
+// animando su alto de 0 al alto real del contenido y viceversa (.collapsing, ver
+// styles.css). Generico: no esta atado a ningun feature en particular, se puede usar
+// en cualquier parte del sitio agregando el mismo par de atributos.
+document.addEventListener('DOMContentLoaded', () => {
+    const expandCollapse = (target) => {
+        target.classList.add('collapsing', 'show');
+        const fullHeight = target.scrollHeight;
+        target.style.height = '0px';
+        target.offsetHeight; // reflow: confirma el 0px antes de animar al alto real
+        requestAnimationFrame(() => {
+            target.style.height = `${fullHeight}px`;
+        });
+        target.addEventListener('transitionend', function handler(e) {
+            if (e.propertyName !== 'height' || e.target !== target) return;
+            target.classList.remove('collapsing');
+            target.style.height = '';
+            target.removeEventListener('transitionend', handler);
+        });
+    };
+
+    const collapseCollapse = (target) => {
+        target.style.height = `${target.scrollHeight}px`;
+        target.offsetHeight; // reflow: fija el alto actual antes de animar a 0
+        target.classList.add('collapsing');
+        requestAnimationFrame(() => {
+            target.style.height = '0px';
+        });
+        target.addEventListener('transitionend', function handler(e) {
+            if (e.propertyName !== 'height' || e.target !== target) return;
+            target.classList.remove('collapsing', 'show');
+            target.style.height = '';
+            target.removeEventListener('transitionend', handler);
+        });
+    };
+
+    document.querySelectorAll('[data-toggle="collapse"]').forEach((trigger) => {
+        const selector = trigger.getAttribute('data-target');
+        const targets = selector ? document.querySelectorAll(selector) : [];
+        if (!targets.length) return;
+
+        trigger.setAttribute('aria-expanded', String(targets[0].classList.contains('show')));
+
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            const willShow = !targets[0].classList.contains('show');
+            targets.forEach((target) => {
+                if (target.classList.contains('show')) {
+                    collapseCollapse(target);
+                } else {
+                    expandCollapse(target);
+                }
+            });
+            trigger.setAttribute('aria-expanded', String(willShow));
+        });
+    });
+});
+
 // Tabs simples (ej. "Añadir maletas" separado por tramo Ida/Vuelta): un boton
 // [data-tab-target="id"] activa el .tab-panel con ese id y oculta a sus hermanos,
 // dentro del contenedor que agrupa tanto los botones como los paneles

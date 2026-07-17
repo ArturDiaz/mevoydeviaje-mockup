@@ -376,6 +376,29 @@
         </div>
 
         <section class="section-products span-6 flex-c gap-5">
+            <div class="content-actions-desktop hidden lg:flex-r gap-2">
+                <a class="btn btn-outline flex-r ai-c gap-1" data-toggle="collapse" data-target="#collapseTablaPreciosDesktop">
+                    <svg class="bs-icon"><use xlink:href="#i-table-options"></use></svg>
+                    Tabla precios
+                </a>
+                <a class="btn btn-outline flex-r ai-c gap-1" data-toggle="collapse" data-target="#collapseCurvasPreciosDesktop">
+                    <svg class="bs-icon"><use xlink:href="#i-grafic-analytics"></use></svg>
+                    Curvas precios
+                </a>
+            </div>
+            <!-- Contenido de Tabla/Curvas de precios: pendiente de definir, por ahora
+                 solo el collapse (ver [data-toggle="collapse"] generico en script.js) -->
+            <div class="collapse" id="collapseTablaPreciosDesktop">
+                <div class="flight-result-card">
+                    <p class="text-3.5 c-scale-500">Tabla de precios (próximamente)</p>
+                </div>
+            </div>
+            <div class="collapse" id="collapseCurvasPreciosDesktop">
+                <div class="flight-result-card">
+                    <p class="text-3.5 c-scale-500">Curvas de precios (próximamente)</p>
+                </div>
+            </div>
+
             <div class="header-section-sentinel"></div>
             <div class="header-section flex-c lg:flex-r jc-b ai-c gap-3">
                 <div class="flex-r jc-b max-md:w-full">
@@ -405,14 +428,27 @@
                     <svg class="bs-icon"><use xlink:href="#i-filter"></use></svg>
                     Filtros
                 </a>
-                <a class="btn btn-outline flex-r ai-c gap-1">
+                <a class="btn btn-outline flex-r ai-c gap-1" data-toggle="collapse" data-target="#collapseTablaPreciosMobile">
                     <svg class="bs-icon"><use xlink:href="#i-table-options"></use></svg>
                     Tabla precios
                 </a>
-                <a class="btn btn-outline flex-r ai-c gap-1">
+                <a class="btn btn-outline flex-r ai-c gap-1" data-toggle="collapse" data-target="#collapseCurvasPreciosMobile">
                     <svg class="bs-icon"><use xlink:href="#i-grafic-analytics"></use></svg>
                     Curvas precios
                 </a>
+            </div>
+
+            <!-- Contenido de Tabla/Curvas de precios: pendiente de definir, por ahora
+                 solo el collapse (ver [data-toggle="collapse"] generico en script.js) -->
+            <div class="collapse mt-2" id="collapseTablaPreciosMobile">
+                <div class="flight-result-card">
+                    <p class="text-3.5 c-scale-500">Tabla de precios (próximamente)</p>
+                </div>
+            </div>
+            <div class="collapse mt-2" id="collapseCurvasPreciosMobile">
+                <div class="flight-result-card">
+                    <p class="text-3.5 c-scale-500">Curvas de precios (próximamente)</p>
+                </div>
             </div>
 
             <div id="results-content" class="results-list">
@@ -691,7 +727,7 @@
                             </button>
                             <div class="fare-cards">
                             <div class="fare-card is-selected">
-                                <div class="fare-card-header">
+                                <div class="fare-card-header flex-c jc-c ai-c">
                                     <span class="font-bold">Basic</span>
                                     <span class="text-3 c-scale-500">Cabina Económica</span>
                                 </div>
@@ -701,19 +737,18 @@
                                         <span class="text-3 c-scale-500">Por persona</span>
                                     </div>
                                     <div class="line-horizontal"></div>
-                                    <div class="flex-r jc-b ai-c">
-                                        <span class="flex-r gap-1 ai-c c-scale-300">
+                                    <div class="flex-r jc-b ai-c jc-c">
+                                        <span class="flex-r gap-1 ai-c c-scale-300 text-5">
                                             <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-mochila"></use></svg>
                                             <svg class="bs-icon m-0"><use xlink:href="#i-maleta-mano"></use></svg>
                                             <svg class="bs-icon m-0"><use xlink:href="#i-bodega"></use></svg>
                                         </span>
-                                        <a class="fare-more-link text-3">Ver más</a>
                                     </div>
                                     <button type="button" class="fare-select-btn" data-fare-select>Seleccionar</button>
-                                    <div class="fare-selected-indicator">
+                                    <button class="fare-selected-indicator fare-select-btn">
                                         <span class="fare-check-circle"><svg class="bs-icon"><use xlink:href="#i-checkmark"></use></svg></span>
                                         Seleccionado
-                                    </div>
+                                    </button>
                                     <div class="line-horizontal"></div>
                                     <div class="flex-c gap-2">
                                         <span class="fare-feature flex-r gap-2 ai-c text-3 c-scale-500">
@@ -728,7 +763,7 @@
                                 </div>
                             </div>
                             <div class="fare-card">
-                                <div class="fare-card-header">
+                                <div class="fare-card-header flex-c jc-c ai-c">
                                     <span class="font-bold">Light</span>
                                     <span class="text-3 c-scale-500">Cabina Económica</span>
                                 </div>
@@ -738,19 +773,18 @@
                                         <span class="text-3 c-scale-500">Por persona</span>
                                     </div>
                                     <div class="line-horizontal"></div>
-                                    <div class="flex-r jc-b ai-c">
-                                        <span class="flex-r gap-1 ai-c c-scale-300">
+                                    <div class="flex-r jc-b ai-c jc-c">
+                                        <span class="flex-r gap-1 ai-c c-scale-300 text-5">
                                             <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-mochila"></use></svg>
                                             <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-maleta-mano"></use></svg>
                                             <svg class="bs-icon m-0"><use xlink:href="#i-bodega"></use></svg>
                                         </span>
-                                        <a class="fare-more-link text-3">Ver más</a>
                                     </div>
                                     <button type="button" class="fare-select-btn" data-fare-select>Seleccionar</button>
-                                    <div class="fare-selected-indicator">
+                                    <button class="fare-selected-indicator fare-select-btn">
                                         <span class="fare-check-circle"><svg class="bs-icon"><use xlink:href="#i-checkmark"></use></svg></span>
                                         Seleccionado
-                                    </div>
+                                    </button>
                                     <div class="line-horizontal"></div>
                                     <div class="flex-c gap-2">
                                         <span class="fare-feature flex-r gap-2 ai-c text-3 c-scale-500">
@@ -765,7 +799,7 @@
                                 </div>
                             </div>
                             <div class="fare-card">
-                                <div class="fare-card-header">
+                                <div class="fare-card-header flex-c jc-c ai-c">
                                     <span class="font-bold">Standard</span>
                                     <span class="text-3 c-scale-500">Cabina Económica</span>
                                 </div>
@@ -775,19 +809,18 @@
                                         <span class="text-3 c-scale-500">Por persona</span>
                                     </div>
                                     <div class="line-horizontal"></div>
-                                    <div class="flex-r jc-b ai-c">
-                                        <span class="flex-r gap-1 ai-c c-scale-300">
+                                    <div class="flex-r jc-b ai-c jc-c">
+                                        <span class="flex-r gap-1 ai-c c-scale-300 text-5">
                                             <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-mochila"></use></svg>
                                             <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-maleta-mano"></use></svg>
                                             <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-bodega"></use></svg>
                                         </span>
-                                        <a class="fare-more-link text-3">Ver más</a>
                                     </div>
                                     <button type="button" class="fare-select-btn" data-fare-select>Seleccionar</button>
-                                    <div class="fare-selected-indicator">
+                                    <button class="fare-selected-indicator fare-select-btn">
                                         <span class="fare-check-circle"><svg class="bs-icon"><use xlink:href="#i-checkmark"></use></svg></span>
                                         Seleccionado
-                                    </div>
+                                    </button>
                                     <div class="line-horizontal"></div>
                                     <div class="flex-c gap-2">
                                         <span class="fare-feature flex-r gap-2 ai-c text-3 c-scale-500">
@@ -802,7 +835,7 @@
                                 </div>
                             </div>
                             <div class="fare-card">
-                                <div class="fare-card-header">
+                                <div class="fare-card-header flex-c jc-c ai-c">
                                     <span class="font-bold">Plus</span>
                                     <span class="text-3 c-scale-500">Cabina Económica</span>
                                 </div>
@@ -812,19 +845,18 @@
                                         <span class="text-3 c-scale-500">Por persona</span>
                                     </div>
                                     <div class="line-horizontal"></div>
-                                    <div class="flex-r jc-b ai-c">
-                                        <span class="flex-r gap-1 ai-c c-scale-300">
+                                    <div class="flex-r jc-b ai-c jc-c">
+                                        <span class="flex-r gap-1 ai-c c-scale-300 text-5">
                                             <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-mochila"></use></svg>
                                             <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-maleta-mano"></use></svg>
                                             <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-bodega"></use></svg>
                                         </span>
-                                        <a class="fare-more-link text-3">Ver más</a>
                                     </div>
                                     <button type="button" class="fare-select-btn" data-fare-select>Seleccionar</button>
-                                    <div class="fare-selected-indicator">
+                                    <button class="fare-selected-indicator fare-select-btn">
                                         <span class="fare-check-circle"><svg class="bs-icon"><use xlink:href="#i-checkmark"></use></svg></span>
                                         Seleccionado
-                                    </div>
+                                    </button>
                                     <div class="line-horizontal"></div>
                                     <div class="flex-c gap-2">
                                         <span class="fare-feature flex-r gap-2 ai-c text-3 c-blue">
@@ -839,7 +871,7 @@
                                 </div>
                             </div>
                             <div class="fare-card">
-                                <div class="fare-card-header">
+                                <div class="fare-card-header flex-c jc-c ai-c">
                                     <span class="font-bold">Flex</span>
                                     <span class="text-3 c-scale-500">Cabina Económica</span>
                                 </div>
@@ -849,19 +881,18 @@
                                         <span class="text-3 c-scale-500">Por persona</span>
                                     </div>
                                     <div class="line-horizontal"></div>
-                                    <div class="flex-r jc-b ai-c">
-                                        <span class="flex-r gap-1 ai-c c-scale-300">
+                                    <div class="flex-r jc-b ai-c jc-c">
+                                        <span class="flex-r gap-1 ai-c c-scale-300 text-5">
                                             <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-mochila"></use></svg>
                                             <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-maleta-mano"></use></svg>
                                             <svg class="bs-icon m-0 c-blue"><use xlink:href="#i-bodega"></use></svg>
                                         </span>
-                                        <a class="fare-more-link text-3">Ver más</a>
                                     </div>
                                     <button type="button" class="fare-select-btn" data-fare-select>Seleccionar</button>
-                                    <div class="fare-selected-indicator">
+                                    <button class="fare-selected-indicator fare-select-btn">
                                         <span class="fare-check-circle"><svg class="bs-icon"><use xlink:href="#i-checkmark"></use></svg></span>
                                         Seleccionado
-                                    </div>
+                                    </button>
                                     <div class="line-horizontal"></div>
                                     <div class="flex-c gap-2">
                                         <span class="fare-feature flex-r gap-2 ai-c text-3 c-blue">
@@ -882,7 +913,7 @@
                         </div>
                         <p class="text-3 c-scale-500 mt-4">Los beneficios y penalidades de la tarifa aplican a los cargos de la aerolínea, y no incluyen los cargos por servicio.</p>
                 </div>
-                <div class="footer-modal">
+                <div class="footer-modal w-full flex-r ai-c jc-b">
                     <span class="flex-c">
                         <b class="text-4.5" id="fare-selected-price">+ US$ 0</b>
                         <span class="text-3 c-scale-500">Por persona</span>
