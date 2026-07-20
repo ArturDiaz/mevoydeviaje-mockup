@@ -1005,6 +1005,13 @@ body.modal-open {
     overflow: hidden;
     transition: height .3s ease;
 }
+/* Triggers de collapse (ej. "Tabla precios"/"Curvas precios"): se pintan como
+   .active solo mientras su contenido esta desplegado (ver script.js) */
+[data-toggle="collapse"].active {
+    color: var(--primary);
+    border-color: var(--primary);
+    background: var(--primary-50);
+}
 
 /* Modales tipo sidebar (.modal-sidebar, ej. #modalFiltros y #modalBusqueda):
    en escritorio (>=1024px) son la misma sidebar de siempre (sin comportamiento
@@ -1145,16 +1152,16 @@ body.modal-open {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 22px;
-    height: 22px;
+    width: 18px;
+    height: 18px;
     border-radius: 50%;
     background: var(--primary);
     color: #fff;
     flex-shrink: 0;
 }
 .fare-check-circle .bs-icon {
-    width: 13px;
-    height: 13px;
+    width: 10px;
+    height: 10px;
     margin: 0;
 }
 .fare-more-link {
@@ -1225,6 +1232,165 @@ body.modal-open {
     .fare-carousel-btn:hover {
         background: var(--scale-100);
     }
+}
+
+/* Tabla de precios por aerolinea (#collapseTablaPreciosDesktop): columna de
+   etiquetas fija + columnas de aerolineas a ancho igual. Cuando hay mas de 4
+   aerolineas, script.js agrega .is-carousel: las columnas pasan a ancho fijo
+   (25% del track) y .price-table-track scrollea con scroll-snap, mostrando
+   4 a la vez; las flechas .price-table-prev/next desplazan el track una
+   columna a la vez (igual que .fare-carousel) */
+.price-table-wrap {
+    display: flex;
+    align-items: stretch;
+    gap: 0.75rem;
+}
+.price-table-labels {
+    flex: 0 0 100px;
+    gap: 0.75rem;
+}
+.price-table-track {
+    display: flex;
+    flex: 1;
+    gap: 1rem;
+    min-width: 0;
+}
+.price-table-col {
+    flex: 1 1 0;
+    min-width: 0;
+    gap: 0.75rem;
+    text-align: center;
+}
+.price-table-cell {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.25rem;
+    gap: 0.15rem;
+}
+.price-table-labels .price-table-cell {
+    align-items: flex-start;
+    text-align: left;
+}
+.badge-rating {
+    background: var(--green);
+    color: #fff;
+    font-weight: 700;
+}
+.price-table-btn {
+    display: none;
+}
+.price-table-wrap.is-carousel .price-table-track {
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+.price-table-wrap.is-carousel .price-table-track::-webkit-scrollbar {
+    display: none;
+}
+.price-table-wrap.is-carousel .price-table-col {
+    flex: 0 0 calc((100% - 3rem) / 4);
+    scroll-snap-align: start;
+}
+/* En mobile (<1024px, ver .content-actions-mobile) el carousel muestra 2
+   aerolineas a la vez en vez de 4 */
+@media (max-width: 1023px) {
+    .price-table-wrap.is-carousel .price-table-col {
+        flex: 0 0 calc((100% - 1rem) / 2);
+    }
+}
+.price-table-wrap.is-carousel .price-table-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1px solid var(--scale-300);
+    background: #fff;
+    color: var(--c-text);
+    cursor: pointer;
+}
+.price-table-wrap.is-carousel .price-table-btn:hover {
+    background: var(--scale-100);
+}
+
+/* Curva de precios (#collapseCurvasPreciosDesktop): matriz Ida (columnas) x Vuelta
+   (filas) en un solo CSS grid de 8 columnas (1 de encabezado + 7 fechas). Precios
+   con scroll horizontal en pantallas chicas via .price-calendar */
+.price-calendar {
+    overflow-x: auto;
+}
+.price-calendar-grid {
+    display: grid;
+    grid-template-columns: 110px repeat(7, minmax(90px, 1fr));
+    min-width: 760px;
+}
+.price-calendar-corner,
+.price-calendar-head-row {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background: #fff;
+    box-shadow: 4px 0 6px -4px var(--scale-30\%);
+}
+.price-calendar-corner {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0.5rem 0.75rem;
+    border-bottom: 2px solid var(--scale-200);
+    border-right: 1px solid var(--scale-200);
+}
+.price-calendar-corner-ida {
+    align-self: flex-end;
+    font-size: 12px;
+    color: var(--scale-500);
+}
+.price-calendar-corner-vuelta {
+    align-self: flex-start;
+    font-weight: 700;
+}
+.price-calendar-head {
+    padding: 0.6rem 0.5rem;
+    text-align: center;
+    font-weight: 700;
+    font-size: 13px;
+    border-bottom: 2px solid var(--scale-200);
+}
+.price-calendar-head-row {
+    text-align: left;
+    border-bottom: 1px solid var(--scale-100);
+    border-right: 1px solid var(--scale-200);
+}
+.price-calendar-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 0.5rem;
+    text-align: center;
+    color: var(--c-text);
+    border-bottom: 1px solid var(--scale-100);
+}
+.price-calendar-cell.is-cheapest {
+    margin: 3px;
+    border-radius: 8px;
+    background: var(--primary);
+    color: #fff;
+    font-weight: 700;
+}
+.price-calendar-cell.is-selected {
+    margin: 3px;
+    border-radius: 8px;
+    border: 2px solid var(--primary);
+    color: var(--primary);
+    font-weight: 700;
+}
+.price-calendar-disclaimer {
+    padding-top: 0.75rem;
 }
 
 .section-products{

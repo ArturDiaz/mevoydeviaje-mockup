@@ -118,6 +118,24 @@ document.addEventListener('DOMContentLoaded', () => {
             target.style.height = '';
             target.removeEventListener('transitionend', handler);
         });
+
+        // Curva de precios en mobile (<1024px): la columna de titulos (.price-calendar-corner/
+        // .price-calendar-head-row) queda fija via CSS (position:sticky), solo el contenido
+        // scrollea horizontalmente. Al desplegarse, centra esa columna con scroll en la fecha
+        // actualmente buscada (.is-selected), ya que representa el dia actual
+        if (window.innerWidth < 1024) {
+            const calendar = target.querySelector('.price-calendar');
+            const selectedCell = calendar && calendar.querySelector('.price-calendar-cell.is-selected');
+            if (calendar && selectedCell) {
+                requestAnimationFrame(() => {
+                    const calendarRect = calendar.getBoundingClientRect();
+                    const cellRect = selectedCell.getBoundingClientRect();
+                    const offset = cellRect.left + cellRect.width / 2 - calendarRect.left
+                        + calendar.scrollLeft - calendarRect.width / 2;
+                    calendar.scrollLeft = Math.max(0, offset);
+                });
+            }
+        }
     };
 
     const collapseCollapse = (target) => {
@@ -140,11 +158,30 @@ document.addEventListener('DOMContentLoaded', () => {
         const targets = selector ? document.querySelectorAll(selector) : [];
         if (!targets.length) return;
 
-        trigger.setAttribute('aria-expanded', String(targets[0].classList.contains('show')));
+        const isShown = targets[0].classList.contains('show');
+        trigger.setAttribute('aria-expanded', String(isShown));
+        trigger.classList.toggle('active', isShown);
 
         trigger.addEventListener('click', (e) => {
             e.preventDefault();
             const willShow = !targets[0].classList.contains('show');
+
+            // Se turnan: los triggers de collapse que comparten el mismo contenedor directo
+            // (ej. "Tabla precios" / "Curvas precios") son mutuamente excluyentes, asi que al
+            // abrir uno se cierra cualquier otro que este abierto en ese mismo grupo
+            if (willShow) {
+                trigger.parentElement.querySelectorAll('[data-toggle="collapse"]').forEach((sibling) => {
+                    if (sibling === trigger) return;
+                    const siblingSelector = sibling.getAttribute('data-target');
+                    const siblingTargets = siblingSelector ? document.querySelectorAll(siblingSelector) : [];
+                    siblingTargets.forEach((siblingTarget) => {
+                        if (siblingTarget.classList.contains('show')) collapseCollapse(siblingTarget);
+                    });
+                    sibling.classList.remove('active');
+                    sibling.setAttribute('aria-expanded', 'false');
+                });
+            }
+
             targets.forEach((target) => {
                 if (target.classList.contains('show')) {
                     collapseCollapse(target);
@@ -153,6 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             });
             trigger.setAttribute('aria-expanded', String(willShow));
+            trigger.classList.toggle('active', willShow);
         });
     });
 });
@@ -262,6 +300,48 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Precio final del vuelo (#modalAddLuggage, footer): precio base del vuelo (tomado de
+// la tarjeta .flight-result-card cuyo "Añadir Maletas" abrio el modal) + el extra por
+// persona de la tarifa seleccionada x cantidad de pasajeros. Se recalcula al abrir el
+// modal (con la tarifa Basic ya marcada por defecto) y cada vez que se elige otra tarifa
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('modalAddLuggage');
+    const totalPriceEl = document.getElementById('fare-total-price');
+    const totalPaxEl = document.getElementById('fare-total-pax');
+    if (!modal || !totalPriceEl) return;
+
+    let basePrice = 0;
+    let passengers = 2;
+
+    const recalcTotal = () => {
+        const selectedCard = modal.querySelector('.fare-card.is-selected');
+        const perPersonEl = selectedCard && selectedCard.querySelector('.fare-card-body .text-6');
+        const perPerson = perPersonEl ? parseInt(perPersonEl.textContent.replace(/\D/g, ''), 10) || 0 : 0;
+
+        totalPriceEl.textContent = `US$ ${basePrice + perPerson * passengers}`;
+        if (totalPaxEl) totalPaxEl.textContent = passengers;
+    };
+
+    document.querySelectorAll('[data-target="#modalAddLuggage"]').forEach((trigger) => {
+        trigger.addEventListener('click', () => {
+            const card = trigger.closest('.flight-result-card');
+            const priceEl = card && card.querySelector('.content-price b');
+            // Ojo: no seleccionar por ".text-3.5" (el punto rompe el selector CSS, ya que
+            // se interpreta como otra clase ".5"); en su lugar se toma el primer span
+            // dentro de .content-price .flex-c (el texto "Precio x N pasajeros")
+            const paxLabel = card && card.querySelector('.content-price .flex-c span');
+
+            basePrice = priceEl ? parseInt(priceEl.textContent.replace(/\D/g, ''), 10) || 0 : 0;
+            passengers = paxLabel ? parseInt(paxLabel.textContent.replace(/\D/g, ''), 10) || 2 : 2;
+            recalcTotal();
+        });
+    });
+
+    document.querySelectorAll('[data-fare-select]').forEach((btn) => {
+        btn.addEventListener('click', recalcTotal);
+    });
+});
+
 // Carrusel de tarifas (desktop, #modalAddLuggage): las flechas .fare-carousel-prev/next
 // desplazan el track .fare-cards el ancho de una tarjeta + gap; scroll-snap (CSS) hace
 // que quede alineada. En mobile las flechas estan ocultas (ver styles.css)
@@ -281,6 +361,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
         prevBtn.addEventListener('click', () => scrollByCard(-1));
         nextBtn.addEventListener('click', () => scrollByCard(1));
+    });
+});
+
+// Tabla de precios por aerolinea (#collapseTablaPreciosDesktop): si hay mas de 4
+// columnas de aerolineas, se agrega .is-carousel a .price-table-wrap (CSS la vuelve
+// scroll horizontal con scroll-snap mostrando 4 a la vez); con 4 o menos queda como
+// tabla estatica normal. Las flechas .price-table-prev/next desplazan el track el
+// ancho de una columna + gap (mismo patron que .fare-carousel)
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.price-table-wrap').forEach((wrap) => {
+        const track = wrap.querySelector('.price-table-track');
+        if (!track) return;
+
+        const cols = track.querySelectorAll('.price-table-col');
+        wrap.classList.toggle('is-carousel', cols.length > 4);
+
+        const prevBtn = wrap.querySelector('.price-table-prev');
+        const nextBtn = wrap.querySelector('.price-table-next');
+        if (!prevBtn || !nextBtn) return;
+
+        const scrollByCol = (dir) => {
+            const col = track.querySelector('.price-table-col');
+            if (!col) return;
+            const gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+            track.scrollBy({ left: dir * (col.offsetWidth + gap), behavior: 'smooth' });
+        };
+
+        prevBtn.addEventListener('click', () => scrollByCol(-1));
+        nextBtn.addEventListener('click', () => scrollByCol(1));
     });
 });
 

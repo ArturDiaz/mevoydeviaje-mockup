@@ -390,12 +390,149 @@
                  solo el collapse (ver [data-toggle="collapse"] generico en script.js) -->
             <div class="collapse" id="collapseTablaPreciosDesktop">
                 <div class="flight-result-card">
-                    <p class="text-3.5 c-scale-500">Tabla de precios (próximamente)</p>
+                    <!-- Tabla de precios por aerolinea: si hay mas de 4 aerolineas, script.js
+                         agrega .is-carousel a .price-table-wrap (se ven 4 columnas a la vez,
+                         con scroll-snap y flechas .price-table-prev/next, igual que .fare-carousel) -->
+                    <div class="price-table-wrap">
+                        <div class="price-table-labels flex-c">
+                            <span class="price-table-cell font-bold">Aerolínea</span>
+                            <span class="price-table-cell font-bold">Directo</span>
+                            <span class="price-table-cell font-bold">Con Escalas</span>
+                        </div>
+                        <button type="button" class="price-table-btn price-table-prev" aria-label="Aerolíneas anteriores">
+                            <svg class="bs-icon"><use xlink:href="#i-chevron-left"></use></svg>
+                        </button>
+                        <div class="price-table-track">
+                            <div id="H2" class="price-table-col flex-c">
+                                <span class="price-table-cell flex-r ai-c jc-c gap-1">
+                                    <img style="max-width:28px" src="../img/H2.png">
+                                    <span class="text-3">Sky Airline</span>
+                                </span>
+                                <span class="price-table-cell c-blue font-bold">US$ 708</span>
+                                <span class="price-table-cell">US$ 1.060</span>
+                            </div>
+                            <div id="JA" class="price-table-col flex-c">
+                                <span class="price-table-cell flex-r ai-c jc-c gap-1">
+                                    <img style="max-width:28px" src="../img/AA.png">
+                                    <span class="text-3">Jetsmart</span>
+                                </span>
+                                <span class="price-table-cell">US$ 813</span>
+                                <span class="price-table-cell">US$ 1.098</span>
+                            </div>
+                            <div id="LA" class="price-table-col flex-c">
+                                <span class="price-table-cell flex-r ai-c jc-c gap-1">
+                                    <img style="max-width:28px" src="../img/LA.png">
+                                    <span class="text-3">Latam Airlines</span>
+                                </span>
+                                <span class="price-table-cell">US$ 999</span>
+                                <span class="price-table-cell">US$ 1.304</span>
+                            </div>
+                            <div id="AV" class="price-table-col flex-c">
+                                <span class="price-table-cell flex-r ai-c jc-c gap-1">
+                                    <img style="max-width:28px" src="../img/AA.png">
+                                    <span class="text-3">Avianca</span>
+                                </span>
+                                <span class="price-table-cell"></span>
+                                <span class="price-table-cell">US$ 1.060</span>
+                            </div>
+                            <div id="2I" class="price-table-col flex-c">
+                                <span class="price-table-cell flex-r ai-c jc-c gap-1">
+                                    <img style="max-width:28px" src="../img/AA.png">
+                                    <span class="text-3">Star Up</span>
+                                </span>
+                                <span class="price-table-cell">US$ 850</span>
+                                <span class="price-table-cell">US$ 1.150</span>
+                            </div>
+                        </div>
+                        <button type="button" class="price-table-btn price-table-next" aria-label="Siguientes aerolíneas">
+                            <svg class="bs-icon"><use xlink:href="#i-chevron-right"></use></svg>
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="collapse" id="collapseCurvasPreciosDesktop">
                 <div class="flight-result-card">
-                    <p class="text-3.5 c-scale-500">Curvas de precios (próximamente)</p>
+                    <!-- Curva de precios: matriz Ida (columnas) x Vuelta (filas). .is-cheapest marca
+                         el precio mas bajo de toda la matriz, .is-selected marca la combinacion de
+                         fechas actualmente buscada (ver header-section mas abajo: 13 Jul - 14 Sep) -->
+                    <div class="price-calendar">
+                        <div class="price-calendar-grid">
+                            <div class="price-calendar-corner">
+                                <span class="price-calendar-corner-ida">Ida</span>
+                                <span class="price-calendar-corner-vuelta">Vuelta</span>
+                            </div>
+                            <div class="price-calendar-head">Jueves<br>3 sept.</div>
+                            <div class="price-calendar-head">Viernes<br>4 sept.</div>
+                            <div class="price-calendar-head">Sábado<br>5 sept.</div>
+                            <div class="price-calendar-head">Domingo<br>6 sept.</div>
+                            <div class="price-calendar-head">Lunes<br>7 sept.</div>
+                            <div class="price-calendar-head">Martes<br>8 sept.</div>
+                            <div class="price-calendar-head">Miércoles<br>9 sept.</div>
+
+                            <div class="price-calendar-head price-calendar-head-row">Jueves<br>10 sept.</div>
+                            <div class="price-calendar-cell">US$ 1.012</div>
+                            <div class="price-calendar-cell">US$ 1.034</div>
+                            <div class="price-calendar-cell">US$ 1.158</div>
+                            <div class="price-calendar-cell">US$ 894</div>
+                            <div class="price-calendar-cell">US$ 992</div>
+                            <div class="price-calendar-cell">US$ 992</div>
+                            <div class="price-calendar-cell">US$ 898</div>
+
+                            <div class="price-calendar-head price-calendar-head-row">Viernes<br>11 sept.</div>
+                            <div class="price-calendar-cell">US$ 1.024</div>
+                            <div class="price-calendar-cell">US$ 1.032</div>
+                            <div class="price-calendar-cell">US$ 1.046</div>
+                            <div class="price-calendar-cell">US$ 1.060</div>
+                            <div class="price-calendar-cell">US$ 1.056</div>
+                            <div class="price-calendar-cell">US$ 1.028</div>
+                            <div class="price-calendar-cell">US$ 930</div>
+
+                            <div class="price-calendar-head price-calendar-head-row">Sábado<br>12 sept.</div>
+                            <div class="price-calendar-cell">US$ 984</div>
+                            <div class="price-calendar-cell">US$ 974</div>
+                            <div class="price-calendar-cell">US$ 880</div>
+                            <div class="price-calendar-cell">US$ 956</div>
+                            <div class="price-calendar-cell is-cheapest">US$ 708</div>
+                            <div class="price-calendar-cell">US$ 942</div>
+                            <div class="price-calendar-cell">US$ 932</div>
+
+                            <div class="price-calendar-head price-calendar-head-row">Domingo<br>13 sept.</div>
+                            <div class="price-calendar-cell">US$ 958</div>
+                            <div class="price-calendar-cell">US$ 946</div>
+                            <div class="price-calendar-cell">US$ 838</div>
+                            <div class="price-calendar-cell is-selected">US$ 708</div>
+                            <div class="price-calendar-cell">US$ 974</div>
+                            <div class="price-calendar-cell">US$ 912</div>
+                            <div class="price-calendar-cell">US$ 792</div>
+
+                            <div class="price-calendar-head price-calendar-head-row">Lunes<br>14 sept.</div>
+                            <div class="price-calendar-cell">US$ 928</div>
+                            <div class="price-calendar-cell">US$ 924</div>
+                            <div class="price-calendar-cell">US$ 878</div>
+                            <div class="price-calendar-cell">US$ 860</div>
+                            <div class="price-calendar-cell">US$ 854</div>
+                            <div class="price-calendar-cell">US$ 914</div>
+                            <div class="price-calendar-cell">US$ 798</div>
+
+                            <div class="price-calendar-head price-calendar-head-row">Martes<br>15 sept.</div>
+                            <div class="price-calendar-cell">US$ 960</div>
+                            <div class="price-calendar-cell">US$ 952</div>
+                            <div class="price-calendar-cell">US$ 928</div>
+                            <div class="price-calendar-cell">US$ 922</div>
+                            <div class="price-calendar-cell">US$ 894</div>
+                            <div class="price-calendar-cell">US$ 904</div>
+                            <div class="price-calendar-cell">US$ 890</div>
+
+                            <div class="price-calendar-head price-calendar-head-row">Miércoles<br>16 sept.</div>
+                            <div class="price-calendar-cell">US$ 990</div>
+                            <div class="price-calendar-cell">US$ 984</div>
+                            <div class="price-calendar-cell">US$ 856</div>
+                            <div class="price-calendar-cell">US$ 848</div>
+                            <div class="price-calendar-cell">US$ 872</div>
+                            <div class="price-calendar-cell">US$ 902</div>
+                            <div class="price-calendar-cell">US$ 818</div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -438,16 +575,149 @@
                 </a>
             </div>
 
-            <!-- Contenido de Tabla/Curvas de precios: pendiente de definir, por ahora
-                 solo el collapse (ver [data-toggle="collapse"] generico en script.js) -->
+            <!-- Mismo contenido que #collapseTablaPreciosDesktop / #collapseCurvasPreciosDesktop
+                 (ver mas arriba), duplicado aqui porque son collapse distintos ligados a los
+                 botones de .content-actions-mobile en vez de .content-actions-desktop -->
             <div class="collapse mt-2" id="collapseTablaPreciosMobile">
                 <div class="flight-result-card">
-                    <p class="text-3.5 c-scale-500">Tabla de precios (próximamente)</p>
+                    <div class="price-table-wrap">
+                        <div class="price-table-labels flex-c">
+                            <span class="price-table-cell font-bold">Aerolínea</span>
+                            <span class="price-table-cell font-bold">Directo</span>
+                            <span class="price-table-cell font-bold">Con Escalas</span>
+                        </div>
+                        <button type="button" class="price-table-btn price-table-prev" aria-label="Aerolíneas anteriores">
+                            <svg class="bs-icon"><use xlink:href="#i-chevron-left"></use></svg>
+                        </button>
+                        <div class="price-table-track">
+                            <div class="price-table-col flex-c">
+                                <span class="price-table-cell flex-r ai-c jc-c gap-1">
+                                    <img style="max-width:28px" src="../img/H2.png">
+                                    <span class="text-3">Sky Airline</span>
+                                </span>
+                                <span class="price-table-cell c-blue font-bold">US$ 708</span>
+                                <span class="price-table-cell">US$ 1.060</span>
+                            </div>
+                            <div class="price-table-col flex-c">
+                                <span class="price-table-cell flex-r ai-c jc-c gap-1">
+                                    <img style="max-width:28px" src="../img/AA.png">
+                                    <span class="text-3">Jetsmart</span>
+                                </span>
+                                <span class="price-table-cell">US$ 813</span>
+                                <span class="price-table-cell">US$ 1.098</span>
+                            </div>
+                            <div class="price-table-col flex-c">
+                                <span class="price-table-cell flex-r ai-c jc-c gap-1">
+                                    <img style="max-width:28px" src="../img/LA.png">
+                                    <span class="text-3">Latam Airlines</span>
+                                </span>
+                                <span class="price-table-cell">US$ 999</span>
+                                <span class="price-table-cell">US$ 1.304</span>
+                            </div>
+                            <div class="price-table-col flex-c">
+                                <span class="price-table-cell flex-r ai-c jc-c gap-1">
+                                    <img style="max-width:28px" src="../img/AA.png">
+                                    <span class="text-3">Avianca</span>
+                                </span>
+                                <span class="price-table-cell"></span>
+                                <span class="price-table-cell">US$ 1.060</span>
+                            </div>
+                            <div class="price-table-col flex-c">
+                                <span class="price-table-cell flex-r ai-c jc-c gap-1">
+                                    <img style="max-width:28px" src="../img/AA.png">
+                                    <span class="text-3">Star Up</span>
+                                </span>
+                                <span class="price-table-cell">US$ 850</span>
+                                <span class="price-table-cell">US$ 1.150</span>
+                            </div>
+                        </div>
+                        <button type="button" class="price-table-btn price-table-next" aria-label="Siguientes aerolíneas">
+                            <svg class="bs-icon"><use xlink:href="#i-chevron-right"></use></svg>
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="collapse mt-2" id="collapseCurvasPreciosMobile">
                 <div class="flight-result-card">
-                    <p class="text-3.5 c-scale-500">Curvas de precios (próximamente)</p>
+                    <div class="price-calendar">
+                        <div class="price-calendar-grid">
+                            <div class="price-calendar-corner">
+                                <span class="price-calendar-corner-ida">Ida</span>
+                                <span class="price-calendar-corner-vuelta">Vuelta</span>
+                            </div>
+                            <div class="price-calendar-head">Jueves<br>3 sept.</div>
+                            <div class="price-calendar-head">Viernes<br>4 sept.</div>
+                            <div class="price-calendar-head">Sábado<br>5 sept.</div>
+                            <div class="price-calendar-head">Domingo<br>6 sept.</div>
+                            <div class="price-calendar-head">Lunes<br>7 sept.</div>
+                            <div class="price-calendar-head">Martes<br>8 sept.</div>
+                            <div class="price-calendar-head">Miércoles<br>9 sept.</div>
+
+                            <div class="price-calendar-head price-calendar-head-row">Jueves<br>10 sept.</div>
+                            <div class="price-calendar-cell">US$ 1.012</div>
+                            <div class="price-calendar-cell">US$ 1.034</div>
+                            <div class="price-calendar-cell">US$ 1.158</div>
+                            <div class="price-calendar-cell">US$ 894</div>
+                            <div class="price-calendar-cell">US$ 992</div>
+                            <div class="price-calendar-cell">US$ 992</div>
+                            <div class="price-calendar-cell">US$ 898</div>
+
+                            <div class="price-calendar-head price-calendar-head-row">Viernes<br>11 sept.</div>
+                            <div class="price-calendar-cell">US$ 1.024</div>
+                            <div class="price-calendar-cell">US$ 1.032</div>
+                            <div class="price-calendar-cell">US$ 1.046</div>
+                            <div class="price-calendar-cell">US$ 1.060</div>
+                            <div class="price-calendar-cell">US$ 1.056</div>
+                            <div class="price-calendar-cell">US$ 1.028</div>
+                            <div class="price-calendar-cell">US$ 930</div>
+
+                            <div class="price-calendar-head price-calendar-head-row">Sábado<br>12 sept.</div>
+                            <div class="price-calendar-cell">US$ 984</div>
+                            <div class="price-calendar-cell">US$ 974</div>
+                            <div class="price-calendar-cell">US$ 880</div>
+                            <div class="price-calendar-cell">US$ 956</div>
+                            <div class="price-calendar-cell is-cheapest">US$ 708</div>
+                            <div class="price-calendar-cell">US$ 942</div>
+                            <div class="price-calendar-cell">US$ 932</div>
+
+                            <div class="price-calendar-head price-calendar-head-row">Domingo<br>13 sept.</div>
+                            <div class="price-calendar-cell">US$ 958</div>
+                            <div class="price-calendar-cell">US$ 946</div>
+                            <div class="price-calendar-cell">US$ 838</div>
+                            <div class="price-calendar-cell is-selected">US$ 708</div>
+                            <div class="price-calendar-cell">US$ 974</div>
+                            <div class="price-calendar-cell">US$ 912</div>
+                            <div class="price-calendar-cell">US$ 792</div>
+
+                            <div class="price-calendar-head price-calendar-head-row">Lunes<br>14 sept.</div>
+                            <div class="price-calendar-cell">US$ 928</div>
+                            <div class="price-calendar-cell">US$ 924</div>
+                            <div class="price-calendar-cell">US$ 878</div>
+                            <div class="price-calendar-cell">US$ 860</div>
+                            <div class="price-calendar-cell">US$ 854</div>
+                            <div class="price-calendar-cell">US$ 914</div>
+                            <div class="price-calendar-cell">US$ 798</div>
+
+                            <div class="price-calendar-head price-calendar-head-row">Martes<br>15 sept.</div>
+                            <div class="price-calendar-cell">US$ 960</div>
+                            <div class="price-calendar-cell">US$ 952</div>
+                            <div class="price-calendar-cell">US$ 928</div>
+                            <div class="price-calendar-cell">US$ 922</div>
+                            <div class="price-calendar-cell">US$ 894</div>
+                            <div class="price-calendar-cell">US$ 904</div>
+                            <div class="price-calendar-cell">US$ 890</div>
+
+                            <div class="price-calendar-head price-calendar-head-row">Miércoles<br>16 sept.</div>
+                            <div class="price-calendar-cell">US$ 990</div>
+                            <div class="price-calendar-cell">US$ 984</div>
+                            <div class="price-calendar-cell">US$ 856</div>
+                            <div class="price-calendar-cell">US$ 848</div>
+                            <div class="price-calendar-cell">US$ 872</div>
+                            <div class="price-calendar-cell">US$ 902</div>
+                            <div class="price-calendar-cell">US$ 818</div>
+                        </div>
+                    </div>
+                    <p class="price-calendar-disclaimer text-3 c-scale-500">Estas predicciones se basan en cientos de búsquedas y fueron creadas para entregarte información adicional al momento de cotizar un viaje.</p>
                 </div>
             </div>
 
@@ -734,7 +1004,7 @@
                                 <div class="fare-card-body">
                                     <div class="flex-c text-c">
                                         <span class="text-6 font-bold">+ US$ 0</span>
-                                        <span class="text-3 c-scale-500">Por persona</span>
+                                        <span class="text-3 c-scale-500">Por persona (Ida y Vuelta)</span>
                                     </div>
                                     <div class="line-horizontal"></div>
                                     <div class="flex-r jc-b ai-c jc-c">
@@ -770,7 +1040,7 @@
                                 <div class="fare-card-body">
                                     <div class="flex-c text-c">
                                         <span class="text-6 font-bold">+ US$ 83</span>
-                                        <span class="text-3 c-scale-500">Por persona</span>
+                                        <span class="text-3 c-scale-500">Por persona (Ida y Vuelta)</span>
                                     </div>
                                     <div class="line-horizontal"></div>
                                     <div class="flex-r jc-b ai-c jc-c">
@@ -806,7 +1076,7 @@
                                 <div class="fare-card-body">
                                     <div class="flex-c text-c">
                                         <span class="text-6 font-bold">+ US$ 138</span>
-                                        <span class="text-3 c-scale-500">Por persona</span>
+                                        <span class="text-3 c-scale-500">Por persona (Ida y Vuelta)</span>
                                     </div>
                                     <div class="line-horizontal"></div>
                                     <div class="flex-r jc-b ai-c jc-c">
@@ -842,7 +1112,7 @@
                                 <div class="fare-card-body">
                                     <div class="flex-c text-c">
                                         <span class="text-6 font-bold">+ US$ 189</span>
-                                        <span class="text-3 c-scale-500">Por persona</span>
+                                        <span class="text-3 c-scale-500">Por persona (Ida y Vuelta)</span>
                                     </div>
                                     <div class="line-horizontal"></div>
                                     <div class="flex-r jc-b ai-c jc-c">
@@ -878,7 +1148,7 @@
                                 <div class="fare-card-body">
                                     <div class="flex-c text-c">
                                         <span class="text-6 font-bold">+ US$ 245</span>
-                                        <span class="text-3 c-scale-500">Por persona</span>
+                                        <span class="text-3 c-scale-500">Por persona (Ida y Vuelta)</span>
                                     </div>
                                     <div class="line-horizontal"></div>
                                     <div class="flex-r jc-b ai-c jc-c">
@@ -914,10 +1184,16 @@
                         <p class="text-3 c-scale-500 mt-4">Los beneficios y penalidades de la tarifa aplican a los cargos de la aerolínea, y no incluyen los cargos por servicio.</p>
                 </div>
                 <div class="footer-modal w-full flex-r ai-c jc-b">
-                    <span class="flex-c">
-                        <b class="text-4.5" id="fare-selected-price">+ US$ 0</b>
-                        <span class="text-3 c-scale-500">Por persona</span>
-                    </span>
+                    <div class="flex-r gap-5 ai-c">
+                        <span class="flex-c">
+                            <b class="text-4.5" id="fare-selected-price">+ US$ 0</b>
+                            <span class="text-3 c-scale-500">Por persona (Ida y Vuelta)</span>
+                        </span>
+                        <!-- <span class="flex-c">
+                            <span class="text-3 c-scale-500">Precio final del vuelo para <span id="fare-total-pax">2</span> personas</span>
+                            <b class="text-5" id="fare-total-price">US$ 452</b>
+                        </span> -->
+                    </div>
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Continuar</button>
                 </div>
             </div>
