@@ -1402,6 +1402,60 @@ body.modal-open {
     background: var(--scale-100);
 }
 
+/* Linea de tiempo (CheckDate.html): pasos del checkout (Busqueda/Seleccion/Datos/
+   Pagar y finalizar) unidos por una linea horizontal (::before). Cada paso es un
+   circulo (.line-time-dot): con numero y borde gris si es futuro (por defecto),
+   con check relleno gris si ya se completo (.is-done), o azul con numero si es el
+   paso actual (.is-active), ver HTML para donde se aplica cada modificador */
+.line-time {
+    padding: 1rem 0;
+}
+.line-time::before {
+    content: '';
+    position: absolute;
+    top: calc(1rem + 10px);
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--scale-200);
+    z-index: 0;
+}
+.line-time-step {
+    position: relative;
+    z-index: 1;
+    background: var(--bg-body);
+    padding-right: 0.5rem;
+}
+.line-time-dot {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 12px;
+    font-weight: 700;
+    background: #fff;
+    border: 2px solid var(--scale-300);
+    color: var(--scale-400);
+}
+.line-time-dot .bs-icon {
+    width: 12px;
+    height: 12px;
+    margin: 0;
+}
+.line-time-step.is-done .line-time-dot {
+    background: var(--scale-300);
+    border-color: var(--scale-300);
+    color: #fff;
+}
+.line-time-step.is-active .line-time-dot {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff;
+}
+
 .section-products{
     .header-section{
         position: sticky;

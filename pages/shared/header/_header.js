@@ -3,7 +3,7 @@
 // para que las imagenes siempre resuelvan sin importar desde que pagina se incluya este partial.
 (function () {
     var scriptUrl = document.currentScript.src;
-    var root = scriptUrl.replace(/pages\/shared\/_header\.js.*$/, '');
+    var root = scriptUrl.replace(/pages\/shared\/header\/_header\.js.*$/, '');
 
     document.write(`
 <header class="bg-header h-fit">
