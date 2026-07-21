@@ -277,38 +277,17 @@ document.addEventListener('DOMContentLoaded', () => {
     observer.observe(sentinel);
 });
 
-// Tarjetas de tarifa (#modalAddLuggage: Basic/Light/Standard): clic en "Seleccionar"
-// marca esa .fare-card como .is-selected (revela el indicador "Seleccionado" via CSS),
-// desmarca a las demas tarjetas del mismo .fare-cards, y refleja su precio en el
-// footer (id="fare-selected-price"), ya que la tarifa aplica a todo el viaje
-document.addEventListener('DOMContentLoaded', () => {
-    const priceEl = document.getElementById('fare-selected-price');
-
-    document.querySelectorAll('[data-fare-select]').forEach((btn) => {
-        btn.addEventListener('click', () => {
-            const card = btn.closest('.fare-card');
-            const group = card.closest('.fare-cards');
-
-            group.querySelectorAll('.fare-card').forEach((c) => c.classList.remove('is-selected'));
-            card.classList.add('is-selected');
-
-            if (priceEl) {
-                const price = card.querySelector('.fare-card-body .text-6');
-                if (price) priceEl.textContent = price.textContent;
-            }
-        });
-    });
-});
-
-// Precio final del vuelo (#modalAddLuggage, footer): precio base del vuelo (tomado de
-// la tarjeta .flight-result-card cuyo "Añadir Maletas" abrio el modal) + el extra por
-// persona de la tarifa seleccionada x cantidad de pasajeros. Se recalcula al abrir el
-// modal (con la tarifa Basic ya marcada por defecto) y cada vez que se elige otra tarifa
+// Total a pagar (#modalAddLuggage, footer, id="fare-selected-price"): precio base del
+// vuelo (tomado de la tarjeta .flight-result-card cuyo "Añadir Maletas" abrio el modal)
+// + el extra por persona de la tarifa seleccionada x cantidad de pasajeros. Clic en
+// "Seleccionar" marca esa .fare-card como .is-selected (revela el indicador
+// "Seleccionado" via CSS, desmarca a las demas del mismo .fare-cards) y recalcula el
+// total; el total tambien se recalcula al abrir el modal (con Basic ya marcada por defecto)
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('modalAddLuggage');
-    const totalPriceEl = document.getElementById('fare-total-price');
-    const totalPaxEl = document.getElementById('fare-total-pax');
-    if (!modal || !totalPriceEl) return;
+    const totalEl = document.getElementById('fare-selected-price');
+    const paxEl = document.getElementById('fare-total-pax');
+    if (!modal || !totalEl) return;
 
     let basePrice = 0;
     let passengers = 2;
@@ -318,17 +297,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const perPersonEl = selectedCard && selectedCard.querySelector('.fare-card-body .text-6');
         const perPerson = perPersonEl ? parseInt(perPersonEl.textContent.replace(/\D/g, ''), 10) || 0 : 0;
 
-        totalPriceEl.textContent = `US$ ${basePrice + perPerson * passengers}`;
-        if (totalPaxEl) totalPaxEl.textContent = passengers;
+        totalEl.textContent = `US$ ${basePrice + perPerson * passengers}`;
+        if (paxEl) paxEl.textContent = passengers;
     };
 
     document.querySelectorAll('[data-target="#modalAddLuggage"]').forEach((trigger) => {
         trigger.addEventListener('click', () => {
             const card = trigger.closest('.flight-result-card');
             const priceEl = card && card.querySelector('.content-price b');
-            // Ojo: no seleccionar por ".text-3.5" (el punto rompe el selector CSS, ya que
-            // se interpreta como otra clase ".5"); en su lugar se toma el primer span
-            // dentro de .content-price .flex-c (el texto "Precio x N pasajeros")
+            // Ojo: no seleccionar por ".text-3.5" (el punto rompe el selector CSS, se
+            // interpreta como otra clase ".5"); se toma el primer span dentro de
+            // .content-price .flex-c (el texto "Precio x N pasajeros")
             const paxLabel = card && card.querySelector('.content-price .flex-c span');
 
             basePrice = priceEl ? parseInt(priceEl.textContent.replace(/\D/g, ''), 10) || 0 : 0;
@@ -338,7 +317,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.querySelectorAll('[data-fare-select]').forEach((btn) => {
-        btn.addEventListener('click', recalcTotal);
+        btn.addEventListener('click', () => {
+            const card = btn.closest('.fare-card');
+            const group = card.closest('.fare-cards');
+
+            group.querySelectorAll('.fare-card').forEach((c) => c.classList.remove('is-selected'));
+            card.classList.add('is-selected');
+
+            recalcTotal();
+        });
     });
 });
 
@@ -390,6 +377,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
         prevBtn.addEventListener('click', () => scrollByCol(-1));
         nextBtn.addEventListener('click', () => scrollByCol(1));
+    });
+});
+
+// Precios clickeables de la tabla comparativa (.price-table-col: Directo/Con Escalas
+// por aerolinea) y de la curva de precios (.price-calendar-cell: cada combinacion
+// Ida/Vuelta): por el momento, hasta que se defina el flujo real de seleccion,
+// cualquier precio clickeado simplemente recarga la pagina. Se ignoran las celdas
+// vacias (ej. aerolineas sin vuelo directo)
+document.addEventListener('DOMContentLoaded', () => {
+    const priceCells = [];
+
+    document.querySelectorAll('.price-table-col').forEach((col) => {
+        const cells = col.querySelectorAll('.price-table-cell');
+        // cells[0] es el nombre/logo de la aerolinea; cells[1] y cells[2] son Directo/Con Escalas
+        priceCells.push(cells[1], cells[2]);
+    });
+
+    document.querySelectorAll('.price-calendar-cell').forEach((cell) => {
+        priceCells.push(cell);
+    });
+
+    priceCells.forEach((cell) => {
+        if (!cell || !cell.textContent.trim()) return;
+        cell.classList.add('is-clickable-price');
+        cell.addEventListener('click', () => location.reload());
     });
 });
 

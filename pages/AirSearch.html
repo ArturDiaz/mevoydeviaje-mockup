@@ -206,7 +206,7 @@
                             <div id="airlines-list" class="flex-c gap-3 px-3">
 
                                 <!-- Template: fila "Todas las aerolíneas" — visible, se actualiza su contador -->
-                                <div id="airline-row-all" class="item-filter flex-r jc-b gap-3">
+                                <div id="airline-row-all" class="item-filter flex-r jc-b ai-c gap-3">
                                     <div class="flex-r gap-2">
                                         <input type="checkbox" id="filter-aerolinea-all" name="filter-airline-all" checked="">
                                         <label for="filter-aerolinea-all" class="flex-r ai-c">Todas las aerolíneas</label>
@@ -215,7 +215,7 @@
                                 </div>
 
                                 <!-- Placeholders estáticos: se cablearán clonando el template desde el Summary -->
-                                <div class="item-filter flex-r jc-b gap-3">
+                                <div class="item-filter flex-r jc-b ai-c gap-3">
                                     <div class="flex-r gap-2">
                                         <input type="checkbox" class="airline-cb" name="filter-airline" value="LA">
                                         <label class="flex-r ai-c">
@@ -225,7 +225,7 @@
                                     </div>
                                     <span class="airline-count">0</span>
                                 </div>
-                                <div class="item-filter flex-r jc-b gap-3">
+                                <div class="item-filter flex-r jc-b ai-c gap-3">
                                     <div class="flex-r gap-2">
                                         <input type="checkbox" class="airline-cb" name="filter-airline" value="AV">
                                         <label class="flex-r ai-c">
@@ -235,7 +235,7 @@
                                     </div>
                                     <span class="airline-count">0</span>
                                 </div>
-                                <div class="item-filter flex-r jc-b gap-3">
+                                <div class="item-filter flex-r jc-b ai-c gap-3">
                                     <div class="flex-r gap-2">
                                         <input type="checkbox" class="airline-cb" name="filter-airline" value="H2">
                                         <label class="flex-r ai-c">
@@ -1184,16 +1184,11 @@
                         <p class="text-3 c-scale-500 mt-4">Los beneficios y penalidades de la tarifa aplican a los cargos de la aerolínea, y no incluyen los cargos por servicio.</p>
                 </div>
                 <div class="footer-modal w-full flex-r ai-c jc-b">
-                    <div class="flex-r gap-5 ai-c">
-                        <span class="flex-c">
-                            <b class="text-4.5" id="fare-selected-price">+ US$ 0</b>
-                            <span class="text-3 c-scale-500">Por persona (Ida y Vuelta)</span>
-                        </span>
-                        <!-- <span class="flex-c">
-                            <span class="text-3 c-scale-500">Precio final del vuelo para <span id="fare-total-pax">2</span> personas</span>
-                            <b class="text-5" id="fare-total-price">US$ 452</b>
-                        </span> -->
-                    </div>
+                    <span class="flex-c">
+                        <span class="text-3 c-scale-500">Total a pagar</span>
+                        <b class="text-4.5" id="fare-selected-price">US$ 452</b>
+                        <span class="text-3 c-scale-500">x <span id="fare-total-pax">2</span> personas</span>
+                    </span>
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Continuar</button>
                 </div>
             </div>

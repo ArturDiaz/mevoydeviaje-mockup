@@ -1392,6 +1392,15 @@ body.modal-open {
 .price-calendar-disclaimer {
     padding-top: 0.75rem;
 }
+/* Precios clickeables (tabla comparativa y curva de precios, ver script.js): por
+   ahora solo recargan la pagina, pero ya se ven interactivos */
+.is-clickable-price {
+    cursor: pointer;
+}
+.price-table-cell.is-clickable-price:hover,
+.price-calendar-cell.is-clickable-price:hover {
+    background: var(--scale-100);
+}
 
 .section-products{
     .header-section{

@@ -87,7 +87,7 @@
 
             <div class="flex-r gap-2 mt-2">
                 <!--<button class="btn btn-default-outline flex-r ai-c jc-c gap-1"><svg class="bs-icon"><use xlink:href="#i-carrito"></use></svg></button>-->
-                <button class="btn btn-primary w-full">Reservar</button>
+                <button type="button" class="btn btn-primary w-full" data-toggle="modal" data-target="#modalAddLuggage">Reservar</button>
             </div>
         </div>
     </div>
