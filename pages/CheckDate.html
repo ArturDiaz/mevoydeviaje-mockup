@@ -29,23 +29,23 @@
             </div>
         </div>
 
-        <div class="flex-c grid cl-6 gap-5">
-            <div class="flex-c gap-5 span-4">
+        <div class="flex-c lg:grid cl-6 gap-5">
+            <div id="accordion-pasajeros" class="flex-c gap-5 span-4">
                 <div class="card-body flex-c gap-4">
-                    <div class="flex-c">
-                        <h4>Ingresa los datos de los viajeros</h4>
+                    <div class="flex-c gap-2">
+                        <h4 class="text-4">Ingresa los datos de los viajeros</h4>
                         <span>Por favor, asegúrate de que los datos ingresados sean correctos. Una vez emitido el boleto, no será posible realizar cambios en la información registrada.</span>
                     </div>
                     <div class="line-horizontal"></div>
                     <div class="item-passenger flex-c gap-4">
-                        <a href="" class="flex-r jc-b ai-c card-title">
+                        <a class="flex-r jc-b ai-c card-title py-2" data-toggle="collapse" data-target="#adulto-1-collapse" data-parent="#accordion-pasajeros">
                             <span class="flex-r ai-c gap-1 font-bold">
                                 <svg class="bs-icon"><use xlink:href="#i-user"></use></svg>
                                 <span>Adulto 1</span>
                             </span>
-                            <svg class="bs-icon"><use xlink:href="#i-arrow-bottom"></use></svg>
+                            <svg class="bs-icon toggle-icon"><use xlink:href="#i-arrow-bottom"></use></svg>
                         </a>
-                        <div class="flex-c lg:grid cl-4 gap-4">
+                        <div id="adulto-1-collapse" class="collapse show flex-c lg:grid cl-4 gap-4">
                             <div class="flex-c span-2">
                                 <label for="">Nombres *</label>
                                 <input type="text" placeholder="Ingresa tus nombres">
@@ -104,12 +104,151 @@
                                     <option value="">Femenino</option>
                                 </select>
                             </div>
+                            <div class="flex-r lg:jc-r span-4">
+                                <a href="" class="btn btn-blue-outline px-6">Guardar</a>
+                            </div>
                         </div>
+                    </div>
+                    <!-- Pasajero 2 -->
+                     <div class="item-passenger flex-c gap-4">
+                        <a class="flex-r jc-b ai-c card-title py-2" data-toggle="collapse" data-target="#adulto-2-collapse" data-parent="#accordion-pasajeros">
+                            <span class="flex-r ai-c gap-1 font-bold">
+                                <svg class="bs-icon"><use xlink:href="#i-user"></use></svg>
+                                <span>Adulto 2</span>
+                            </span>
+                            <svg class="bs-icon toggle-icon"><use xlink:href="#i-arrow-bottom"></use></svg>
+                        </a>
+                        <div id="adulto-2-collapse" class="collapse flex-c lg:grid cl-4 gap-4">
+                            <div class="flex-c span-2">
+                                <label for="">Nombres *</label>
+                                <input type="text" placeholder="Ingresa tus nombres">
+                            </div>
+                            <div class="flex-c span-2">
+                                <label for="">Apellidos *</label>
+                                <input type="text" placeholder="Ingresa tus nombres">
+                            </div>
+                            <div class="flex-c">
+                                <label for="">Tipo de documento *</label>
+                                <select name="" id="">
+                                    <option value="">DNI</option>
+                                    <option value="">Pasaporte</option>
+                                </select>
+                            </div>
+                            <div class="flex-c">
+                                <label for="">Nro. Documento *</label>
+                                <input type="text" placeholder="Ingresa tus nombres">
+                            </div>
+                            <div class="flex-c span-2">
+                                <label for="">Nacionalidad *</label>
+                                <select name="" id="">
+                                    <option value="">Perú</option>
+                                    <option value="">Argentina</option>
+                                    <option value="">Brasil</option>
+                                    <option value="">Chile</option>
+                                    <option value="">Mexico</option>
+                                </select>
+                            </div>
+                            <div class="flex-c span-2">
+                                <label for="">Fecha de nacimiento *</label>
+                                <div class="grid cl-3 gap-2">
+                                    <input type="text" placeholder="DD">
+                                    <select name="" id="">
+                                        <option value="">Mes</option>
+                                        <option value="">Enero</option>
+                                        <option value="">Febrero</option>
+                                        <option value="">Marzo</option>
+                                        <option value="">Abril</option>
+                                        <option value="">Mayo</option>
+                                        <option value="">Junio</option>
+                                        <option value="">Julio</option>
+                                        <option value="">Agosto</option>
+                                        <option value="">Septiembre</option>
+                                        <option value="">Octubre</option>
+                                        <option value="">Noviembre</option>
+                                        <option value="">Diciembre</option>
+                                    </select>
+                                    <input type="text" placeholder="AAA">
+                                </div>
+                            </div>
+                            <div class="flex-c span-2">
+                                <label for="">Genero *</label>
+                                <select name="" id="">
+                                    <option value="">Masculino</option>
+                                    <option value="">Femenino</option>
+                                </select>
+                            </div>
+                            <div class="flex-r lg:jc-r span-4">
+                                <a href="" class="btn btn-blue-outline px-6">Guardar</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-body flex-c gap-4">
+                    <a class="flex-r jc-b ai-c card-title py-2" data-toggle="collapse" data-target="#contacto-collapse" data-parent="#accordion-pasajeros">
+                        <h4 class="text-4">Datos del contacto</h4>
+                        <svg class="bs-icon toggle-icon"><use xlink:href="#i-arrow-bottom"></use></svg>
+                    </a>
+                    <div id="contacto-collapse" class="collapse flex-c lg:grid cl-3 gap-4">
+                        <div class="flex-c">
+                            <label for="">Nombres *</label>
+                            <input type="text" placeholder="Ingresa tus nombres">
+                        </div>
+                        <div class="flex-c">
+                            <label for="">Teléfono *</label>
+                            <div class="input-phone flex-r ai-c">
+                                <span class="flex-r ai-c gap-1 px-2">
+                                    <svg class="bs-icon i-bandera-peru"><use xlink:href="#i-peru-h"></use></svg>
+                                    +51
+                                </span>
+                                <input type="tel" placeholder="999 999 999">
+                            </div>
+                        </div>
+                        <div class="flex-c">
+                            <label for="">Email *</label>
+                            <input type="email" placeholder="tucorreo@email.com">
+                        </div>
+                        <span class="text-3 c-scale-500 lg:span-3">*Enviaremos tu boleto a este correo una vez completada la compra.</span>
                     </div>
                 </div>
             </div>
             <div class="flex-c gap-5 span-2">
-                aqui precio
+                <div class="card-body flex-c gap-4">
+                    <h4 class="text-4">Sub total</h4>
+                    <div class="content-subtotal flex-c gap-3">
+                        <div class="price-brand text-3 badge badge-blue upper-case w-fit">BASIC</div>
+                        <div class="flex-c gap-2">
+                            <div class="flex-r jc-b">
+                                <span>2 Adultos</span>
+                                <span class="price-adult">USD 320.00</span>
+                            </div>
+                            <div class="flex-r jc-b">
+                                <span>1 Niño</span>
+                                <span class="price-kids">USD 40.00</span>
+                            </div>
+                            <div class="flex-r jc-b">
+                                <span>Impuestos y tasas</span>
+                                <span class="price-tax">USD 387.76</span>
+                            </div>
+                            <div class="flex-r jc-b c-blue">
+                                <span>Descuentos</span>
+                                <span class="price-tax">USD 00.0</span>
+                            </div>
+                            <div class="flex-r jc-b c-blue">
+                                <span>Cupones</span>
+                                <span class="price-tax">USD 00.0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="line-horizontal"></div>
+                    <div class="flex-r jc-b ai-r w-full text-4.5">
+                        <span class="flex-c">
+                            <b>Total a pagar</b>
+                            <span class="text-3">Ida y Vuelta</span>
+                        </span>
+                        <span>USD <span class="price-total"><b>707.76</b></span></span>
+                    </div>
+                </div>
             </div>
         </div>
     </main>

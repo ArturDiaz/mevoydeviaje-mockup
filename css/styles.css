@@ -322,6 +322,11 @@ ul, li, a{
         transition: all .3s ease;
     }
 }
+.btn-primary-outline, .btn-blue-outline{
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    &:hover{background: var(--primary-50);}
+}
 .btn-outline{
     border: 1px solid var(--scale-300);
     color: var(--c-text);
@@ -389,6 +394,27 @@ input[type="text"], input[type="email"], input[type="tel"], input[type="password
     vertical-align: middle;
     direction: ltr;
     border: 1px solid var(--scale-300);
+}
+/* Campo de telefono (CheckDate.html, "Datos del contacto"): bandera + prefijo del
+   pais + input, visualmente como un solo campo con un borde compartido */
+.input-phone {
+    height: 36px;
+    border: 1px solid var(--scale-300);
+    border-radius: 6px;
+    background: #fff;
+    overflow: hidden;
+}
+.input-phone > span {
+    height: 100%;
+    white-space: nowrap;
+    border-right: 1px solid var(--scale-300);
+    background: var(--scale-50);
+}
+.input-phone input {
+    flex: 1;
+    min-width: 0;
+    height: 100%;
+    border: 0;
 }
 .input-date, .input-text {
     width: 100%;
@@ -1035,9 +1061,9 @@ body.modal-open {
 /* Triggers de collapse (ej. "Tabla precios"/"Curvas precios"): se pintan como
    .active solo mientras su contenido esta desplegado (ver script.js) */
 [data-toggle="collapse"].active {
-    color: var(--primary);
+    /* color: var(--primary);
     border-color: var(--primary);
-    background: var(--primary-50);
+    background: var(--primary-50); */
 }
 
 /* Modales tipo sidebar (.modal-sidebar, ej. #modalFiltros y #modalBusqueda):
@@ -1126,7 +1152,13 @@ body.modal-open {
     padding: 1.5rem;
 }
 .card-title{
-    
+    cursor: pointer;
+}
+.card-title .toggle-icon {
+    transition: transform 0.25s ease;
+}
+.card-title:not(.active) .toggle-icon {
+    transform: rotate(-90deg);
 }
 /* Tarjetas de tarifa (#modalAddLuggage: Basic/Light/Standard). */
 .fare-card {

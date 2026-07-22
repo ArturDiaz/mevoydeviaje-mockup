@@ -166,11 +166,15 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             const willShow = !targets[0].classList.contains('show');
 
-            // Se turnan: los triggers de collapse que comparten el mismo contenedor directo
-            // (ej. "Tabla precios" / "Curvas precios") son mutuamente excluyentes, asi que al
-            // abrir uno se cierra cualquier otro que este abierto en ese mismo grupo
+            // Se turnan: los triggers de collapse agrupados son mutuamente excluyentes, asi
+            // que al abrir uno se cierra cualquier otro que este abierto en ese mismo grupo.
+            // El grupo es data-parent="#id" (mismo nombre/comportamiento que el accordion de
+            // Bootstrap, ej. "Adulto 1"/"Adulto 2" en CheckDate.html) si esta presente, o si no
+            // el contenedor directo del trigger (ej. "Tabla precios" / "Curvas precios")
             if (willShow) {
-                trigger.parentElement.querySelectorAll('[data-toggle="collapse"]').forEach((sibling) => {
+                const groupSelector = trigger.getAttribute('data-parent');
+                const group = groupSelector ? document.querySelector(groupSelector) : trigger.parentElement;
+                if (group) group.querySelectorAll('[data-toggle="collapse"]').forEach((sibling) => {
                     if (sibling === trigger) return;
                     const siblingSelector = sibling.getAttribute('data-target');
                     const siblingTargets = siblingSelector ? document.querySelectorAll(siblingSelector) : [];
