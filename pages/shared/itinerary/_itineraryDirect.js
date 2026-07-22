@@ -82,6 +82,7 @@
                 </span>
             </div>
             <div class="list-badges text-3 flex-r gap-2 wrap">
+                <span class="badge badge-blue filter-badge flex-r ai-c gap-1" hidden><svg class="bs-icon"><use xlink:href="#i-check"></use></svg><span class="filter-badge-label"></span></span>
                 <span class="badge badge-pink flex-r ai-c gap-1"><svg class="bs-icon"><use xlink:href="#i-time"></use></svg>Últimos asientos disponibles</span>
             </div>
 

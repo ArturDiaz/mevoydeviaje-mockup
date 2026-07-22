@@ -215,6 +215,83 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Badge de resultado destacado (.filter-badge, impreso oculto en cada tarjeta por los
+// partials _itinerary*): sigue al tab activo de .content-actions (Recomendado/Más
+// barato/Más rápido/Cyber). Por ahora no hay orden/filtrado real por tramo, asi que
+// el destacado siempre es la primera tarjeta de #results-content; al cambiar de tab
+// se le actualiza el texto (y el color, rojo si es "Cyber", azul en cualquier otro
+// caso). El badge-pink "Últimos asientos disponibles" es independiente de esto
+document.addEventListener('DOMContentLoaded', () => {
+    const tabs = document.querySelectorAll('.content-actions a');
+    const resultsContainer = document.getElementById('results-content');
+    if (!tabs.length || !resultsContainer) return;
+
+    const updateFilterBadge = () => {
+        const activeTab = document.querySelector('.content-actions a.active');
+        const isCyber = activeTab ? activeTab.classList.contains('outline-cyber') : false;
+        const label = activeTab ? activeTab.textContent.trim() : '';
+
+        document.querySelectorAll('.flight-result-card').forEach((card) => {
+            card.classList.remove('is-recommended');
+            const badge = card.querySelector('.filter-badge');
+            if (badge) badge.hidden = true;
+        });
+
+        const firstCard = resultsContainer.querySelector('.flight-result-card');
+        const badge = firstCard && firstCard.querySelector('.filter-badge');
+        if (!firstCard || !badge) return;
+
+        firstCard.classList.add('is-recommended');
+        badge.hidden = false;
+        badge.classList.toggle('badge-red', isCyber);
+        badge.classList.toggle('badge-blue', !isCyber);
+
+        const labelEl = badge.querySelector('.filter-badge-label');
+        if (labelEl) labelEl.textContent = label;
+    };
+
+    // Al cambiar de tab: como no hay filtrado/orden real todavia, se simula un segundo
+    // de carga (mismas tarjetas .skeleton-card que usa el revelado incremental de abajo)
+    // antes de volver a mostrar los resultados con el badge ya actualizado
+    const FILTER_LOADING_DELAY = 1000;
+
+    const createSkeletonCard = () => {
+        const card = document.createElement('div');
+        card.className = 'flight-result-card skeleton-card filter-loading-skeleton flex-r ai-c gap-3';
+        card.innerHTML = `
+            <div class="skeleton skeleton-circle"></div>
+            <div class="flex-c gap-2 flex-1">
+                <div class="skeleton skeleton-line skeleton-line-lg"></div>
+                <div class="skeleton skeleton-line skeleton-line-sm"></div>
+            </div>
+            <div class="skeleton skeleton-line skeleton-line-price"></div>
+        `;
+        return card;
+    };
+
+    tabs.forEach((tab) => {
+        tab.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (tab.classList.contains('active')) return;
+
+            tabs.forEach((t) => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            const skeletons = [createSkeletonCard(), createSkeletonCard(), createSkeletonCard()];
+            resultsContainer.classList.add('is-filtering');
+            resultsContainer.prepend(...skeletons);
+
+            setTimeout(() => {
+                skeletons.forEach((skeleton) => skeleton.remove());
+                resultsContainer.classList.remove('is-filtering');
+                updateFilterBadge();
+            }, FILTER_LOADING_DELAY);
+        });
+    });
+
+    updateFilterBadge();
+});
+
 // Revelado incremental de resultados (#results-content): muestra los primeros
 // BATCH_SIZE .flight-result-card y revela BATCH_SIZE mas cada vez que el scroll
 // llega al sentinel al final de la lista. Antes de revelarlos, simula LOADING_DELAY

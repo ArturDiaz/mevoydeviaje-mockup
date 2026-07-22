@@ -340,6 +340,13 @@ ul, li, a{
     font-size: 12px;
     border-radius: 6px;
 }
+/* El atributo [hidden] por si solo no alcanza: .badge (y el flex-r que traen los
+   badges con icono) le fijan un display explicito, que gana la cascada sobre el
+   [hidden] del navegador (misma especificidad, pero hoja de autor vs. user-agent).
+   Se sube la especificidad aca para que .filter-badge[hidden] si oculte de verdad */
+.filter-badge[hidden]{
+    display: none;
+}
 .badge-pink {
     background: var(--pink-100);
     color: var(--pink);
@@ -701,10 +708,23 @@ input[type="text"], input[type="email"], input[type="tel"], input[type="password
     animation: skeleton-loading 1.4s ease infinite;
     border-radius: 6px;
 }
-.results-list .flight-result-card .badge-blue{display: none;}
-.results-list .flight-result-card:nth-of-type(1) {
+/* Card destacada + badge de filtro (.filter-badge, ver script.js): en vez de un
+   hack de CSS puro (nth-of-type), script.js decide que tarjeta es la destacada
+   (por ahora, siempre la primera de #results-content) y le agrega .is-recommended,
+   ademas de mostrar/textear/colorear su .filter-badge segun el tab activo de
+   .content-actions (rojo si es "Cyber", azul en cualquier otro caso) */
+.results-list .flight-result-card.is-recommended {
     border: 2px solid var(--primary);
-    .badge-blue{display: flex !important;}
+}
+.badge-red {
+    background: var(--red-50);
+    color: var(--red);
+}
+/* Efecto de carga al cambiar de tab en .content-actions (ver script.js): mientras
+   dura, oculta las tarjetas reales y deja ver solo los .filter-loading-skeleton
+   insertados al principio de #results-content */
+.results-list.is-filtering > .flight-result-card:not(.filter-loading-skeleton) {
+    display: none;
 }
 /* Utilidad para el patron "skeleton -> contenido real": oculta el contenedor sin
    importar que otras clases de layout tenga (flex-c, lg:grid, etc.), ya que esas
@@ -859,6 +879,13 @@ input[type="text"], input[type="email"], input[type="tel"], input[type="password
         background: var(--primary-50);
         color: var(--primary);
         border: 1px solid var(--primary);
+    }
+    /* El tab "Cyber" mantiene su identidad roja (.outline-cyber) incluso activo,
+       en vez de pasar a azul como el resto de tabs */
+    a.active.outline-cyber{
+        background: var(--red-50);
+        color: var(--red);
+        border: 1px solid var(--red);
     }
 }
 
@@ -1092,10 +1119,16 @@ body.modal-open {
     }
 }
 
-/* Tarjetas de tarifa (#modalAddLuggage: Basic/Light/Standard). Una tarjeta por
-   nivel de tarifa, con su indicador de equipaje incluido (reutiliza el mismo
-   patron .c-blue / .c-scale-300 de los iconos de maleta en las tarjetas de
-   vuelo) y una lista de beneficios/penalidades */
+.card-body{
+    background: #fff;
+    border: 1px solid var(--scale-200);
+    border-radius: 15px;
+    padding: 1.5rem;
+}
+.card-title{
+    
+}
+/* Tarjetas de tarifa (#modalAddLuggage: Basic/Light/Standard). */
 .fare-card {
     border: 2px solid var(--scale-300);
     border-radius: 12px;

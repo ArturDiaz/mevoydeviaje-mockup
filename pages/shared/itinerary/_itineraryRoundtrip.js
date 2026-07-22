@@ -99,7 +99,7 @@
                 </span>
             </div>
             <div class="list-badges text-3 flex-r gap-2 wrap">
-                <span class="badge badge-blue flex-r ai-c gap-1"><svg class="bs-icon"><use xlink:href="#i-check"></use></svg>Recomendado</span>
+                <span class="badge badge-blue filter-badge flex-r ai-c gap-1" hidden><svg class="bs-icon"><use xlink:href="#i-check"></use></svg><span class="filter-badge-label"></span></span>
             </div>
             <div class="flex-r gap-2 mt-2">
                 <!--<button class="btn btn-default-outline flex-r ai-c jc-c gap-1"><svg class="bs-icon"><use xlink:href="#i-carrito"></use></svg></button>-->

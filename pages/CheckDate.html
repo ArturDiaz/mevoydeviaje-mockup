@@ -9,8 +9,8 @@
 <body class="page-check-date icons-svg text-3.5">
     <script src="shared/icons/IconSVG.js"></script>
     <script src="shared/header/_header.js"></script>
-    <main class="w-responsive min-lg:max-w-200 m-auto py-7 pb-15">
-        <div class="line-time flex-r jc-b ai-c relative">
+    <main class="w-responsive py-7 pb-15">
+        <div class="line-time min-lg:max-w-200 m-auto flex-r jc-b ai-c relative">
             <div class="line-time-step is-done flex-r ai-c gap-1">
                 <span class="line-time-dot"><svg class="bs-icon"><use xlink:href="#i-checkmark"></use></svg></span>
                 <span class="text-3.5 c-scale-400">Búsqueda</span>
@@ -29,8 +29,88 @@
             </div>
         </div>
 
-        <div class="flex-c grid cl-5 gap-5">
-            .flex-c.gap-5.span-3
+        <div class="flex-c grid cl-6 gap-5">
+            <div class="flex-c gap-5 span-4">
+                <div class="card-body flex-c gap-4">
+                    <div class="flex-c">
+                        <h4>Ingresa los datos de los viajeros</h4>
+                        <span>Por favor, asegúrate de que los datos ingresados sean correctos. Una vez emitido el boleto, no será posible realizar cambios en la información registrada.</span>
+                    </div>
+                    <div class="line-horizontal"></div>
+                    <div class="item-passenger flex-c gap-4">
+                        <a href="" class="flex-r jc-b ai-c card-title">
+                            <span class="flex-r ai-c gap-1 font-bold">
+                                <svg class="bs-icon"><use xlink:href="#i-user"></use></svg>
+                                <span>Adulto 1</span>
+                            </span>
+                            <svg class="bs-icon"><use xlink:href="#i-arrow-bottom"></use></svg>
+                        </a>
+                        <div class="flex-c lg:grid cl-4 gap-4">
+                            <div class="flex-c span-2">
+                                <label for="">Nombres *</label>
+                                <input type="text" placeholder="Ingresa tus nombres">
+                            </div>
+                            <div class="flex-c span-2">
+                                <label for="">Apellidos *</label>
+                                <input type="text" placeholder="Ingresa tus nombres">
+                            </div>
+                            <div class="flex-c">
+                                <label for="">Tipo de documento *</label>
+                                <select name="" id="">
+                                    <option value="">DNI</option>
+                                    <option value="">Pasaporte</option>
+                                </select>
+                            </div>
+                            <div class="flex-c">
+                                <label for="">Nro. Documento *</label>
+                                <input type="text" placeholder="Ingresa tus nombres">
+                            </div>
+                            <div class="flex-c span-2">
+                                <label for="">Nacionalidad *</label>
+                                <select name="" id="">
+                                    <option value="">Perú</option>
+                                    <option value="">Argentina</option>
+                                    <option value="">Brasil</option>
+                                    <option value="">Chile</option>
+                                    <option value="">Mexico</option>
+                                </select>
+                            </div>
+                            <div class="flex-c span-2">
+                                <label for="">Fecha de nacimiento *</label>
+                                <div class="grid cl-3 gap-2">
+                                    <input type="text" placeholder="DD">
+                                    <select name="" id="">
+                                        <option value="">Mes</option>
+                                        <option value="">Enero</option>
+                                        <option value="">Febrero</option>
+                                        <option value="">Marzo</option>
+                                        <option value="">Abril</option>
+                                        <option value="">Mayo</option>
+                                        <option value="">Junio</option>
+                                        <option value="">Julio</option>
+                                        <option value="">Agosto</option>
+                                        <option value="">Septiembre</option>
+                                        <option value="">Octubre</option>
+                                        <option value="">Noviembre</option>
+                                        <option value="">Diciembre</option>
+                                    </select>
+                                    <input type="text" placeholder="AAA">
+                                </div>
+                            </div>
+                            <div class="flex-c span-2">
+                                <label for="">Genero *</label>
+                                <select name="" id="">
+                                    <option value="">Masculino</option>
+                                    <option value="">Femenino</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-c gap-5 span-2">
+                aqui precio
+            </div>
         </div>
     </main>
     <script src="shared/footer/_footer.js"></script>
