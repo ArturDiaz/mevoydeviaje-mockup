@@ -1154,10 +1154,13 @@ body.modal-open {
 .card-title{
     cursor: pointer;
 }
-.card-title .toggle-icon {
+/* Rotacion de chevron para cualquier trigger de collapse con icono .toggle-icon
+   (no solo .card-title, ej. el resumen de itinerario en CheckDate.html): apunta
+   hacia abajo mientras esta cerrado, se endereza al abrirse (.active, ver script.js) */
+[data-toggle="collapse"] .toggle-icon {
     transition: transform 0.25s ease;
 }
-.card-title:not(.active) .toggle-icon {
+[data-toggle="collapse"]:not(.active) .toggle-icon {
     transform: rotate(-90deg);
 }
 /* Tarjetas de tarifa (#modalAddLuggage: Basic/Light/Standard). */

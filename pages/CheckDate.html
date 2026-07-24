@@ -104,7 +104,8 @@
                                     <option value="">Femenino</option>
                                 </select>
                             </div>
-                            <div class="flex-r lg:jc-r span-4">
+                            <div class="flex-r lg:jc-r span-4 ai-c">
+                                <div class="badge badge-blue h-fit flex-r ai-c gap-1"><svg class="bs-icon"><use xlink:href="#i-checkmark"></use></svg> Completado</div>
                                 <a href="" class="btn btn-blue-outline px-6">Guardar</a>
                             </div>
                         </div>
@@ -211,6 +212,9 @@
                         <span class="text-3 c-scale-500 lg:span-3">*Enviaremos tu boleto a este correo una vez completada la compra.</span>
                     </div>
                 </div>
+                <div class="flex-r jc-r">
+                    <button class="btn btn-primary px-7">Continuar</button>
+                </div>
             </div>
             <div class="flex-c gap-5 span-2">
                 <div class="card-body flex-c gap-4">
@@ -247,6 +251,88 @@
                             <span class="text-3">Ida y Vuelta</span>
                         </span>
                         <span>USD <span class="price-total"><b>707.76</b></span></span>
+                    </div>
+                </div>
+                <div class="card-body flex-c gap-5">
+                    <div class="flex-r ai-c jc-b">
+                        <h4 class="text-4">Tu vuelo</h4>
+                        <a href="">Camnbiar</a>
+                    </div>
+                    <a class="flex-r jc-b ai-c" data-toggle="collapse" data-target="#detalle-itinerario-check">
+                        <div class="flex-c">
+                            <span>Ida</span>
+                            <span class="flex-r ai-c gap-2">Lima <svg class="bs-icon"><use xlink:href="#i-arrows-exchange"></use></svg> Miami</span>
+                            <span>Viernes 24 nov. | 02:15 - 18:05 | Directo</span>
+                            <span class="cont-adicional">+ Seguro de viaje</span>
+                        </div>
+                        <svg class="bs-icon toggle-icon"><use xlink:href="#i-arrow-bottom"></use></svg>
+                    </a>
+                    <div id="detalle-itinerario-check" class="cont-itinerario-check collapse">
+                        <div class="line-horizontal mb-4"></div>
+                        <div class="flex-c">
+                            <div class="itinerary-stop">
+                                <div class="itinerary-marker"><span class="itinerary-dot"></span></div>
+                                <div class="flex-c gap-1 pb-2">
+                                    <span class="text-4 font-bold">02:15 · Lima (LIM)</span>
+                                    <span class="text-3.5 c-scale-500">Aeropuerto Internacional Jorge Chávez</span>
+                                </div>
+                            </div>
+                            <div class="itinerary-connector">
+                                <div class="itinerary-marker"><span class="line-vertical-itinerary"></span></div>
+                                <div class="itinerary-connector-body flex-c gap-1">
+                                    <div class="flex-r ai-c gap-2">
+                                        <img class="i-logos" src="../img/LA.png">
+                                        <span class="text-3.5 font-bold">LATAM Airlines · LA 2470</span>
+                                    </div>
+                                    <span class="text-3 c-scale-500">Airbus A320 · Duración 15h 50m</span>
+                                </div>
+                            </div>
+                            <div class="itinerary-stop">
+                                <div class="itinerary-marker"><span class="itinerary-dot"></span></div>
+                                <div class="flex-c gap-1">
+                                    <span class="text-4 font-bold">18:05 · Miami (MIA)</span>
+                                    <span class="text-3.5 c-scale-500">Aeropuerto Internacional de Miami</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="flex-r jc-b ai-c" data-toggle="collapse" data-target="#detalle-itinerario-vuelta-check">
+                        <div class="flex-c">
+                            <span>Vuelta</span>
+                            <span class="flex-r ai-c gap-2">Miami <svg class="bs-icon"><use xlink:href="#i-arrows-exchange"></use></svg> Lima</span>
+                            <span>Miércoles 29 nov. | 20:30 - 04:15 | Directo</span>
+                            <span class="cont-adicional">+ Seguro de viaje</span>
+                        </div>
+                        <svg class="bs-icon toggle-icon"><use xlink:href="#i-arrow-bottom"></use></svg>
+                    </a>
+                    <div id="detalle-itinerario-vuelta-check" class="cont-itinerario-check collapse">
+                        <div class="line-horizontal mb-4"></div>
+                        <div class="flex-c">
+                            <div class="itinerary-stop">
+                                <div class="itinerary-marker"><span class="itinerary-dot"></span></div>
+                                <div class="flex-c gap-1 pb-2">
+                                    <span class="text-4 font-bold">20:30 · Miami (MIA)</span>
+                                    <span class="text-3.5 c-scale-500">Aeropuerto Internacional de Miami</span>
+                                </div>
+                            </div>
+                            <div class="itinerary-connector">
+                                <div class="itinerary-marker"><span class="line-vertical-itinerary"></span></div>
+                                <div class="itinerary-connector-body flex-c gap-1">
+                                    <div class="flex-r ai-c gap-2">
+                                        <img class="i-logos" src="../img/LA.png">
+                                        <span class="text-3.5 font-bold">LATAM Airlines · LA 2471</span>
+                                    </div>
+                                    <span class="text-3 c-scale-500">Airbus A320 · Duración 7h 45m</span>
+                                </div>
+                            </div>
+                            <div class="itinerary-stop">
+                                <div class="itinerary-marker"><span class="itinerary-dot"></span></div>
+                                <div class="flex-c gap-1">
+                                    <span class="text-4 font-bold">04:15 · Lima (LIM)</span>
+                                    <span class="text-3.5 c-scale-500">Aeropuerto Internacional Jorge Chávez</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
