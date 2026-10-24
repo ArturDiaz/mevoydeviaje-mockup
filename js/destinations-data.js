@@ -10,5 +10,8 @@ window.AIRPORTS_DATA = [
     { country: 'Colombia', city: 'Cartagena', airport: 'Aeropuerto Rafael Nuñez', code: 'CTG' },
     { country: 'España', city: 'Madrid', airport: 'Aeropuerto Adolfo Suárez Madrid-Barajas', code: 'MAD' },
     { country: 'Italia', city: 'Roma', airport: 'Aeropuerto Leonardo Da Vinci - Fiumicino', code: 'FCO' },
+    { country: 'Argentina', city: 'Buenos Aires', airport: 'Aeropuerto Intl Ministro Pistarini', code: 'EZE' },
+    { country: 'Peru', city: 'Arequipa', airport: 'Aeropuerto Intl Rodríguez Ballón', code: 'AQP' },
+    { country: 'Peru', city: 'Piura', airport: 'Aeropuerto Cap. FAP Guillermo Concha Iberico', code: 'PIU' },
     { country: 'Mexico', city: 'Ciudad De Mexico', airport: 'Aeropuerto Intl Benito Juárez', code: 'MEX' },
 ];

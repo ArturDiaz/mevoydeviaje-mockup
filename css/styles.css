@@ -1551,3 +1551,122 @@ body.modal-open {
     opacity: 0.4;
     cursor: not-allowed;
 }
+/* Tarjetas "Vuelos baratos irrepetibles" (index): imagen con badge rosado
+   superpuesto al borde inferior, destino, origen y precio separado por linea */
+.section-title {
+    font-size: 32px;
+    font-weight: 400;
+}
+.card-flight {
+    overflow: hidden;
+    color: inherit;
+    text-decoration: none;
+    &:hover { transform: translateY(-4px); }
+}
+.card-flight-img {
+    position: relative;
+    height: 200px;
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+}
+.card-flight-badge {
+    position: absolute;
+    left: 18px;
+    bottom: -15px;
+    padding: 4px 16px;
+    border-radius: 12px;
+    background: #fde4f4;
+    color: #a3127a;
+    font-size: 12px;
+    letter-spacing: .5px;
+}
+.content-item:has(.card-flight-title) { padding-top: 24px; }
+.card-flight-title {
+    font-size: 20px;
+    font-weight: 400;
+}
+.card-flight-sub {
+    color: var(--scale-500);
+    font-size: 13px;
+}
+.card-flight-price {
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px solid var(--scale-200);
+    span:first-child { color: var(--scale-600); }
+    .price { font-size: 20px; font-weight: 700; color: var(--scale-600); }
+}
+/* "Ver más ofertas": al extremo derecho del subtitulo de cada grupo de ofertas */
+.offers-more {
+    flex-shrink: 0;
+    padding: 6px 18px;
+    border: 1px solid var(--primary-800);
+    border-radius: 40px;
+    background: var(--primary-50);
+    color: var(--primary-800);
+    text-decoration: none;
+    transition: background .3s ease;
+    &:hover { background: var(--primary-100); }
+}
+/* Ofertas generadas por js/offers.js: subtitulo por tipo (internacional/nacional) y
+   fecha de referencia bajo el precio; el bloque de precio se empuja al fondo para que
+   todas las tarjetas de una fila alineen su precio aunque el texto varie de largo */
+.offers-subtitle {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--scale-700);
+}
+.card-flight .content-item { flex: 1; }
+.card-flight-price { margin-top: auto; }
+.card-flight-date {
+    margin-top: 6px;
+    font-size: 11px;
+    color: var(--scale-500);
+    b { color: var(--scale-600); font-weight: 600; }
+}
+/* Banner principal del index (debajo del buscador, ver index.html), igual que
+   mevoydeviaje.com: en mobile/tablet va dentro del ancho de la pagina con bordes
+   redondeados; en desktop (donde .flight-search-container es absolute) ocupa todo el
+   ancho de la ventana, arranca donde termina el header y el buscador flota encima de
+   su borde superior. El margin-top de 2.25rem compensa el -4rem de .form-search menos
+   el py-7 de main, para que el banner pegue justo con el header */
+.hero-banner {
+    display: block;
+    margin-top: 2.5rem;
+    border-radius: 15px;
+    overflow: hidden;
+    img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+}
+@media (min-width: 1024px) {
+    html:has(.page-index) { overflow-x: clip; }
+    .hero-banner {
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
+        margin-top: 2.25rem;
+        border-radius: 0;
+    }
+}
+/* Categorias de paquetes del index ("Empieza tu proxima aventura"): las imagenes del
+   sitio son 350x280 pero se muestran mas anchas, recortadas con object-fit */
+.category-card {
+    display: block;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--box-form);
+    transition: transform .3s ease;
+    img {
+        display: block;
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        object-fit: cover;
+    }
+    &:hover { transform: translateY(-4px); }
+}

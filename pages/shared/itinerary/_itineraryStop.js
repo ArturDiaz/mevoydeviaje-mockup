@@ -22,7 +22,7 @@
                     <div class="list-itinerario list-toggle-2 flex-c gap-2.5 w-full">
                             <span class="text-3.5 flex-r gap-1 ai-c"><input type="radio" name="itinerary-a-${uid}" id="itinerary-a1-${uid}" checked>
                                 <label class="grid cl-4 ai-c gap-3 w-full" for="itinerary-a1-${uid}">
-                                    <span class="span-3 ml-2"><b>06:10</b> MIA — <b>12:45</b> LIM <span class="text-3 min-md:ml-4">1 escala · 5h 20m</span></span>
+                                    <span class="span-3 ml-2"><b>06:10</b> LIM — <b>12:45</b> MIA <span class="text-3 min-md:ml-4">1 escala · 5h 20m</span></span>
                                     <div class="flex-r gap-2 ai-c jc-r">
                                         <span class="flex-r ai-r text-5.5 c-scale-300">
                                             <svg class="bs-icon bg-i-default m-0 c-blue"><use xlink:href="#i-mochila"></use></svg>
@@ -35,7 +35,7 @@
                             </span>
                             <span class="text-3.5 flex-r gap-1 ai-c"><input type="radio" name="itinerary-a-${uid}" id="itinerary-a2-${uid}">
                                 <label class="grid cl-4 ai-c gap-3 w-full" for="itinerary-a2-${uid}">
-                                    <span class="span-3 ml-2"><b>08:10</b> MIA — <b>14:45</b> LIM <span class="text-3 min-md:ml-4">1 escala · 6h 35m</span></span>
+                                    <span class="span-3 ml-2"><b>08:10</b> LIM — <b>14:45</b> MIA <span class="text-3 min-md:ml-4">1 escala · 6h 35m</span></span>
                                     <div class="flex-r gap-2 ai-c jc-r">
                                         <span class="flex-r ai-r text-5.5 c-scale-300">
                                             <svg class="bs-icon bg-i-default m-0 c-blue"><use xlink:href="#i-mochila"></use></svg>
@@ -48,7 +48,7 @@
                             </span>
                             <span class="text-3.5 flex-r gap-1 ai-c"><input type="radio" name="itinerary-a-${uid}" id="itinerary-a3-${uid}">
                                 <label class="grid cl-4 ai-c gap-3 w-full" for="itinerary-a3-${uid}">
-                                    <span class="span-3 ml-2"><b>16:10</b> MIA — <b>22:45</b> LIM <span class="text-3 min-md:ml-4">1 escala · 6h 35m</span></span>
+                                    <span class="span-3 ml-2"><b>16:10</b> LIM — <b>22:45</b> MIA <span class="text-3 min-md:ml-4">1 escala · 6h 35m</span></span>
                                     <div class="flex-r gap-2 ai-c jc-r">
                                         <span class="flex-r ai-r text-5.5 c-scale-300">
                                             <svg class="bs-icon bg-i-default m-0 c-blue"><use xlink:href="#i-mochila"></use></svg>

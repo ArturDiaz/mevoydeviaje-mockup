@@ -4,7 +4,7 @@
     {
       "name": "static-server",
       "runtimeExecutable": "powershell",
-      "runtimeArgs": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "C:\\Users\\jdiaz\\AppData\\Local\\Temp\\claude\\D--Arturo-Mevoydeviaje-Replica-MVDV\\d2fa009d-388d-4641-af7c-7b55f49b20a3\\scratchpad\\static-server.ps1"],
+      "runtimeArgs": ["-NoProfile", "-ExecutionPolicy", "Bypass", "-File", "C:\\Users\\jdiaz\\AppData\\Local\\Temp\\claude\\D--Arturo-Mevoydeviaje-Replica-MVDV\\eeedfb2a-c20b-4a5c-a515-f4e4e28e8504\\scratchpad\\static-server.ps1"],
       "port": 8080,
       "autoPort": true
     }
