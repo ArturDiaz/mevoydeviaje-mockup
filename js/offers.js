@@ -76,7 +76,7 @@
                         </div>
                         <div class="content-item p-4 flex-c gap-2">
                             <h3 class="card-flight-title">${offer.city}</h3>
-                            <span class="card-flight-sub">Saliendo de Lima · Ida y vuelta</span>
+                            <span class="card-flight-sub">Saliendo de Lima</span>
                             <span class="card-flight-sub">Por ${offer.airlineName}</span>
                             <div class="card-flight-price flex-c">
                                 <span class="spec-cantidad text-3">Precio ida y vuelta desde</span>
