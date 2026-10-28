@@ -746,6 +746,13 @@ input[type="text"], input[type="email"], input[type="tel"], input[type="password
     background: var(--red-50);
     color: var(--red);
 }
+.badge-cyber {
+    width: fit-content;
+    background: var(--primary-hover-2);
+    color: white !important;
+    font-size: 14px;
+    margin-bottom: 0.5rem;
+}
 /* Efecto de carga al cambiar de tab en .content-actions (ver script.js): mientras
    dura, oculta las tarjetas reales y deja ver solo los .filter-loading-skeleton
    insertados al principio de #results-content */
@@ -1579,8 +1586,8 @@ body.modal-open {
     bottom: -15px;
     padding: 4px 16px;
     border-radius: 12px;
-    background: #fde4f4;
-    color: #a3127a;
+    background: var(--pink-50);
+    color: var(--pink);
     font-size: 12px;
     letter-spacing: .5px;
 }
@@ -1619,6 +1626,15 @@ body.modal-open {
     font-size: 20px;
     font-weight: 500;
     color: var(--scale-700);
+}
+/* Ofertas Cyber (cyber: true en OFFERS de js/offers.js -> .is-cyber): el badge
+   "Cyber Travel" va siempre en el HTML pero solo se muestra en estas tarjetas, que
+   ademas llevan el borde del color del badge */
+.card-flight .badge-cyber { display: none; }
+.card-flight.is-cyber {
+    border: 2px solid var(--primary-hover-2);
+    /* outline-offset: -2px; */
+    .badge-cyber { display: block; }
 }
 .card-flight .content-item { flex: 1; }
 .card-flight-price { margin-top: auto; }
