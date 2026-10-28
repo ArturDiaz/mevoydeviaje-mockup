@@ -9,14 +9,14 @@
     // daysOut: dias desde hoy hasta la ida; stay: noches hasta la vuelta
     // cyber: true -> la tarjeta lleva .is-cyber (borde + badge "Cyber Travel", ver styles.css)
     const OFFERS = [
-        { type: 'internacional', code: 'EZE', city: 'Buenos Aires', country: 'Argentina', airport: 'Aeropuerto Intl Ministro Pistarini', airline: 'JA', basePrice: 307, daysOut: 29, stay: 8, cyber: true, img: 'https://www.mevoydeviaje.com/images/thumbs/0000897_buenos-aires_320.webp' },
-        { type: 'internacional', code: 'MIA', city: 'Miami', country: 'Estados Unidos De America', airport: 'Aeropuerto Intl De Miami', airline: 'CM', basePrice: 419, daysOut: 41, stay: 10, img: 'https://www.mevoydeviaje.com/images/thumbs/0000646_miami-por-primera-vez.png' },
-        { type: 'internacional', code: 'JFK', city: 'Nueva York', country: 'Estados Unidos De America', airport: 'Aeropuerto Intl John F. Kennedy', airline: 'DM', basePrice: 525, daysOut: 63, stay: 8, cyber: true, img: 'https://www.mevoydeviaje.com.pe/Plugins/Widgets.TravelProcess/Content/img/HomeVuelosBaratos/New%20York.jpg' },
+        { type: 'internacional', code: 'EZE', city: 'Buenos Aires', country: 'Argentina', airport: 'Aeropuerto Intl Ministro Pistarini', airline: 'JA', basePrice: 307, daysOut: 29, stay: 8, cyber: true, img: 'img/vuelos/buenos_aires_350x350.webp' },
+        { type: 'internacional', code: 'MIA', city: 'Miami', country: 'Estados Unidos De America', airport: 'Aeropuerto Intl De Miami', airline: 'CM', basePrice: 419, daysOut: 41, stay: 10, img: 'img/vuelos/miami_350x350.webp' },
+        { type: 'internacional', code: 'JFK', city: 'Nueva York', country: 'Estados Unidos De America', airport: 'Aeropuerto Intl John F. Kennedy', airline: 'DM', basePrice: 525, daysOut: 63, stay: 8, cyber: true, img: 'img/vuelos/nueva_york_350x350.webp' },
         { type: 'internacional', code: 'MAD', city: 'Madrid', country: 'España', airport: 'Aeropuerto Adolfo Suárez Madrid-Barajas', airline: 'PU', basePrice: 742, daysOut: 26, stay: 8, img: 'img/vuelos/madrid_turista_350x350.webp' },
-        { type: 'nacional', code: 'AQP', city: 'Arequipa', country: 'Perú', airport: 'Aeropuerto Intl Rodríguez Ballón', airline: 'JA', basePrice: 89, daysOut: 19, stay: 2,cyber: true, img: 'https://www.mevoydeviaje.com/images/thumbs/0000822_arequipa_320.webp' },
-        { type: 'nacional', code: 'PIU', city: 'Piura', country: 'Perú', airport: 'Aeropuerto Cap. FAP Guillermo Concha Iberico', airline: 'JA', basePrice: 91, daysOut: 52, stay: 48,cyber: true, img: 'https://www.mevoydeviaje.com.pe/Plugins/Widgets.TravelProcess/Content/img/HomeVuelosBaratos/Piura.jpg' },
-        { type: 'nacional', code: 'TPP', city: 'Tarapoto', country: 'Perú', airport: 'Aeropuerto Cadete FAP Guillermo Del Castillo Paredes', airline: 'LA', basePrice: 113, daysOut: 12, stay: 15, img: 'https://www.mevoydeviaje.com/images/thumbs/0000755_tarapoto_320.webp' },
-        { type: 'nacional', code: 'CUZ', city: 'Cusco', country: 'Perú', airport: 'Aeropuerto Intl Alejandro Velasco Astete', airline: 'H2', basePrice: 112, daysOut: 4, stay: 28, img: 'https://www.mevoydeviaje.com/images/thumbs/0000754_cusco_320.webp' },
+        { type: 'nacional', code: 'AQP', city: 'Arequipa', country: 'Perú', airport: 'Aeropuerto Intl Rodríguez Ballón', airline: 'JA', basePrice: 89, daysOut: 19, stay: 2,cyber: true, img: 'img/vuelos/arequipa_350x350.webp' },
+        { type: 'nacional', code: 'PIU', city: 'Piura', country: 'Perú', airport: 'Aeropuerto Cap. FAP Guillermo Concha Iberico', airline: 'JA', basePrice: 91, daysOut: 52, stay: 48,cyber: true, img: 'img/vuelos/piura_350x350.webp' },
+        { type: 'nacional', code: 'TPP', city: 'Tarapoto', country: 'Perú', airport: 'Aeropuerto Cadete FAP Guillermo Del Castillo Paredes', airline: 'LA', basePrice: 113, daysOut: 12, stay: 15, img: 'img/vuelos/tarapoto_350x350.webp' },
+        { type: 'nacional', code: 'CUZ', city: 'Cusco', country: 'Perú', airport: 'Aeropuerto Intl Alejandro Velasco Astete', airline: 'H2', basePrice: 112, daysOut: 4, stay: 28, img: 'img/vuelos/cusco_350x350.webp' },
     ];
 
     const AIRLINES = {
