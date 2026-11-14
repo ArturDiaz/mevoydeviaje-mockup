@@ -1,7 +1,24 @@
 // Partial: formulario de busqueda de vuelos (form-search), inyectado inline via document.write
 document.write(`
         <section class="post-slider form-search relative z-1">
+            <!-- Resumen colapsado (solo index en mobile, como despegar.com): ver el script al final -->
+            <button type="button" class="search-resumen" aria-expanded="false" aria-label="Buscar vuelos">
+                <span class="search-resumen-campo">
+                    <svg class="bs-icon"><use xlink:href="#i-location"></use></svg>
+                    <span class="search-resumen-textos">
+                        <span data-resumen="ruta" class="is-placeholder">Ingresa tu destino</span>
+                        <small data-resumen="detalle"></small>
+                    </span>
+                </span>
+                <span class="search-resumen-buscar"><svg class="bs-icon"><use xlink:href="#i-search"></use></svg></span>
+            </button>
             <div class="flight-search-container w-full">
+                <div class="search-cabecera">
+                    <b>Busca tu vuelo</b>
+                    <button type="button" class="search-cerrar" aria-label="Cerrar buscador">
+                        <svg class="bs-icon"><use xlink:href="#i-close"></use></svg>
+                    </button>
+                </div>
                 <div class="content-form flex-c lg:grid cl-10 gap-2">
                     <div class="trip-type-section">
                         <span class="text-3">Tramo</span>
@@ -21,7 +38,7 @@ document.write(`
                                     <span class="text-3">Origen</span>
                                     <span tabindex="-1" class="k-autocomplete k-input k-input-solid k-input-md k-rounded-md" style=""><input type="text" name="OriginAirportName1" placeholder="Origen" value="Lima, Perú, Aeropuerto Jorge Chávez" data-role="autocomplete" data-text-field="Nombre" data-min-length="3" data-filter="contains" data-source="Flight.airportSource" data-auto-width="true" data-template="_AutocompleteItem" data-group-template="_AutocompleteGroup" data-required-if="" data-required-msg="Complete el origen" data-bind="value: OriginAirportName1, events: { select: onAirportSelect, change: onAirportChange, filtering: onAirportFiltering }" aria-disabled="false" aria-readonly="false" class="k-input-inner" autocomplete="off" role="combobox" aria-expanded="false" inputmode="text" aria-autocomplete="list" aria-controls="4f4a3547-12bb-cc52-db99-39921afb600e_listbox"><span unselectable="on" class="k-clear-value" title="clear" role="button" tabindex="-1"><span class="k-icon k-svg-icon k-svg-i-x"><svg class="bs-icon"  viewBox="0 0 512 512" focusable="false" xmlns="http://www.w3.org/2000/svg"><path d="M416 141.3 301.3 256 416 370.7 370.7 416 256 301.3 141.3 416 96 370.7 210.7 256 96 141.3 141.3 96 256 210.7 370.7 96z"></path></svg></span></span></span>
                                 </div>
-                                <button type="button" class="btn-return btn-default border-none p-2 flex-c ai-c" data-leg="1" data-bind="click: swapAirports">
+                                <button type="button" class="btn-return btn-default border-none p-2 flex-c ai-c max-md:hidden" data-leg="1" data-bind="click: swapAirports">
                                     <svg class="bs-icon"  class="bs-icon text-4"><use xlink:href="#i-arrow-horizontal"></use></svg>
                                 </button>
                                 <div class="flight-input-wrapper w-full">
@@ -307,3 +324,50 @@ document.write(`
         </section>
 
 `);
+
+// Buscador colapsado en mobile/tablet (solo .page-index, < 1024px, mientras el form va
+// en columna; ver .search-resumen en
+// styles.css): el formulario completo ocupaba casi toda la pantalla y tapaba el banner,
+// asi que se muestra un resumen de la busqueda (ruta, fechas, pasajeros) y al tocarlo
+// se despliega el formulario. En desktop el resumen no se ve y el form sigue igual.
+(function () {
+    if (!document.body.classList.contains('page-index')) return;
+    var section = document.querySelectorAll('.form-search');
+    section = section[section.length - 1];
+    var resumen = section.querySelector('.search-resumen');
+    var campo = function (name) { return section.querySelector('[name="' + name + '"]'); };
+    var ciudad = function (name) { return (campo(name).value || '').split(',')[0].trim(); };
+    var fecha = function (name) { return (campo(name).value || '').replace(/^\S+\s+/, ''); };
+
+    function pintar() {
+        var origen = ciudad('OriginAirportName1');
+        var destino = ciudad('DestinationAirportName1');
+        var ida = fecha('DepartureDate1');
+        var vuelta = fecha('DepartureDate2');
+        var roundtrip = section.querySelector('[data-bind="value: TripType"]').value === 'roundtrip';
+        var pax = section.querySelector('.content-pasajeros .btn-float').textContent.match(/\d+/);
+
+        // Sin destino: placeholder "Ingresa tu destino" (como despegar.com); con destino,
+        // la ruta y debajo fechas + pasajeros
+        var ruta = section.querySelector('[data-resumen="ruta"]');
+        ruta.textContent = destino ? (origen ? origen + ' → ' : '') + destino : 'Ingresa tu destino';
+        ruta.classList.toggle('is-placeholder', !destino);
+        var fechas = !ida ? '' : roundtrip && vuelta ? ida + ' - ' + vuelta : ida;
+        var n = pax ? +pax[0] : 1;
+        section.querySelector('[data-resumen="detalle"]').textContent =
+            destino ? [fechas, n + (n === 1 ? ' pasajero' : ' pasajeros')].filter(Boolean).join(' · ') : '';
+    }
+
+    function setAbierto(abierto) {
+        section.classList.toggle('is-open', abierto);
+        resumen.setAttribute('aria-expanded', abierto);
+        if (!abierto) pintar();
+    }
+
+    resumen.addEventListener('click', function () { setAbierto(true); });
+    section.querySelector('.search-cerrar').addEventListener('click', function () {
+        setAbierto(false);
+        resumen.scrollIntoView({ block: 'nearest' });
+    });
+    document.addEventListener('DOMContentLoaded', pintar);
+})();
